@@ -33,9 +33,9 @@ Route::prefix('/')->group(function(){
 
 /*********************  This is route for the admin side plese do not touch **************/
 Route::group(['prefix'=>'welcome'],function(){
-Route::get('/signup','SignupController@index');
-Route::post('/sendemail','SignupController@sendMail');
-Route::post('/addnewshop','SignupController@addNewShop');
+Route::get('/signup','AdministrationControllers\SignupController@index');
+Route::post('/sendemail','AdministrationControllers\SignupController@sendMail');
+Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop');
 });
 
 Route::group(['prefix'=>'administration'], function () {
