@@ -31,14 +31,9 @@ Route::prefix('/')->group(function(){
 });
 
 
-/*********************  This is route for the admin side plese do not touch **************/
-Route::group(['prefix'=>'welcome'],function(){
-Route::get('/signup','AdministrationControllers\SignupController@index');
-Route::post('/sendemail','AdministrationControllers\SignupController@sendMail');
-Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop');
-});
 
-Route::group(['prefix'=>'administration'], function () {
+
+Route::group(['prefix'=>'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');
   Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
@@ -51,7 +46,48 @@ Route::group(['prefix'=>'administration'], function () {
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
 
-Route::get('/tags','AdministrationControllers\TagsController@index');
+
+});
+
+
+Route::group(['prefix' => 'courier'], function () {
+  Route::get('/login', 'CourierAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'CourierAuth\LoginController@login');
+  Route::post('/logout', 'CourierAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'CourierAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'CourierAuth\RegisterController@register');
+
+  Route::post('/password/email', 'CourierAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'CourierAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'CourierAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'CourierAuth\ResetPasswordController@showResetForm');
+});
+
+
+
+
+/*********************  This is route for the admin side plese do not touch **************/
+Route::group(['prefix'=>'welcome'],function(){
+Route::get('/signup','AdministrationControllers\SignupController@index');
+Route::post('/sendemail','AdministrationControllers\SignupController@sendMail');
+Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop');
+});
+
+Route::group(['prefix' => 'shopadmin'], function () {
+  Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'ShopadminAuth\LoginController@login');
+  Route::post('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'ShopadminAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'ShopadminAuth\RegisterController@register');
+
+  Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'ShopadminAuth\ResetPasswordController@showResetForm');
+
+  Route::get('/tags','AdministrationControllers\TagsController@index');
 Route::get('/deletetag','AdministrationControllers\TagsController@deleteTag');
 Route::post('/addtag','AdministrationControllers\TagsController@addNewTag');
 Route::post('/edittag','AdministrationControllers\TagsController@editTag');
@@ -75,32 +111,5 @@ Route::post('/addvaluetoattribute','AdministrationControllers\AttributeFeaturesC
 Route::get('/attributefeaturedetails/{id}','AdministrationControllers\AttributeFeaturesController@attributeDetails');
 Route::post('/editattributefeature','AdministrationControllers\AttributeFeaturesController@editAttributeFeatureValue');
 });
+
 /************************** End of Admin Route.Please do not touch ******************************************/
-
-Route::group(['prefix' => 'courier'], function () {
-  Route::get('/login', 'CourierAuth\LoginController@showLoginForm')->name('login');
-  Route::post('/login', 'CourierAuth\LoginController@login');
-  Route::post('/logout', 'CourierAuth\LoginController@logout')->name('logout');
-
-  Route::get('/register', 'CourierAuth\RegisterController@showRegistrationForm')->name('register');
-  Route::post('/register', 'CourierAuth\RegisterController@register');
-
-  Route::post('/password/email', 'CourierAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'CourierAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'CourierAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
-  Route::get('/password/reset/{token}', 'CourierAuth\ResetPasswordController@showResetForm');
-});
-
-Route::group(['prefix' => 'shopadmin'], function () {
-  Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm')->name('login');
-  Route::post('/login', 'ShopadminAuth\LoginController@login');
-  Route::post('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
-
-  Route::get('/register', 'ShopadminAuth\RegisterController@showRegistrationForm')->name('register');
-  Route::post('/register', 'ShopadminAuth\RegisterController@register');
-
-  Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
-  Route::get('/password/reset/{token}', 'ShopadminAuth\ResetPasswordController@showResetForm');
-});
