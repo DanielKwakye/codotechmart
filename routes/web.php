@@ -75,19 +75,19 @@ Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop
 });
 
 Route::group(['prefix' => 'shopadmin'], function () {
-  Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm')->name('login');
-  Route::post('/login', 'ShopadminAuth\LoginController@login');
-  Route::post('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
+Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'ShopadminAuth\LoginController@login');
+Route::post('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
 
-  Route::get('/register', 'ShopadminAuth\RegisterController@showRegistrationForm')->name('register');
-  Route::post('/register', 'ShopadminAuth\RegisterController@register');
+Route::get('/register', 'ShopadminAuth\RegisterController@showRegistrationForm')->name('register');
+Route::post('/register', 'ShopadminAuth\RegisterController@register');
 
-  Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
-  Route::get('/password/reset/{token}', 'ShopadminAuth\ResetPasswordController@showResetForm');
+Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset')->name('password.email');
+Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+Route::get('/password/reset/{token}', 'ShopadminAuth\ResetPasswordController@showResetForm');
 
-  Route::get('/tags','AdministrationControllers\TagsController@index');
+Route::get('/tags','AdministrationControllers\TagsController@index');
 Route::get('/deletetag','AdministrationControllers\TagsController@deleteTag');
 Route::post('/addtag','AdministrationControllers\TagsController@addNewTag');
 Route::post('/edittag','AdministrationControllers\TagsController@editTag');

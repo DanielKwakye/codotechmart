@@ -29,7 +29,7 @@
 		            <div class="wizard-container">
 		                <div class="card wizard-card" data-color="azure" id="wizard">
 		                    <form action="{{url('/welcome/addnewshop')}}" method="post">
-		                <!--        You can switch " data-color="azure" "  with one of the next bright colors: "blue", "green", "orange", "red"           -->
+		                 {{csrf_field()}}
 
 		                    	<div class="wizard-header">
 		                        	<h3 class="wizard-title">Create your Online Shop within seconds</h3>

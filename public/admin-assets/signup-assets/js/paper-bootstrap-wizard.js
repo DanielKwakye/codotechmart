@@ -9,7 +9,7 @@ transparent = true;
             $('[rel="tooltip"]').tooltip();
 
             // Code for the Validator
-            var $validator = $('.wizard-car form').validate({
+            var $validator = $('.wizard-card form').validate({
         		  rules: {
         		    firstname: {
         		      required: true,
