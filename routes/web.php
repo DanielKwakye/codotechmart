@@ -25,7 +25,7 @@ Route::prefix('/')->group(function(){
     Route::get('products','Front\WebpageController@products');
 
     Route::get('test',function (){
-
+    \Illuminate\Support\Facades\Hash::make('password');
     });
     
 });
