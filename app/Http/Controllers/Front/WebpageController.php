@@ -31,6 +31,10 @@ class WebpageController extends Controller
         
         return Compare::getInstance()->all();
     }
+
+    public function favorite(){
+        return view('front.techmarket.favorite');
+    }
     
     public function addWishlist(){
          $item = new Item();

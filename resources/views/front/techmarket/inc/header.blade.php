@@ -60,7 +60,7 @@
                                         <a title="Logitech Sale" href="{{url('login/register')}}">Login/Registers</a>
                                     </li>
                                     <li class="menu-item animate-dropdown">
-                                        <a title="Headphones Sale" href={{url('/favorites')}}">Favorites</a>
+                                        <a title="Headphones Sale" href="{{url('/favorites')}}">Favorites</a>
                                     </li>
                                     <li class="menu-item animate-dropdown">
                                         <a title="Headphones Sale" href="{{url('/comparelist')}}">Compare List</a>

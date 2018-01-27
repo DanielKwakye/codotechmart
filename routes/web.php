@@ -23,10 +23,8 @@ Route::prefix('/')->group(function(){
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('products','Front\WebpageController@products');
+    Route::get('/favorites','Front\WebpageController@favorite');
 
-    Route::get('test',function (){
-    \Illuminate\Support\Facades\Hash::make('password');
-    });
     
 });
 Route::group(['prefix' => 'admin'], function () {
