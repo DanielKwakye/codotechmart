@@ -63,7 +63,7 @@
                                         <a title="Headphones Sale" href="{{url('/favorites')}}">Favorites</a>
                                     </li>
                                     <li class="menu-item animate-dropdown">
-                                        <a title="Headphones Sale" href="{{url('/comparelist')}}">Compare List</a>
+                                        <a title="Headphones Sale" href="{{url('/compare')}}">Compare List</a>
                                     </li>
                                     <li class="techmarket-flex-more-menu-item dropdown">
                                         <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>

@@ -35,6 +35,10 @@ class WebpageController extends Controller
     public function favorite(){
         return view('front.techmarket.favorite');
     }
+
+    public function compare(){
+        return view('front.techmarket.compare');
+    }
     
     public function addWishlist(){
          $item = new Item();
