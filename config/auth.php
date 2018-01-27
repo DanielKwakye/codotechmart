@@ -36,6 +36,11 @@ return [
     */
 
     'guards' => [
+        'shopadmin' => [
+            'driver' => 'session',
+            'provider' => 'shopadmins',
+        ],
+
         'courier' => [
             'driver' => 'session',
             'provider' => 'couriers',
@@ -75,6 +80,11 @@ return [
     */
 
     'providers' => [
+        'shopadmins' => [
+            'driver' => 'eloquent',
+            'model' => App\Shopadmin::class,
+        ],
+
         'couriers' => [
             'driver' => 'eloquent',
             'model' => App\Courier::class,
@@ -112,6 +122,12 @@ return [
     */
 
     'passwords' => [
+        'shopadmins' => [
+            'provider' => 'shopadmins',
+            'table' => 'shopadmin_password_resets',
+            'expire' => 60,
+        ],
+
         'couriers' => [
             'provider' => 'couriers',
             'table' => 'courier_password_resets',
