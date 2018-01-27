@@ -90,3 +90,17 @@ Route::group(['prefix' => 'courier'], function () {
   Route::get('/password/reset', 'CourierAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'CourierAuth\ResetPasswordController@showResetForm');
 });
+
+Route::group(['prefix' => 'shopadmin'], function () {
+  Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'ShopadminAuth\LoginController@login');
+  Route::post('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'ShopadminAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'ShopadminAuth\RegisterController@register');
+
+  Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'ShopadminAuth\ResetPasswordController@showResetForm');
+});
