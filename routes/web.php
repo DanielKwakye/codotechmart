@@ -29,7 +29,16 @@ Route::prefix('/')->group(function(){
     });
     
 });
-Route::group(['prefix' => 'admin'], function () {
+
+
+/*********************  This is route for the admin side plese do not touch **************/
+Route::group(['prefix'=>'welcome'],function(){
+Route::get('/signup','SignupController@index');
+Route::post('/sendemail','SignupController@sendMail');
+Route::post('/addnewshop','SignupController@addNewShop');
+});
+
+Route::group(['prefix'=>'administration'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');
   Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
@@ -41,7 +50,32 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+
+Route::get('/tags','AdministrationControllers\TagsController@index');
+Route::get('/deletetag','AdministrationControllers\TagsController@deleteTag');
+Route::post('/addtag','AdministrationControllers\TagsController@addNewTag');
+Route::post('/edittag','AdministrationControllers\TagsController@editTag');
+
+Route::get('/category','AdministrationControllers\CategoryController@index');
+Route::get('/deletecategory','AdministrationControllers\CategoryController@deleteCategory');
+Route::post('/addcategory','AdministrationControllers\CategoryController@addCategory');
+
+Route::get('/branches','AdministrationControllers\BranchController@index');
+Route::get('/branchdetails/{id}','AdministrationControllers\BranchController@branchDetails');
+Route::get('/addnewbranch','AdministrationControllers\BranchController@addNewBranch');
+Route::post('/addnewbranch','AdministrationControllers\BranchController@saveBranch');
+
+Route::get('/paymentmethod','AdministrationControllers\PaymentMethodController@index');
+
+Route::get('/attributes','AdministrationControllers\AttributeFeaturesController@index');
+Route::post('/addnewattribute','AdministrationControllers\AttributeFeaturesController@addNewAttribute');
+Route::get('/deleteattribute/{id}','AdministrationControllers\AttributeFeaturesController@deleteAttribute');
+Route::get('deletevalue/{id}','AdministrationControllers\AttributeFeaturesController@deleteValueOfAttributeOrFeature');
+Route::post('/addvaluetoattribute','AdministrationControllers\AttributeFeaturesController@addValueToAttribute');
+Route::get('/attributefeaturedetails/{id}','AdministrationControllers\AttributeFeaturesController@attributeDetails');
+Route::post('/editattributefeature','AdministrationControllers\AttributeFeaturesController@editAttributeFeatureValue');
 });
+/************************** End of Admin Route.Please do not touch ******************************************/
 
 Route::group(['prefix' => 'courier'], function () {
   Route::get('/login', 'CourierAuth\LoginController@showLoginForm')->name('login');
