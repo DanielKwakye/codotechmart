@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    public $redirectTo = '/shopadmin/home';
+    public $redirectTo = '/administration/category';
 
     /**
      * Create a new controller instance.
@@ -48,7 +48,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('shopadmin.auth.login');
+        return view('administration.products.login');
     }
 
     /**

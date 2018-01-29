@@ -19,12 +19,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/bootstrap-extended.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/app.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/colors.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}"> --}}
  
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/core/menu/menu-types/vertical-menu.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/core/menu/menu-types/vertical-overlay-menu.min.css')}}">
  
-    <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+   {{--  <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}"> --}}
   
   </head>
   <body data-open="click" data-menu="vertical-menu" data-col="1-column" class="vertical-layout vertical-menu 1-column bg-cyan bg-lighten-2 fixed-navbar">
@@ -66,25 +66,34 @@
 		</div>
 		<div class="card-body collapse in">
 			<div class="card-block">
-				<form class="form-horizontal" action="https://pixinvent.com/bootstrap-admin-template/robust/html/ltr/vertical-menu-template/index.html" novalidate>
-					<fieldset class="form-group position-relative has-icon-left">
-						<input type="text" class="form-control input-lg" id="user-name" placeholder="Your Username" tabindex="1" required data-validation-required-message= "Please enter your username.">
+				<form class="form-horizontal" method="post" action="{{url('/administration/login')}}" novalidate>
+          {{csrf_field()}}
+					<fieldset class="form-group position-relative has-icon-left{{ $errors->has('email') ? ' has-error' : '' }}">
+						<input type="text" class="form-control input-lg" name="email" placeholder="Your Email" tabindex="1" required data-validation-required-message= "Please enter your Email.">
 						<div class="form-control-position">
 						    <i class="icon-head"></i>
 						</div>
-						<div class="help-block font-small-3"></div>
+             @if ($errors->has('email'))
+						<div class="help-block font-small-3">
+               <strong>{{ $errors->first('email') }}</strong>      
+            </div>
+             @endif
 					</fieldset>
-					<fieldset class="form-group position-relative has-icon-left">
-						<input type="password" class="form-control input-lg" id="password" placeholder="Enter Password" tabindex="2" required data-validation-required-message= "Please enter valid passwords.">
+					<fieldset class="form-group position-relative has-icon-left{{ $errors->has('password') ? ' has-error' : '' }}">
+						<input type="password" class="form-control input-lg" id="password" name="password" placeholder="Enter Password" tabindex="2" required data-validation-required-message= "Please enter valid passwords." >
 						<div class="form-control-position">
 						    <i class="icon-key3"></i>
 						</div>
-						<div class="help-block font-small-3"></div>
+            @if ($errors->has('password'))
+						<div class="help-block font-small-3">
+               <strong>{{ $errors->first('password') }}</strong>      
+            </div>
+            @endif
 					</fieldset>
 					<fieldset class="form-group row">
 						<div class="col-md-6 col-xs-12 text-xs-center text-md-left">
 							<fieldset>
-				                <input type="checkbox" id="remember-me" class="chk-remember">
+				                <input type="checkbox" id="remember-me" name="remember" class="chk-remember" value="1">
 				                <label for="remember-me"> Remember Me</label>
 				            </fieldset>
 						</div>
@@ -96,7 +105,7 @@
 		</div>
 		<div class="card-footer no-border">
 			<p class="card-subtitle line-on-side text-muted text-xs-center font-small-3 mx-2 my-1"><span>New to Robust ?</span></p>
-			<a href="register-advanced.html" class="btn btn-primary btn-block btn-lg mt-3"><i class="icon-head"></i> Register</a>
+			<a href="{{url('/welcome/signup')}}" class="btn btn-primary btn-block btn-lg mt-3"><i class="icon-head"></i> Register</a>
 		</div>
 	</div>
 </section>

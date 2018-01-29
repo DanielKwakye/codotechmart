@@ -20,12 +20,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/bootstrap-extended.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/app.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/colors.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/style.css')}}">
  
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/core/menu/menu-types/vertical-menu.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/core/menu/menu-types/vertical-overlay-menu.min.css')}}">
  
-    <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+  {{--   <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}"> --}}
   @yield('styles-below')
   </head>
   <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">

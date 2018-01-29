@@ -74,7 +74,7 @@ Route::post('/sendemail','AdministrationControllers\SignupController@sendMail');
 Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop');
 });
 
-Route::group(['prefix' => 'shopadmin'], function () {
+Route::group(['prefix' => 'administration'], function () {
 Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'ShopadminAuth\LoginController@login');
 Route::post('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
