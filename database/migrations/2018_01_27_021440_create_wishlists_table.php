@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShopadminsTable extends Migration
+class CreateWishlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +13,10 @@ class CreateShopadminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shopadmins', function (Blueprint $table) {
+        Schema::create('wishlists', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email',100)->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer("user_id");
+            $table->integer("product_id");
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateShopadminsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('shopadmins');
+        Schema::dropIfExists('wishlists');
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShopadminsTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +13,8 @@ class CreateShopadminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shopadmins', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email',100)->unique();
-            $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateShopadminsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('shopadmins');
+        Schema::dropIfExists('orders');
     }
 }
