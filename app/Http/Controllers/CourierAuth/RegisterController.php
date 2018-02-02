@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/courier/home';
+    protected $redirectTo = '/courier';
 
     /**
      * Create a new controller instance.
@@ -63,11 +63,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Courier::create([
+        $user = Courier::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'role_id'=>1,
+            'image'=>'couriers/img/upload/ijbbBi7sIVF2wrr2SsDerIc96study-in-usa.jpeg',
         ]);
+       
+        foreach ($data['days'] as $k) {
+          \App\day_user::create(array('courier_id' => $user->id, 'day_id' => $k));
+        }
+        
+        \App\Option::firstOrCreate(['courier_id'=>$user->id,'header'=>'bg-gradient-9']);
+
+        return $user;
     }
 
     /**

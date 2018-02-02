@@ -8,10 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel Multi Auth Guard') }}</title>
+    <title>Password Reset</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{asset('/css/app.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -59,15 +59,11 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ url('/courier/logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                    <a href="{{ url('/courier/logout') }}">
                                         Logout
                                     </a>
 
-                                    <form id="logout-form" action="{{ url('/courier/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
+                                    
                                 </li>
                             </ul>
                         </li>
@@ -80,6 +76,6 @@
     @yield('content')
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="{{asset('/js/app.js')}}"></script>
 </body>
 </html>

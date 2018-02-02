@@ -18,7 +18,7 @@ class RedirectIfCourier
 	public function handle($request, Closure $next, $guard = 'courier')
 	{
 	    if (Auth::guard($guard)->check()) {
-	        return redirect('courier/home');
+	        return redirect('courier');
 	    }
 
 	    return $next($request);

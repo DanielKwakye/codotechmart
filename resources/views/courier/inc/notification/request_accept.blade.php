@@ -1,0 +1,1 @@
+<span class="notification-text font-blue">{{$n}}</span><br>
