@@ -1,3 +1,13 @@
+@section('custom_menu')
+    <li class="menu-item animate-dropdown">
+        <a title="Headphones Sale" href="{{url('/shop/detail')}}">Visit Shop</a>
+    </li>
+@endsection
+@section('left_menu')
+    <li class="highlight menu-item animate-dropdown">
+        <a title="New Arrivals" href="{{url('/shop/detail')}}">Visit Shop</a>
+    </li>
+@endsection
 <!DOCTYPE html>
 <html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
 

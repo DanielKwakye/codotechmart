@@ -1,8 +1,16 @@
+@section('custom_menu')
+    <li class="menu-item animate-dropdown">
+        <a title="Headphones Sale" href="{{url('products')}}">Products</a>
+    </li>
+@endsection
+@section('left_menu')
+    <li class="highlight menu-item animate-dropdown">
+        <a title="New Arrivals" href="{{url('products')}}">Products</a>
+    </li>
+@endsection
+
 <!DOCTYPE html>
 <html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
-    
-<!-- Mirrored from transvelo.github.io/techmarket-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:52:38 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
