@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>Techmarket HTML</title>
     @include('front.techmarket.inc.head_assets')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 </head>
 <body class="woocommerce-active left-sidebar">
 <div id="page" class="hfeed site">
@@ -23,8 +22,8 @@
                 <nav class="woocommerce-breadcrumb">
                     <a href="home-v1.html">Home</a>
                     <span class="delimiter">
-                                <i class="tm tm-breadcrumbs-arrow-right"></i>
-                            </span>Shop
+                        <i class="tm tm-breadcrumbs-arrow-right"></i>
+                    </span>Shop
                 </nav>
                 <!-- .woocommerce-breadcrumb -->
                 <div id="primary" class="content-area">
@@ -107,70 +106,8 @@
                             <!-- .features -->
                         </div>
                         <div>
-                            <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>2011/07/25</td>
-                                <td>$170,750</td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                                <td>2009/01/12</td>
-                                <td>$86,000</td>
-                            </tr>
-                            <tr>
-                                <td>Michael Bruce</td>
-                                <td>Javascript Developer</td>
-                                <td>Singapore</td>
-                                <td>29</td>
-                                <td>2011/06/27</td>
-                                <td>$183,000</td>
-                            </tr>
-                            <tr>
-                                <td>Donna Snider</td>
-                                <td>Customer Support</td>
-                                <td>New York</td>
-                                <td>27</td>
-                                <td>2011/01/25</td>
-                                <td>$112,000</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                            {{-- list of orders here .... --}}
+
                         </div>
                         <!-- .shop-control-bar-bottom -->
                     </main>
@@ -224,8 +161,6 @@
 @include('front.techmarket.inc.config')
 <!-- For demo purposes – can be removed on production : End -->
 @include('front.techmarket.inc.foot_assets')
-<script type="application/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script type="application/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#example').DataTable();

@@ -25,7 +25,7 @@ Route::prefix('/')->group(function(){
     Route::get('products','Front\WebpageController@products');
     Route::get('/favorites','Front\WebpageController@favorite');
     Route::get('/compare','Front\WebpageController@compare');
-
+    Route::get('/faq','Front\WebpageController@faq');
     
 });
 

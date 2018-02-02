@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="footer-contact">
                                 <div class="footer-logo">
-                                    <a href="home-v1.html" class="custom-logo-link" rel="home">
+                                    <a href="{{url('/')}}" class="custom-logo-link" rel="home">
                                         Tech Market
                                     </a>
                                 </div>
@@ -75,10 +75,10 @@
                                             </span>
                                             <div class="media-body">
                                                 <span class="call-us-title">Got Questions ? Call us 24/7!</span>
-                                                <span class="call-us-text">(800) 8001-8588, (0600) 874 548</span>
-                                                <address class="footer-contact-address">17 Princess Road, London, Greater London NW1 8JR, UK</address>
-                                                <a href="#" class="footer-address-map-link">
-                                                    <i class="tm tm-map-marker"></i>Find us on map</a>
+                                                <span class="call-us-text">(+233) 54 124 3508</span>
+                                                {{--<address class="footer-contact-address">17 Princess Road, London, Greater London NW1 8JR, UK</address>--}}
+                                                {{--<a href="#" class="footer-address-map-link">--}}
+                                                    {{--<i class="tm tm-map-marker"></i>Find us on map</a>--}}
                                             </div>
                                             <!-- .media-body -->
                                         </div>
@@ -95,32 +95,21 @@
                                                 <div class="footer-payment-icons">
                                                     <ul class="list-payment-icons nav">
                                                         <li class="nav-item">
-                                                            <img class="payment-icon-image" src="assets/images/credit-cards/mastercard.svg" alt="mastercard" />
+                                                            <img class="payment-icon-image" src="{{asset('assets/images/credit-cards/mtn.png')}}" alt="mastercard" />
                                                         </li>
                                                         <li class="nav-item">
-                                                            <img class="payment-icon-image" src="assets/images/credit-cards/visa.svg" alt="visa" />
+                                                            <img class="payment-icon-image" src="{{asset('assets/images/credit-cards/visa.svg')}}" alt="visa" />
                                                         </li>
                                                         <li class="nav-item">
-                                                            <img class="payment-icon-image" src="assets/images/credit-cards/paypal.svg" alt="paypal" />
+                                                            <img class="payment-icon-image" src="{{asset('assets/images/credit-cards/paypal.svg')}}" alt="paypal" />
                                                         </li>
                                                         <li class="nav-item">
-                                                            <img class="payment-icon-image" src="assets/images/credit-cards/maestro.svg" alt="maestro" />
+                                                            <img class="payment-icon-image" src="{{asset('assets/images/credit-cards/maestro.svg')}}" alt="maestro" />
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <!-- .footer-payment-icons -->
-                                                <div class="footer-secure-by-info">
-                                                    <h6 class="footer-secured-by-title">Secured by:</h6>
-                                                    <ul class="footer-secured-by-icons">
-                                                        <li class="nav-item">
-                                                            <img class="secure-icons-image" src="assets/images/secured-by/norton.svg" alt="norton" />
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <img class="secure-icons-image" src="assets/images/secured-by/mcafee.svg" alt="mcafee" />
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <!-- .footer-secure-by-info -->
+
                                             </div>
                                             <!-- .media-body -->
                                         </div>
@@ -135,26 +124,11 @@
                                 <div class="columns">
                                     <aside class="widget clearfix">
                                         <div class="body">
-                                            <h4 class="widget-title">Find it Fast</h4>
+                                            <h4 class="widget-title">Quick Links</h4>
                                             <div class="menu-footer-menu-1-container">
                                                 <ul id="menu-footer-menu-1" class="menu">
                                                     <li class="menu-item">
                                                         <a href="shop.html">Computers &#038; Laptops</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="shop.html">Cameras &#038; Photography</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="shop.html">Smart Phones &#038; Tablets</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="shop.html">Video Games &#038; Consoles</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="shop.html">TV</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="shop.html">Car Electronic &#038; GPS</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -172,23 +146,15 @@
                                             <div class="menu-footer-menu-2-container">
                                                 <ul id="menu-footer-menu-2" class="menu">
                                                     <li class="menu-item">
-                                                        <a href="shop.html">Printers &#038; Ink</a>
+                                                        <a href="{{url('login')}}">Login/Register</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="shop.html">Audio &amp; Music</a>
+                                                        <a href="{{url('wishlist')}}">Favorite</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="shop.html">Home Theaters</a>
+                                                        <a href="{{url('compare')}}">Compare List</a>
                                                     </li>
-                                                    <li class="menu-item">
-                                                        <a href="shop.html">PC Components</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="shop.html">Ultrabooks</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="shop.html">Smartwatches</a>
-                                                    </li>
+
                                                 </ul>
                                             </div>
                                             <!-- .menu-footer-menu-2-container -->
@@ -205,25 +171,20 @@
                                             <div class="menu-footer-menu-3-container">
                                                 <ul id="menu-footer-menu-3" class="menu">
                                                     <li class="menu-item">
-                                                        <a href="login-and-register.html">My Account</a>
+                                                        <a href="{{url('profile')}}">My Account</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="track-your-order.html">Track Order</a>
+                                                        <a href="{{url('/')}}">Shop</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="shop.html">Shop</a>
+                                                        <a href="{{url('wishlist')}}">Wishlist</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="wishlist.html">Wishlist</a>
+                                                        <a href="{{url('about')}}">About Us</a>
                                                     </li>
+
                                                     <li class="menu-item">
-                                                        <a href="about.html">About Us</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="terms-and-conditions.html">Returns/Exchange</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="faq.html">FAQs</a>
+                                                        <a href="{{url('faq')}}">FAQs</a>
                                                     </li>
                                                 </ul>
                                             </div>
