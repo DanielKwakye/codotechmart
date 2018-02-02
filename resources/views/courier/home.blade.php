@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in as Courier!ss
+                    You are logged in as Courier!
                     
                 </div>
             </div>
