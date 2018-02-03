@@ -25,9 +25,14 @@ Route::prefix('/')->group(function(){
     Route::get('products','Front\WebpageController@products');
     Route::get('/favorites','Front\WebpageController@favorite');
     Route::get('/compare','Front\WebpageController@compare');
+    Route::get('/faq','Front\WebpageController@faq');
+    Route::get('/about','Front\WebpageController@about');
+    Route::get('order/detail','Front\WebpageController@orderDetail');
 
-    
+    Route::auth();
 });
+
+
 
 
 
@@ -122,3 +127,7 @@ Route::get('/addproduct','AdministrationControllers\ProductsController@index');
 
 
 /************************** End of Admin Route.Please do not touch ******************************************/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

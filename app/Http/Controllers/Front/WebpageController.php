@@ -36,6 +36,19 @@ class WebpageController extends Controller
         return view('front.techmarket.favorite');
     }
 
+    public function orderDetail(){
+        return view('front.techmarket.order_detail');
+    }
+
+
+    public function faq(){
+        return view('front.techmarket.faq');
+    }
+
+    public function about(){
+        return view('front.techmarket.about');
+    }
+
     public function compare(){
         return view('front.techmarket.compare');
     }
