@@ -37,6 +37,7 @@
                                             <div class="u-column1 col-1">
                                                 <h2>Login</h2>
                                                 <form method="post" class="woocomerce-form woocommerce-form-login login" action="{{url('/login')}}">
+                                                    {{csrf_field()}}
                                                     <p class="before-login-text">
                                                         Welcome Back
                                                     </p>
@@ -86,6 +87,7 @@
                                             <div class="u-column2 col-2">
                                                 <h2>Register</h2>
                                                 <form class="register" method="post" action="{{url('/register')}}">
+                                                    {{csrf_field()}}
                                                     <p class="before-register-text">
                                                         Create new account today to reap the benefits of a personalized shopping experience.
                                                     </p>

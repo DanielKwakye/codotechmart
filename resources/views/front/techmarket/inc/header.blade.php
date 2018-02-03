@@ -56,9 +56,7 @@
                                         </ul>
                                         <!-- .dropdown-menu -->
                                     </li>
-                                    <li class="menu-item animate-dropdown">
-                                        <a title="Logitech Sale" href="{{url('login/register')}}">Login/Register</a>
-                                    </li>
+
                                     <li class="menu-item animate-dropdown">
                                         <a title="Headphones Sale" href="{{url('/favorites')}}">Favorites</a>
                                     </li>
@@ -71,6 +69,18 @@
                                         <ul class="overflow-items dropdown-menu"></ul>
                                         <!-- . -->
                                     </li>
+                                    @if(\Illuminate\Support\Facades\Auth::user())
+                                        <li class="menu-item animate-dropdown">
+                                            <a title="Logitech Sale" href="{{url('profile')}}">Account</a>
+                                        </li>
+                                        <li class="menu-item animate-dropdown">
+                                            <a title="Logitech Sale" href="{{url('logout')}}">Logout</a>
+                                        </li>
+                                    @else
+                                        <li class="menu-item animate-dropdown">
+                                            <a title="Logitech Sale" href="{{url('login/register')}}">Login/Register</a>
+                                        </li>
+                                    @endif
                                 </ul>
                                 <!-- .nav -->
                             </nav>

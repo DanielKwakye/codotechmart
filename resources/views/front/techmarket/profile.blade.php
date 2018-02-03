@@ -108,6 +108,103 @@
                         <div>
                             {{-- list of orders here .... --}}
 
+                            <table class="shop_table cart wishlist_table">
+                                <thead>
+                                <tr>
+                                    <th class="product-remove"></th>
+                                    <th class="product-thumbnail"></th>
+                                    <th class="product-name">
+                                        <span class="nobr">Order Number</span>
+                                    </th>
+                                    <th class="product-price">
+                                                <span class="nobr">
+                                                    Order Date
+                                                </span>
+                                    </th>
+                                    <th class="product-stock-status">
+                                                <span class="nobr">
+                                                    Status
+                                                </span>
+                                    </th>
+                                    <th class="product-stock-status">
+                                                <span class="nobr">
+                                                    Action
+                                                </span>
+                                    </th>
+                                    <th class="product-add-to-cart"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="product-remove">
+                                        <div>
+                                            <a title="Remove this product" class="remove remove_from_wishlist" href="#">×</a>
+                                        </div>
+                                    </td>
+                                    <td class="product-thumbnail">
+                                        <a href="single-product-fullwidth.html">
+                                            <img width="180" height="180" alt="" class="wp-post-image" src="assets/images/products/cart-1.jpg">
+                                        </a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="single-product-fullwidth.html">#200911</a>
+                                    </td>
+
+                                    <td class="product-name">
+                                        <a href="single-product-fullwidth.html">25 July 2017</a>
+                                    </td>
+
+                                    <td class="product-price">
+                                        <ins>
+                                                                <span class="woocommerce-Price-amount amount">
+                                                                    <span class="woocommerce-Price-currencySymbol">£</span>199.95</span>
+                                        </ins>
+                                        <del>
+                                                                <span class="woocommerce-Price-amount amount">
+                                                                    <span class="woocommerce-Price-currencySymbol">£</span>229.99</span>
+                                        </del>
+                                    </td>
+                                    <td class="product-add-to-cart">
+                                        <a class="button add_to_cart_button button alt" href="{{url('order/detail')}}"> See Items</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="product-remove">
+                                        <div>
+                                            <a title="Remove this product" class="remove remove_from_wishlist" href="#">×</a>
+                                        </div>
+                                    </td>
+                                    <td class="product-thumbnail">
+                                        <a href="single-product-fullwidth.html">
+                                            <img width="180" height="180" alt="" class="wp-post-image" src="assets/images/products/cart-1.jpg">
+                                        </a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="single-product-fullwidth.html">4K Action Cam with  Wi-Fi &amp; GPS</a>
+                                    </td>
+
+                                    <td class="product-name">
+                                        <a href="single-product-fullwidth.html">4K Action Cam with  Wi-Fi &amp; GPS</a>
+                                    </td>
+
+                                    <td class="product-price">
+                                        <ins>
+                                                                <span class="woocommerce-Price-amount amount">
+                                                                    <span class="woocommerce-Price-currencySymbol">£</span>199.95</span>
+                                        </ins>
+                                        <del>
+                                                                <span class="woocommerce-Price-amount amount">
+                                                                    <span class="woocommerce-Price-currencySymbol">£</span>229.99</span>
+                                        </del>
+                                    </td>
+                                    <td class="product-add-to-cart">
+                                        <a class="button add_to_cart_button button alt" href="{{url('order/detail')}}"> See Items</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- .wishlist_table -->
+
                         </div>
                         <!-- .shop-control-bar-bottom -->
                     </main>

@@ -27,6 +27,7 @@ Route::prefix('/')->group(function(){
     Route::get('/compare','Front\WebpageController@compare');
     Route::get('/faq','Front\WebpageController@faq');
     Route::get('/about','Front\WebpageController@about');
+    Route::get('order/detail','Front\WebpageController@orderDetail');
 
     Route::auth();
 });

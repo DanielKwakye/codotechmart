@@ -13,10 +13,6 @@
                     </li>
 
                     <li class="highlight menu-item animate-dropdown">
-                        <a title="New Arrivals" href="{{url('/login')}}">Login / Register</a>
-                    </li>
-
-                    <li class="highlight menu-item animate-dropdown">
                         <a title="New Arrivals" href="{{url('/favorite')}}">Favorites</a>
                     </li>
 
@@ -32,6 +28,19 @@
                     <li class="highlight menu-item animate-dropdown">
                         <a title="New Arrivals" href="{{url('/about')}}">About Us</a>
                     </li>
+
+                    @if(\Illuminate\Support\Facades\Auth::user())
+                        <li class="highlight menu-item animate-dropdown">
+                            <a title="New Arrivals" href="{{url('/profile')}}">Account</a>
+                        </li>
+                        <li class="highlight menu-item animate-dropdown">
+                            <a title="New Arrivals" href="{{url('/logout')}}">Logout</a>
+                        </li>
+                        @else
+                        <li class="highlight menu-item animate-dropdown">
+                            <a title="New Arrivals" href="{{url('/login')}}">Login / Register</a>
+                        </li>
+                    @endif
 
                 </ul>
             </div>
