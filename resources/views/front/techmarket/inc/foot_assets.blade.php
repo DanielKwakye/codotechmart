@@ -21,6 +21,7 @@
         <script>
             $(".modal").iziModal();
         </script>
+        <script src="{{asset('assets/js/custom-script.js')}}"></script>
         @if ($errors->any())
          @foreach ($errors->all() as $error)
                  <script type="text/javascript">

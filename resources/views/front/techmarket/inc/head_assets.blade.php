@@ -22,3 +22,9 @@
         <link rel="shortcut icon" href="{{asset('assets/images/fav-icon.png')}}">
         <link rel="stylesheet" href="{{asset('assets/css/iziModal.min.css ') }}" />
         <link rel="stylesheet" href="{{asset('assets/css/iziToast.min.css ') }}" />
+
+        <style>
+                .none{
+                    display: none;
+                }
+        </style>

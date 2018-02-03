@@ -1,3 +1,19 @@
+@section('branches')
+    <div id="departments-menu" class="dropdown departments-menu">
+        <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="tm tm-departments-thin"></i>
+            <span>All Branches</span>
+        </button>
+        <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
+            <li class="highlight menu-item animate-dropdown">
+                <a title="Value of the Day" href="home-v2.html">Value of the Day</a>
+            </li>
+            <li class="highlight menu-item animate-dropdown">
+                <a title="Top 100 Offers" href="home-v3.html">Top 100 Offers</a>
+            </li>
+        </ul>
+    </div>
+@endsection
 @section('custom_menu')
     <li class="menu-item animate-dropdown">
         <a title="Headphones Sale" href="{{url('products')}}">Products</a>
@@ -163,7 +179,7 @@
                                                                             <!-- /.sale-label-outer -->
                                                                         </div>
                                                                         <!-- /.sale-product-with-timer-header -->
-                                                                        <img width="224" height="197" alt="" class="wp-post-image" src="assets/images/products/1.jpg">
+                                                                        <img width="224" height="197" alt="" class="wp-post-image" src="{{asset('assets/images/products/1.jpg')}}">
                                                                         <div class="deal-progress">
                                                                             <div class="deal-stock">
                                                                                 <div class="stock-sold">Already Sold:
