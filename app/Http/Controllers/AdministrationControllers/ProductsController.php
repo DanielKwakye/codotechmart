@@ -10,8 +10,7 @@ class ProductsController extends Controller
 {
     //
     public function index(){
-    	$products = 
-    	return view('administration.products.tags',compact('tags'));
+    	return view('administration.products.addproduct');
     }
 
    

@@ -76,7 +76,7 @@ Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop
 Route::group(['prefix' => 'administration'], function () {
 Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'ShopadminAuth\LoginController@login');
-Route::post('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
+Route::get('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
 
 Route::get('/register', 'ShopadminAuth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'ShopadminAuth\RegisterController@register');
@@ -109,6 +109,16 @@ Route::get('deletevalue/{id}','AdministrationControllers\AttributeFeaturesContro
 Route::post('/addvaluetoattribute','AdministrationControllers\AttributeFeaturesController@addValueToAttribute');
 Route::get('/attributefeaturedetails/{id}','AdministrationControllers\AttributeFeaturesController@attributeDetails');
 Route::post('/editattributefeature','AdministrationControllers\AttributeFeaturesController@editAttributeFeatureValue');
+
+
+Route::get('/brand','AdministrationControllers\ProductBrandController@index');
+Route::post('/addbrand','AdministrationControllers\ProductBrandController@addBrand');
+Route::get('/deletebrand','AdministrationControllers\ProductBrandController@deleteBrand');
+Route::post('/editbrand','AdministrationControllers\ProductBrandController@editBrand');
+
+Route::get('/addproduct','AdministrationControllers\ProductsController@index');
 });
+
+
 
 /************************** End of Admin Route.Please do not touch ******************************************/
