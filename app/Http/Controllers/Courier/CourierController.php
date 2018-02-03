@@ -153,33 +153,6 @@ class CourierController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $r)
-    {
-       $yhh=[];
-       $real= $r->days;
-
-       $time=implode(',', $r->time);
-
-       // foreach ($real as $r) {
-       //      $now= json_encode(array('day' => $r,'time'=>array('1:30,12:30')));
-       //      $done=array_push($yhh, $now);
-       // }
-       foreach ($real as $r) {
-            $now= json_encode(array('day' => $r,'time'=>array('1:30,12:30')));
-            $done=array_push($yhh, $now);
-       }
- 
-       $n=serialize($yhh);
-        
-      Auth::guard('courier')->user()->create(['name'=>'samuel','email'=>'donegg3@g.com','password'=>'123','delivery_days'=>'12','price_per_km'=>'122','image'=>'122','delivery_times'=>$n]);    
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

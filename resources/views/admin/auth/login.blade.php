@@ -25,7 +25,7 @@
 </style>
 <div class="center-vertical bg-black">
     <div class="center-content row">
-        <form  id="login-validation" class="center-margin col-xs-11 col-sm-5" method="POST" action="{{ url('/admin/login') }}">
+        <form class="center-margin col-xs-11 col-sm-5" method="POST" action="{{ url('/admin/login') }}">
             {{ csrf_field() }}
             <h3 class="text-center pad25B font-gray font-size-23">Administrator <span class="opacity-80">v1.0</span></h3>
             <div id="login-form" class="content-box">

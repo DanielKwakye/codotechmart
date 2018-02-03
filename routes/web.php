@@ -35,7 +35,7 @@ Route::prefix('/')->group(function(){
 Route::group(['prefix'=>'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');
-  Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
+  Route::get('/logout', 'AdminAuth\LoginController@logout')->name('logout');
 
   Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
   Route::post('/register', 'AdminAuth\RegisterController@register');
@@ -45,6 +45,7 @@ Route::group(['prefix'=>'admin'], function () {
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
   Route::get('/', 'Admin\AdminController@index')->middleware('admin');
+  Route::post('/addCategory', 'Admin\AdminController@addCategory');
 
 });
 

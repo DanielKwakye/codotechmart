@@ -122,15 +122,15 @@
     <li>
         <a href="#" title="All Orders">
             <i class="glyph-icon icon-linecons-diamond"></i>
-            <span>Orders</span>
+            <span>Enrolled Shops</span>
             <span class="bs-badge badge-danger totalorders">{{count(\App\Orders::where('user_id',Auth::guard('admin')->user()->id)->get())}}</span>
         </a>
         <div class="sidebar-submenu">
 
             <ul>
-                <li><a href="{{url('admin/pending-orders')}}" title="Buttons"><span>Pending Orders</span>
+                <li><a href="{{url('admin/pending-orders')}}" title="Buttons"><span>Active Shops</span>
                     <span class="bs-badge badge-purple orders">{{count(\App\Orders::whereIn('status',[1,2])->where('user_id',Auth::guard('admin')->user()->id)->get())}}</span></a></li>
-                    <li><a href="{{url('admin/delivery-history')}}" title="Buttons"><span>Delivery History</span> <span class="bs-badge badge-yellow delivery">{{count(\App\Orders::where('status',3)->where('user_id',Auth::guard('admin')->user()->id)->get())}}</span></a></a></li>
+                    <li><a href="{{url('admin/delivery-history')}}" title="Buttons"><span>Deactivated Shops</span> <span class="bs-badge badge-yellow delivery">{{count(\App\Orders::where('status',3)->where('user_id',Auth::guard('admin')->user()->id)->get())}}</span></a></a></li>
             </ul>
 
         </div><!-- .sidebar-submenu -->
@@ -138,12 +138,14 @@
     <li>
         <a href="#" title="Statistics">
             <i class="glyph-icon icon-linecons-wallet"></i>
-            <span>Reports</span>
+            <span>Couriers Onboard</span>
         </a>
         <div class="sidebar-submenu">
 
             <ul>
-                <li><a href="{{url('admin/charts')}}" title="Responsive tabs"><span>Statistics</span></a></li>
+                <li><a href="{{url('admin/pending-orders')}}" title="Buttons"><span>Active Couriers</span>
+                    <span class="bs-badge badge-purple orders">{{count(\App\Orders::whereIn('status',[1,2])->where('user_id',Auth::guard('admin')->user()->id)->get())}}</span></a></li>
+                    <li><a href="{{url('admin/delivery-history')}}" title="Buttons"><span>Deactivated Couriers</span> <span class="bs-badge badge-yellow delivery">{{count(\App\Orders::where('status',3)->where('user_id',Auth::guard('admin')->user()->id)->get())}}</span></a></a></li>
             </ul>
 
         </div><!-- .sidebar-submenu -->
@@ -151,50 +153,15 @@
     <li>
         <a href="#" title="Forms UI">
             <i class="glyph-icon icon-linecons-eye"></i>
-            <span>Payment</span>
+            <span>Complaints</span>
         </a>
     </li>
     
     <li class="header"><span>Extra</span></li>
     <li>
-        <a href="#" title="Advanced tables">
-            <i class="glyph-icon icon-linecons-megaphone"></i>
-            <span>Accounts</span>
-        </a>
-        <div class="sidebar-submenu">
-
-            <ul>
-                <li><a href="{{url('admin/profile')}}" title="Data tables"><span>Profile</span></a></li>
-            </ul>
-
-        </div><!-- .sidebar-submenu -->
-    </li>
-    <li>
-        <a href="#" title="Shops">
-            <i class="glyph-icon icon-linecons-paper-plane"></i>
-            <span>Shops</span>
-        </a>
-        <div class="sidebar-submenu">
-
-            <ul>
-                <li><a href="{{url('admin/myshops')}}" title="Responsive tables"><span>My Shops</span></a></li>
-                <li><a href="{{url('admin/all-shops')}}" title="Basic tables"><span>All Shops</span></a></li>
-                <li><a href="{{url('admin/requestedshops')}}" title="Data tables"><span>Requested Shops</span></a></li>
-            </ul>
-
-        </div>
-    </li>
-
-    <li>
         <a href="{{url('admin/options')}}" title="Customise Dashboard Options">
             <i class="glyph-icon icon-linecons-paper-plane"></i>
             <span class="appearance">Appearance<span class="bs-badge badge-purple">New</span></span>
-        </a><!-- .sidebar-submenu -->
-    </li>
-    <li>
-        <a href="{{url('admin/options')}}" title="Notifications">
-            <i class="glyph-icon icon-linecons-paper-plane"></i>
-            <span class="appearance">notifications<span class="bs-badge badge-purple">{{count(Auth::guard('admin')->user()->unreadNotifications)}}</span></span>
         </a><!-- .sidebar-submenu -->
     </li>
     </ul><!-- #sidebar-menu -->

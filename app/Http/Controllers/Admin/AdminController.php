@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\ShopCategory;
+use Session;
 
 class AdminController extends Controller
 {
@@ -22,9 +24,21 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addCategory(Request $r)
     {
-        //
+       
+        $r->validate([
+            'name'=>'required'
+        ]);
+        $user = ShopCategory::where('name', '=', $r->name)->first();
+        if ($user === null) {
+           ShopCategory::create($r->all());
+           Session::flash('success','Category Added successfully...');
+            return back();
+        }
+
+        Session::flash('error','Category Already Exist...');
+        return back();
     }
 
     /**

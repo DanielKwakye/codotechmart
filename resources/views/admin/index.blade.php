@@ -1,6 +1,6 @@
 @extends('admin.layout.adminLayout')
 @section('title')
-    <title>Requested Shops</title>
+    <title>Enrolled Shops</title>
 @endsection
 @section('content')
     
@@ -48,7 +48,7 @@
                         </script>
                         
                         <div id="page-title">
-                            <h2>My Shop(s)</h2>
+                            <h2>Enrolled Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
                         </div>
                         <div class="panel">
                             <div class="panel-body">
@@ -77,7 +77,7 @@
 
                                         <tbody>
                                             
-                                            @foreach(\App\shops::all() as $p)
+                                            @foreach(\App\shops::where('status',1)->get() as $p)
                                             
                                             <tr class="tr{{$p->id}}">
                                                 <td>{{$p->shopname}}</td>
@@ -104,7 +104,9 @@
                                 </div>
                             </div>
                         </div>
+
 @endsection
+
 @section('script')
     <script type="text/javascript">
     $(document).on('click','.cancelRequest',function(e){

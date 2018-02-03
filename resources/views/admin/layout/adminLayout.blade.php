@@ -29,6 +29,32 @@
             <div id="page-content">
 
                 <div class="container">
+                    @if(session()->has('success'))
+                        <script type="text/javascript">
+                            
+                            $(document).ready(function(){
+                                notify('{{session()->get('success')}}',false);
+                            });
+                        </script>
+                        @elseif(session()->has('error'))
+                        <script type="text/javascript">
+                            
+                            $(document).ready(function(){
+                                notify('{{session()->get('error')}}',true);
+                            });
+                        </script>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     @yield('content')
                 </div>
 
@@ -40,6 +66,7 @@
 </div>
 </div>
 @include('courier.inc.footer')
+@include('admin.layout.inc.addCategory')
 
 </div>
 </body>
