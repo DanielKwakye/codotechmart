@@ -16,6 +16,7 @@ class CreateCouriersTable extends Migration
             $table->increments('id');
             $table->integer('role_id')->default(1);
             $table->string('name');
+            $table->string('image');
             $table->string('email',100)->unique();
             $table->string('image');
             $table->string('password');

@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/home';
+    protected $redirectTo = '/admin/';
 
     /**
      * Create a new controller instance.
@@ -63,11 +63,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Admin::create([
+        $user= Admin::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'image'=>'couriers/img/upload/ijbbBi7sIVF2wrr2SsDerIc96study-in-usa.jpeg',
         ]);
+        \App\AdminOption::firstOrCreate(['admin_id'=>$user->id,'header'=>'bg-gradient-9']);
+        return $user;
     }
 
     /**

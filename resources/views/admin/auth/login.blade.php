@@ -1,68 +1,89 @@
-@extends('admin.layout.auth')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/login') }}">
-                        {{ csrf_field() }}
+<!-- Mirrored from agileui.com/demo/monarch/demo/admin-template/login-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 10:37:45 GMT -->
+<head>
+    @include('courier.inc.header')
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus>
+</head>
+<body>
+<div id="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
 
+<style type="text/css">
+
+    html,body {
+        height: 100%;
+    }
+
+</style>
+<div class="center-vertical bg-black">
+    <div class="center-content row">
+        <form  id="login-validation" class="center-margin col-xs-11 col-sm-5" method="POST" action="{{ url('/admin/login') }}">
+            {{ csrf_field() }}
+            <h3 class="text-center pad25B font-gray font-size-23">Administrator <span class="opacity-80">v1.0</span></h3>
+            <div id="login-form" class="content-box">
+                <div class="content-box-wrapper pad20A">
+
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label for="exampleInputEmail1">Email address:</label>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon addon-inside bg-white font-primary">
+                                <i class="glyph-icon icon-envelope-o"></i>
+                            </span>
+                            <input type="email" name="email" class="form-control" placeholder="Enter email" value="{{ old('email') }}">
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
-                            </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
+                    </div>
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label for="exampleInputPassword1">Password:</label>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon addon-inside bg-white font-primary">
+                                <i class="glyph-icon icon-unlock-alt"></i>
+                            </span>
+                            <input type="password" class="form-control" name="password" placeholder="Password">
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="checkbox-primary col-md-6" style="height: 20px;">
+                            <label>
+                                <input type="checkbox" name="remember" class="custom-checkbox">
+                                Remember me
+                            </label>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/admin/password/reset') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
+                        <div class="text-right col-md-6">
+                            <a href="{{ url('/admin/password/reset')}}" title="Recover password">Forgot your password?</a>
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="button-pane">
+                    <button type="submit" class="btn btn-block btn-primary">Login</button>
                 </div>
             </div>
-        </div>
+
+        </form>
+
     </div>
 </div>
-@endsection
+
+
+@include('courier.inc.footer')
+
+</body>
+
+</html>
