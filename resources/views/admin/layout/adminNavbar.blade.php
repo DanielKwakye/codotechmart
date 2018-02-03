@@ -80,9 +80,7 @@
                                 <span class="glyph-icon icon-clock-o"></span>
                             </div>
                         </li> --}}
-                        @php
-                        $user = \App\shops::find(4);
-                         @endphp
+                        
                         {{-- notification --}}
                            
                                 {{-- <notification v-bind:notifications="notifications"></notification> --}}

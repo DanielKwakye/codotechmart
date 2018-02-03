@@ -58,9 +58,7 @@
                                         <thead>
                                             <tr>
                                                 <th>ShopName</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Start date</th>
+                                                <th>Category</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -68,32 +66,21 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Start date</th>
+                                                <th>Category</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
 
                                         <tbody>
                                             
-                                            @foreach(\App\shops::where('status',1)->get() as $p)
+                                            @foreach(\App\Shop::where('active',1)->get() as $p)
                                             
                                             <tr class="tr{{$p->id}}">
-                                                <td>{{$p->shopname}}</td>
-                                                <td>System Architect</td>
-                                                <td class="groupId">{{$p->id}}</td>
-                                                <td>yhh</td>
-                                                <td class="cancel{{$p->id}}">
-                                                <div class="btn-group" id='cancelrequest{{$p->id}}'>
-                                                        <button type="button" class="btn btn-info btn-xs  popover-button-default" disabled="">Request Sent</button>
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-info btn-xs  popover-button-default" data-placement="bottom" data-content="<div class='text-center'><a href='#' class='cancelRequest' shopid='{{$p->id}}' userid='{{Auth::guard('admin')->user()->id}}' >Cancel Request</a></div>">....
-                                                                <span class="caret"></span>
-                                                            </button>
-                                                            
-                                                        </div>
-                                                </div>
+                                                <td>{{$p->name}}</td>
+                                                <td>{{$p->shopcategory->name}}</td>
+                                                <td class="">
+                                                    <button class="btn btn-warning btn-xs">VIEW</button>
+                                                    <button class="btn btn-danger btn-xs">DEACTIVATE</button>
                                                 </td>
                                             </tr>
                                             

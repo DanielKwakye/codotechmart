@@ -47,9 +47,9 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function profile()
     {
-        //
+        return view('admin.profile');
     }
 
     /**

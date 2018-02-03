@@ -51,7 +51,7 @@ Route::group(['prefix'=>'admin'], function () {
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
   Route::get('/', 'Admin\AdminController@index')->middleware('admin');
   Route::post('/addCategory', 'Admin\AdminController@addCategory');
-
+  Route::get('/profile', 'Admin\AdminController@profile');
 });
 
 
