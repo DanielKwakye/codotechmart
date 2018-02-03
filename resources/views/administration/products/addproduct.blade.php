@@ -30,14 +30,14 @@
 				</div>
 				<div class="card-body collapse in">
 					<div class="card-block">
-						<form class="form" method="post" action="{{url('administration/addnewbranch')}}">
+						<form class="form" method="post" action="{{url('administration/addnewproduct')}}">
 							{{csrf_field()}}
 							<div class="form-body">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="name">Product Name</label>
-											<input type="text" id="name" class="form-control" placeholder="Branch Name" name="name">
+											<input type="text" id="name" class="form-control" placeholder="Product Name" name="name">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -95,12 +95,6 @@
 												@endforeach
 											</select>
 											</div>
-
-											<div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <input type="file" multiple id="input-id" name="images[]">
-                                                </div>
-                                            </div>
 											
 											{{-- <div class="col-sm-4" style="margin-top: 20px">
 												

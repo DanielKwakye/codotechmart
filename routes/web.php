@@ -122,6 +122,7 @@ Route::get('/deletebrand','AdministrationControllers\ProductBrandController@dele
 Route::post('/editbrand','AdministrationControllers\ProductBrandController@editBrand');
 
 Route::get('/addproduct','AdministrationControllers\ProductsController@index');
+Route::post('/addnewproduct','AdministrationControllers\ProductsController@addNewProduct');
 });
 
 
