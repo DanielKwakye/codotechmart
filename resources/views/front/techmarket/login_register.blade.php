@@ -36,15 +36,15 @@
                                         <div id="customer_login" class="u-columns col2-set">
                                             <div class="u-column1 col-1">
                                                 <h2>Login</h2>
-                                                <form method="post" class="woocomerce-form woocommerce-form-login login">
+                                                <form method="post" class="woocomerce-form woocommerce-form-login login" action="{{url('/login')}}">
                                                     <p class="before-login-text">
-                                                        Vestibulum lacus magna, faucibus vitae dui eget, aliquam fringilla. In et commodo elit. Class aptent taciti sociosqu ad litora.
+                                                        Welcome Back
                                                     </p>
                                                     <p class="form-row form-row-wide">
-                                                        <label for="username">Username or email address
+                                                        <label for="username"> email address
                                                             <span class="required">*</span>
                                                         </label>
-                                                        <input type="text" class="input-text" name="username" id="username" value="" />
+                                                        <input type="email" class="input-text" name="email" id="username" value="" />
                                                     </p>
                                                     <p class="form-row form-row-wide">
                                                         <label for="password">Password
@@ -58,19 +58,45 @@
                                                             <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> Remember me
                                                         </label>
                                                     </p>
+
                                                     <p class="woocommerce-LostPassword lost_password">
                                                         <a href="#">Lost your password?</a>
                                                     </p>
+
                                                 </form>
+
+                                                <div class="footer-social-icons">
+                                                    <ul class="social-icons nav">
+                                                        <li class="nav-item">
+                                                            <a class="sm-icon-label-link nav-link" href="#">
+                                                             Login with    <i class="fa fa-facebook"></i> Facebook</a>
+                                                        </li>
+
+                                                        <li class="nav-item">
+                                                            <a class="sm-icon-label-link nav-link" href="#">
+                                                              Login with  <i class="fa fa-google-plus"></i> Google+</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
                                                 <!-- .woocommerce-form-login -->
                                             </div>
                                             <!-- .col-1 -->
                                             <div class="u-column2 col-2">
                                                 <h2>Register</h2>
-                                                <form class="register" method="post">
+                                                <form class="register" method="post" action="{{url('/register')}}">
                                                     <p class="before-register-text">
-                                                        Create new account today to reap the benefits of a personalized shopping experience. Praesent placerat, est sed aliquet finibus.
+                                                        Create new account today to reap the benefits of a personalized shopping experience.
                                                     </p>
+
+                                                    <p class="form-row form-row-wide">
+                                                        <label for="reg_email">Your Name
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <input type="text" value="" id="reg_name" name="name" class="woocommerce-Input woocommerce-Input--text input-text">
+                                                    </p>
+
                                                     <p class="form-row form-row-wide">
                                                         <label for="reg_email">Email address
                                                             <span class="required">*</span>

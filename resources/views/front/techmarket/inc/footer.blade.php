@@ -130,21 +130,6 @@
                                                     <li class="menu-item">
                                                         <a href="shop.html">Computers &#038; Laptops</a>
                                                     </li>
-                                                </ul>
-                                            </div>
-                                            <!-- .menu-footer-menu-1-container -->
-                                        </div>
-                                        <!-- .body -->
-                                    </aside>
-                                    <!-- .widget -->
-                                </div>
-                                <!-- .columns -->
-                                <div class="columns">
-                                    <aside class="widget clearfix">
-                                        <div class="body">
-                                            <h4 class="widget-title">&nbsp;</h4>
-                                            <div class="menu-footer-menu-2-container">
-                                                <ul id="menu-footer-menu-2" class="menu">
                                                     <li class="menu-item">
                                                         <a href="{{url('login')}}">Login/Register</a>
                                                     </li>
@@ -154,16 +139,16 @@
                                                     <li class="menu-item">
                                                         <a href="{{url('compare')}}">Compare List</a>
                                                     </li>
-
                                                 </ul>
                                             </div>
-                                            <!-- .menu-footer-menu-2-container -->
+                                            <!-- .menu-footer-menu-1-container -->
                                         </div>
                                         <!-- .body -->
                                     </aside>
                                     <!-- .widget -->
                                 </div>
                                 <!-- .columns -->
+
                                 <div class="columns">
                                     <aside class="widget clearfix">
                                         <div class="body">
