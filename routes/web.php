@@ -123,6 +123,9 @@ Route::post('/editbrand','AdministrationControllers\ProductBrandController@editB
 
 Route::get('/addproduct','AdministrationControllers\ProductsController@index');
 Route::post('/addnewproduct','AdministrationControllers\ProductsController@addNewProduct');
+
+Route::get('/emailsettings','AdministrationControllers\EmailSettingsController@index');
+Route::post('/saveemailsettings','AdministrationControllers\EmailSettingsController@saveEmailSettings');
 });
 
 
