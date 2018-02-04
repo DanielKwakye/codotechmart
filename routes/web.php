@@ -51,7 +51,12 @@ Route::group(['prefix'=>'admin'], function () {
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
   Route::get('/', 'Admin\AdminController@index')->middleware('admin');
   Route::post('/addCategory', 'Admin\AdminController@addCategory');
-  Route::get('/profile', 'Admin\AdminController@profile');
+  Route::post('/shop/deactivate', 'Admin\AdminController@deactivate');
+  Route::post('/shop/activate', 'Admin\AdminController@activate');
+  Route::get('/active-shops', 'Admin\AdminController@activeShops');
+  Route::get('/deactivated-shops', 'Admin\AdminController@deactivatedShops')->middleware('admin');
+  Route::post('/addMonthlyPlan', 'Admin\AdminController@addMonthlyPlan');
+
 });
 
 

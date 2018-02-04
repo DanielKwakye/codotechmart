@@ -1,6 +1,6 @@
 @extends('admin.layout.adminLayout')
 @section('title')
-    <title>All Shops</title>
+    <title>Active Shops</title>
 @endsection
 @section('content')
     
@@ -48,7 +48,7 @@
                         </script>
                         
                         <div id="page-title">
-                            <h2>Enrolled Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button> <button class="btn border-orange btn-alt btn-link font-orange ra-100 btn-border" data-toggle="modal" data-target="#monthlyPlan"><i class="glyph-icon icon-plus"> </i>Add Monthly Plan</button></h2>
+                            <h2>Active Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button> <button class="btn border-orange btn-alt btn-link font-orange ra-100 btn-border" data-toggle="modal" data-target="#monthlyPlan"><i class="glyph-icon icon-plus"> </i>Add Monthly Plan</button></h2>
                         </div>
                         <div class="panel">
                             <div class="panel-body">
@@ -75,19 +75,14 @@
 
                                         <tbody>
                                             
-                                            @foreach(\App\Shop::withTrashed()->get() as $p)
-                                            <tr>
+                                            @foreach(\App\Shop::all() as $p)
+                                            <tr class="tr{{$p->id}}">
                                                 <td>{{$p->name}}</td>
                                                 <td>{{$p->shopcategory->name}}</td>
                                                 <td>{{$p->active==1?'Active':'Deactivated'}}</td>
                                                 <td class="tr{{$p->id}}">
                                                     <button class="btn btn-warning btn-xs view" data-toggle="modal" data-target="#myProfile" data="{{$p}}">VIEW</button>
-                                                    @if($p->deleted_at==null)
                                                     <button class="btn btn-danger btn-xs deactivate" id="deactivate{{$p->id}}" shopid="{{$p->id}}">DEACTIVATE</button>
-                                                    @elseif($p->deleted_at!==null)
-                                                    <button class="btn btn-danger btn-xs activate" id="activate{{$p->id}}" shopid="{{$p->id}}">ACTIVATE</button>
-                                                    @endif
-                                                     
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -97,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        
 @endsection
 
 @section('script')
@@ -118,11 +113,10 @@
     if (confirm('Are you sure you want to Deactive This Shop?')) {
         $.post("{{url('admin/shop/deactivate')}}",{shopid:shopid,_token:_token},function(result){
         $now=JSON.parse(result);
+        $('.tr'+shopid).remove();
         $('.deactivatedshop').html($now.deactiveCount);
         $('.allshops').html($now.allshops);
         $('.activatedshop').html($now.activeCount);
-        $('#deactivate'+shopid).detach();
-        $('.tr'+shopid).append('<button class="btn btn-success btn-xs activate" id="activate'+shopid+'" shopid="'+shopid+'">ACTIVATE</button>');
         notify($now.status,$now.error);
 
         }).fail(function(){
@@ -130,24 +124,7 @@
         });
     }
    });  
-    $(document).on('click','.activate',function(e){
-    var shopid=$(this).attr('shopid');
-    var _token = "{{csrf_token()}}";
-    if (confirm('Are you sure you want to Deactive This Shop?')) {
-        $.post("{{url('admin/shop/activate')}}",{shopid:shopid,_token:_token},function(result){
-        $now=JSON.parse(result);
-        $('.deactivatedshop').html($now.deactiveCount);
-        $('.allshops').html($now.allshops);
-        $('.activatedshop').html($now.activeCount);
-        $('#activate'+shopid).detach();
-        $('.tr'+shopid).append('<button class="btn btn-danger btn-xs deactivate" id="deactivate'+shopid+'" shopid="'+shopid+'">DEACTIVATE</button>');
-        notify($now.status,$now.error);
-
-        }).fail(function(){
-            alert('error sending request');
-        });
-    }
-   });  
+    
 </script>
 
 @endsection

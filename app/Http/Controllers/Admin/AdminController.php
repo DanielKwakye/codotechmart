@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ShopCategory;
 use Session;
+use App\Shop;
 
 class AdminController extends Controller
 {
@@ -41,16 +42,6 @@ class AdminController extends Controller
         return back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function profile()
-    {
-        return view('admin.profile');
-    }
 
     /**
      * Display the specified resource.
@@ -58,9 +49,32 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function deactivate(Request $r)
     {
-        //
+        $shop=Shop::find($r->shopid)->delete();
+        $deactivecount=Shop::onlyTrashed()->count();
+        $activecount=Shop::all()->count();
+        $allshops=Shop::withTrashed()->count();
+        if ($shop) {
+            return json_encode(['error'=>false,'status'=>'Shop has been successfully deactivated','activeCount'=>$activecount,'deactiveCount'=>$deactivecount,'allshops'=>$allshops]);
+        }
+        return json_encode(['error'=>true,'status'=>'Error whiles deactivating shop','count'=>$count]);
+
+    }
+
+    public function activate(Request $r)
+    {
+        $shop=Shop::withTrashed()
+        ->where('id', $r->shopid)
+        ->restore();
+        $deactivecount=Shop::onlyTrashed()->count();
+        $activecount=Shop::all()->count();
+        $allshops=Shop::withTrashed()->count();
+        if ($shop) {
+            return json_encode(['error'=>false,'status'=>'Shop has been successfully Activated','activeCount'=>$activecount,'deactiveCount'=>$deactivecount,'allshops'=>$allshops]);
+        }
+        return json_encode(['error'=>true,'status'=>'Error whiles Activating shop']);
+
     }
 
     /**
@@ -69,9 +83,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function activeShops()
     {
-        //
+        return view('admin.activeShops');
     }
 
     /**
@@ -81,9 +95,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function deactivatedShops()
     {
-        //
+        return view('admin.deactiveShops');
     }
 
     /**
@@ -92,7 +106,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function addMonthlyPlan(Request $r)
     {
         //
     }

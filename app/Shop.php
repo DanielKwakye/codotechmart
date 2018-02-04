@@ -3,13 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Shop extends Model
 {
-	
+	use SoftDeletes;
     
     protected $table = 'shops';
+    
     protected $fillable = [
      'id','name','phone','type','latitude','longitude','creator_surname','creator_firstname','creator_email',
     'active'];
@@ -29,4 +31,6 @@ class Shop extends Model
     public function orders(){
     	return $this->hasMany('App\Orders');
     }
+
+    protected $dates = ['deleted_at'];
 }

@@ -121,14 +121,15 @@
         <a href="#" title="All Orders">
             <i class="glyph-icon icon-linecons-diamond"></i>
             <span>Enrolled Shops</span>
-            <span class="bs-badge badge-danger totalorders">{{count(\App\Orders::where('user_id',Auth::guard('admin')->user()->id)->get())}}</span>
         </a>
         <div class="sidebar-submenu">
 
             <ul>
-                <li><a href="{{url('admin/pending-orders')}}" title="Buttons"><span>Active Shops</span>
-                    <span class="bs-badge badge-purple orders">{{count(\App\Orders::whereIn('status',[1,2])->where('user_id',Auth::guard('admin')->user()->id)->get())}}</span></a></li>
-                    <li><a href="{{url('admin/delivery-history')}}" title="Buttons"><span>Deactivated Shops</span> <span class="bs-badge badge-yellow delivery">{{count(\App\Orders::where('status',3)->where('user_id',Auth::guard('admin')->user()->id)->get())}}</span></a></a></li>
+                    <li><a href="{{url('admin')}}" title="Buttons"><span>All Shops</span>
+                    <span class="bs-badge badge-azure allshops">{{count(\App\Shop::withTrashed()->get())}}</span></a></li>
+                    <li><a href="{{url('admin/active-shops')}}" title="Buttons"><span>Active Shops</span>
+                    <span class="bs-badge badge-purple activatedshop">{{count(\App\Shop::all())}}</span></a></li>
+                    <li><a href="{{url('admin/deactivated-shops')}}" title="Buttons"><span>Deactivated Shops</span> <span class="bs-badge badge-yellow deactivatedshop">{{count(\App\Shop::onlyTrashed()->get())}}</span></a></a></li>
             </ul>
 
         </div><!-- .sidebar-submenu -->
