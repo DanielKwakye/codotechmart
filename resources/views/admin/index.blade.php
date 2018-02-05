@@ -48,7 +48,7 @@
                         </script>
                         
                         <div id="page-title">
-                            <h2>Enrolled Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button> <button class="btn border-orange btn-alt btn-link font-orange ra-100 btn-border" data-toggle="modal" data-target="#monthlyPlan"><i class="glyph-icon icon-plus"> </i>Add Monthly Plan</button></h2>
+                            <h2>Enrolled Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
                         </div>
                         <div class="panel">
                             <div class="panel-body">

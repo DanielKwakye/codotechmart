@@ -1,6 +1,6 @@
 @extends('admin.layout.adminLayout')
 @section('title')
-    <title>Deactivated Shops</title>
+    <title>All Shops</title>
 @endsection
 @section('content')
     
@@ -48,7 +48,7 @@
                         </script>
                         
                         <div id="page-title">
-                            <h2>Deactivated Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
+                            <h2>Enrolled Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
                         </div>
                         <div class="panel">
                             <div class="panel-body">
@@ -75,14 +75,19 @@
 
                                         <tbody>
                                             
-                                            @foreach(\App\Shop::onlyTrashed()->get() as $p)
-                                            <tr class="tr{{$p->id}}">
+                                            @foreach(\App\Courier::withTrashed()->get() as $p)
+                                            <tr>
                                                 <td>{{$p->name}}</td>
-                                                <td>{{$p->shopcategory->name}}</td>
-                                                <td>Deactivated</td>
+                                                <td>{{$p->name}}</td>
+                                                <td>{{$p->deleted_at==null?'Active':'Deactivated'}}</td>
                                                 <td class="tr{{$p->id}}">
                                                     <button class="btn btn-warning btn-xs view" data-toggle="modal" data-target="#myProfile" data="{{$p}}">VIEW</button>
-                                                    <button class="btn btn-success btn-xs activate" id="activate{{$p->id}}" shopid="{{$p->id}}">ACTIVATE</button>
+                                                    @if($p->deleted_at==null)
+                                                    <button class="btn btn-danger btn-xs deactivate" id="deactivate{{$p->id}}" courierid="{{$p->id}}">DEACTIVATE</button>
+                                                    @elseif($p->deleted_at!==null)
+                                                    <button class="btn btn-success btn-xs activate" id="activate{{$p->id}}" courierid="{{$p->id}}">ACTIVATE</button>
+                                                    @endif
+                                                     
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -92,32 +97,33 @@
                                 </div>
                             </div>
                         </div>
-                        
+
 @endsection
 
 @section('script')
     <script type="text/javascript">
         $('.view').click(function(){
         var data = JSON.parse($(this).attr('data'));
-        $('.name').html(data.creator_firstname+' '+data.creator_surname);
-       $('.email').html(data.creator_email);
-       $('.phone').html(data.phone);
-       $('.profile').html(data.name);
+        $('.name').html(data.name);
+       $('.email').html(data.email);
+       $('.categorise').html('Courier');
+       $('.profile').html(data.name+'\'s Profile');
+       $('.image').attr('src','{{asset('')}}'+data.image);
     }); 
     </script>
 
     <script type="text/javascript">
-    $(document).on('click','.activate',function(e){
-    var shopid=$(this).attr('shopid');
+    $(document).on('click','.deactivate',function(e){
+    var courierid=$(this).attr('courierid');
     var _token = "{{csrf_token()}}";
     if (confirm('Are you sure you want to Deactive This Shop?')) {
-        $.post("{{url('admin/shop/activate')}}",{shopid:shopid,_token:_token},function(result){
+        $.post("{{url('admin/courier/deactivate')}}",{courierid:courierid,_token:_token},function(result){
         $now=JSON.parse(result);
-        console.log($now);
-        $('.deactivatedshop').html($now.deactiveCount);
-        $('.allshops').html($now.allshops);
-        $('.activatedshop').html($now.activeCount);
-        $('.tr'+shopid).remove();
+        $('.deactiveCouriers').html($now.deactiveCouriers);
+        $('.allcouriers').html($now.allcouriers);
+        $('.activeCouriers').html($now.activeCouriers);
+        $('#deactivate'+courierid).detach();
+        $('.tr'+courierid).append('<button class="btn btn-success btn-xs activate" id="activate'+courierid+'" courierid="'+courierid+'">ACTIVATE</button>');
         notify($now.status,$now.error);
 
         }).fail(function(){
@@ -125,7 +131,24 @@
         });
     }
    });  
-    
+    $(document).on('click','.activate',function(e){
+    var courierid=$(this).attr('courierid');
+    var _token = "{{csrf_token()}}";
+    if (confirm('Are you sure you want to Deactive This Shop?')) {
+        $.post("{{url('admin/courier/activate')}}",{courierid:courierid,_token:_token},function(result){
+        $now=JSON.parse(result);
+        $('.deactiveCouriers').html($now.deactiveCouriers);
+        $('.allcouriers').html($now.allcouriers);
+        $('.activeCouriers').html($now.activeCouriers);
+        $('#activate'+courierid).detach();
+        $('.tr'+courierid).append('<button class="btn btn-danger btn-xs deactivate" id="deactivate'+courierid+'" courierid="'+courierid+'">DEACTIVATE</button>');
+        notify($now.status,$now.error);
+
+        }).fail(function(){
+            alert('error sending request');
+        });
+    }
+   });  
 </script>
 
 @endsection

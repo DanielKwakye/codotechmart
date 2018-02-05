@@ -125,7 +125,7 @@
         <div class="sidebar-submenu">
 
             <ul>
-                    <li><a href="{{url('admin')}}" title="Buttons"><span>All Shops</span>
+                    <li><a href="{{url('admin/shops')}}" title="Buttons"><span>All Shops</span>
                     <span class="bs-badge badge-azure allshops">{{count(\App\Shop::withTrashed()->get())}}</span></a></li>
                     <li><a href="{{url('admin/active-shops')}}" title="Buttons"><span>Active Shops</span>
                     <span class="bs-badge badge-purple activatedshop">{{count(\App\Shop::all())}}</span></a></li>
@@ -142,9 +142,26 @@
         <div class="sidebar-submenu">
 
             <ul>
-                <li><a href="{{url('admin/pending-orders')}}" title="Buttons"><span>Active Couriers</span>
-                    <span class="bs-badge badge-purple orders">{{count(\App\Orders::whereIn('status',[1,2])->where('user_id',Auth::guard('admin')->user()->id)->get())}}</span></a></li>
-                    <li><a href="{{url('admin/delivery-history')}}" title="Buttons"><span>Deactivated Couriers</span> <span class="bs-badge badge-yellow delivery">{{count(\App\Orders::where('status',3)->where('user_id',Auth::guard('admin')->user()->id)->get())}}</span></a></a></li>
+                <li><a href="{{url('admin/couriers')}}" title="Buttons"><span>All Couriers</span>
+                    <span class="bs-badge badge-azure allcouriers">{{count(\App\Courier::withTrashed()->get())}}</span></a></li>
+                    <li><a href="{{url('admin/active-couriers')}}" title="Buttons"><span>Active Couriers</span>
+                    <span class="bs-badge badge-purple activeCouriers">{{count(\App\Courier::all())}}</span></a></li>
+                    <li><a href="{{url('admin/deactivated-couriers')}}" title="Buttons"><span>Deactivated Couriers</span> <span class="bs-badge badge-yellow deactiveCouriers">{{count(\App\Courier::onlyTrashed()->get())}}</span></a></a></li>
+            </ul>
+
+        </div><!-- .sidebar-submenu -->
+    </li>
+    <li>
+        <a href="#" title="Statistics">
+            <i class="glyph-icon icon-linecons-wallet"></i>
+            <span>Monthly Plans</span>
+        </a>
+        <div class="sidebar-submenu">
+
+            <ul>
+                <li><a href="{{url('admin/shopPlans')}}" title="Buttons"><span>Shops Monthly Plan</span>
+                    </a></li>
+                    <li><a href="{{url('admin/courierPlans')}}" title="Buttons"><span>Couriers Monthly Plan</span></a></a></li>
             </ul>
 
         </div><!-- .sidebar-submenu -->

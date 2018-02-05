@@ -1,6 +1,6 @@
 @extends('admin.layout.adminLayout')
 @section('title')
-    <title>Deactivated Shops</title>
+    <title>Active Shops</title>
 @endsection
 @section('content')
     
@@ -48,7 +48,7 @@
                         </script>
                         
                         <div id="page-title">
-                            <h2>Deactivated Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
+                            <h2>Active Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
                         </div>
                         <div class="panel">
                             <div class="panel-body">
@@ -75,14 +75,14 @@
 
                                         <tbody>
                                             
-                                            @foreach(\App\Shop::onlyTrashed()->get() as $p)
+                                            @foreach(\App\Courier::all() as $p)
                                             <tr class="tr{{$p->id}}">
                                                 <td>{{$p->name}}</td>
-                                                <td>{{$p->shopcategory->name}}</td>
-                                                <td>Deactivated</td>
+                                                <td>{{$p->name}}</td>
+                                                <td>Active</td>
                                                 <td class="tr{{$p->id}}">
                                                     <button class="btn btn-warning btn-xs view" data-toggle="modal" data-target="#myProfile" data="{{$p}}">VIEW</button>
-                                                    <button class="btn btn-success btn-xs activate" id="activate{{$p->id}}" shopid="{{$p->id}}">ACTIVATE</button>
+                                                    <button class="btn btn-danger btn-xs deactivate" id="deactivate{{$p->id}}" shopid="{{$p->id}}">DEACTIVATE</button>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -107,17 +107,16 @@
     </script>
 
     <script type="text/javascript">
-    $(document).on('click','.activate',function(e){
+    $(document).on('click','.deactivate',function(e){
     var shopid=$(this).attr('shopid');
     var _token = "{{csrf_token()}}";
     if (confirm('Are you sure you want to Deactive This Shop?')) {
-        $.post("{{url('admin/shop/activate')}}",{shopid:shopid,_token:_token},function(result){
+        $.post("{{url('admin/shop/deactivate')}}",{shopid:shopid,_token:_token},function(result){
         $now=JSON.parse(result);
-        console.log($now);
+        $('.tr'+shopid).remove();
         $('.deactivatedshop').html($now.deactiveCount);
         $('.allshops').html($now.allshops);
         $('.activatedshop').html($now.activeCount);
-        $('.tr'+shopid).remove();
         notify($now.status,$now.error);
 
         }).fail(function(){

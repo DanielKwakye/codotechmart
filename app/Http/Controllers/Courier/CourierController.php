@@ -276,7 +276,7 @@ class CourierController extends Controller
     public function notify()
     {
       $user = Auth::guard('courier')->user();
-        event(new sentRequest($user));
+        event(new sentRequest('hello there'));
     }
 
     public function notificationtest(){

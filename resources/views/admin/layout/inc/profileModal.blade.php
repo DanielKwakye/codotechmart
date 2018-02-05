@@ -15,12 +15,12 @@
 
                                     <div class="panel-content image-box">
                                         <div class="ribbon">
-                                            <div class="bg-primary">Shop</div>
+                                            <div class="bg-primary categorise">Shop</div>
                                         </div>
                                         <div class="image-content font-white">
 
                                             <div class="meta-box meta-box-bottom">
-                                                <img src="{{asset('couriers/assets/image-resources/gravatar.jpg')}}" alt="" class="meta-image img-bordered img-circle">
+                                                <img class="image" style="width: 80px; height: 80px;" src="{{asset('couriers/assets/image-resources/gravatar.jpg')}}" alt="" class="meta-image img-bordered img-circle">
                                                 <h3 class="meta-heading name"></h3>
                                                 <i class="email">
                                                     <i class="glyph-icon icon-envelope-o"></i>

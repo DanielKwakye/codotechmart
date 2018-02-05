@@ -11,7 +11,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Courier;
 
-class sentRequest
+class sentRequest implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,9 +22,11 @@ class sentRequest
      */
 
     public $courier;
-    public function __construct(Courier $courier)
+
+
+    public function __construct($courier)
     {
-        $this->$courier=$courier;
+        $this->courier=$courier;
     }
 
     /**
@@ -32,8 +34,8 @@ class sentRequest
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    // public function broadcastOn()
-    // {
-    //     return new PrivateChannel('channel-name');
-    // }
+    public function broadcastOn()
+    {
+        return new PrivateChannel('courier');
+    }
 }

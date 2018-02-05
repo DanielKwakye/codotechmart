@@ -75,11 +75,11 @@
 
                                         <tbody>
                                             
-                                            @foreach(\App\Shop::onlyTrashed()->get() as $p)
+                                            @foreach(\App\Courier::onlyTrashed()->get() as $p)
                                             <tr class="tr{{$p->id}}">
                                                 <td>{{$p->name}}</td>
-                                                <td>{{$p->shopcategory->name}}</td>
-                                                <td>Deactivated</td>
+                                                <td>{{$p->name}}</td>
+                                                <td>Inactive</td>
                                                 <td class="tr{{$p->id}}">
                                                     <button class="btn btn-warning btn-xs view" data-toggle="modal" data-target="#myProfile" data="{{$p}}">VIEW</button>
                                                     <button class="btn btn-success btn-xs activate" id="activate{{$p->id}}" shopid="{{$p->id}}">ACTIVATE</button>

@@ -1,6 +1,6 @@
 @extends('admin.layout.adminLayout')
 @section('title')
-    <title>Deactivated Shops</title>
+    <title>Monthly Plans</title>
 @endsection
 @section('content')
     
@@ -48,7 +48,7 @@
                         </script>
                         
                         <div id="page-title">
-                            <h2>Deactivated Shop(s) <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
+                            <h2>Shop Monthly Plans <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
                         </div>
                         <div class="panel">
                             <div class="panel-body">
@@ -57,35 +57,35 @@
                                         <table id="datatable-tabletools" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>ShopName</th>
-                                                <th>Category</th>
-                                                <th>Status</th>
+                                                <th>ShopId</th>
+                                                <th>Plan</th>
+                                                <th>Amount</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Status</th>
+                                                <th>ShopId</th>
+                                                <th>Plan</th>
+                                                <th>Amount</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
 
                                         <tbody>
-                                            
-                                            @foreach(\App\Shop::onlyTrashed()->get() as $p)
-                                            <tr class="tr{{$p->id}}">
+                                            @if(\App\ShopMonthlyPlan::all()!==null)
+                                            @foreach(\App\ShopMonthlyPlan::all() as $p)
+                                            <tr>
+                                               <td>{{$p->id}}</td>
                                                 <td>{{$p->name}}</td>
-                                                <td>{{$p->shopcategory->name}}</td>
-                                                <td>Deactivated</td>
+                                                <td class="amount">GH&cent; {{$p->amount}}</td>
                                                 <td class="tr{{$p->id}}">
-                                                    <button class="btn btn-warning btn-xs view" data-toggle="modal" data-target="#myProfile" data="{{$p}}">VIEW</button>
-                                                    <button class="btn btn-success btn-xs activate" id="activate{{$p->id}}" shopid="{{$p->id}}">ACTIVATE</button>
+                                                    <button class="btn btn-warning btn-xs plan" data-toggle="modal" data-target="#monthlyPlan" data="{{$p}}">UPDATE</button>
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                     </div>
@@ -96,36 +96,12 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript">
-        $('.view').click(function(){
+<script type="text/javascript">
+        $('.plan').click(function(){
         var data = JSON.parse($(this).attr('data'));
-        $('.name').html(data.creator_firstname+' '+data.creator_surname);
-       $('.email').html(data.creator_email);
-       $('.phone').html(data.phone);
-       $('.profile').html(data.name);
+        $('.month').val(data.name);
+        $('.id').val(data.id);
+        $('.modalform').attr('action','{{url('admin/shop/update')}}');
     }); 
     </script>
-
-    <script type="text/javascript">
-    $(document).on('click','.activate',function(e){
-    var shopid=$(this).attr('shopid');
-    var _token = "{{csrf_token()}}";
-    if (confirm('Are you sure you want to Deactive This Shop?')) {
-        $.post("{{url('admin/shop/activate')}}",{shopid:shopid,_token:_token},function(result){
-        $now=JSON.parse(result);
-        console.log($now);
-        $('.deactivatedshop').html($now.deactiveCount);
-        $('.allshops').html($now.allshops);
-        $('.activatedshop').html($now.activeCount);
-        $('.tr'+shopid).remove();
-        notify($now.status,$now.error);
-
-        }).fail(function(){
-            alert('error sending request');
-        });
-    }
-   });  
-    
-</script>
-
 @endsection
