@@ -1,4 +1,4 @@
-@extends('courier.layout.auth')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,11 +8,11 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in as Courier!ss
+                    You are logged in as Courier!
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
-yes

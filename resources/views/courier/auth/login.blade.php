@@ -1,68 +1,104 @@
-@extends('courier.layout.auth')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/courier/login') }}">
-                        {{ csrf_field() }}
+<head>
+    @include('courier.inc.header')
+    
+        <title> Login </title>
+</head>
+<body>
+<div id="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
 
+<style type="text/css">
+
+    html,body {
+        height: 100%;
+        background: #fff;
+        overflow: hidden;
+    }
+
+</style>
+
+
+<script type="text/javascript" src="{{asset('courierss/assets/widgets/wow/wow.js')}}"></script>
+<script type="text/javascript">
+    /* WOW animations */
+
+    wow = new WOW({
+        animateClass: 'animated',
+        offset: 100
+    });
+    wow.init();
+</script>
+
+
+<img src="{{asset('couriers/assets/image-resources/blurred-bg/blurred-bg-3.jpg')}}" class="login-img wow fadeIn" alt="">
+
+<div class="center-vertical">
+    <div class="center-content row">
+
+        <div class="col-md-3 center-margin">
+
+            <form class="form-horizontal" method="POST" action="{{ url('/courier/login') }}">
+                {{ csrf_field() }}
+                <div class="content-box wow bounceInDown modal-content" style="padding: 5px;">
+                    <h3 class="content-box-header content-box-header-alt bg-default">
+                        <span class="icon-separator">
+                            <i class="glyph-icon icon-cog"></i>
+                        </span>
+                        <span class="header-wrapper">
+                                couriers Service
+                            <small>Login to your account.</small>
+                        </span>
+                        <span class="header-buttons">
+                            <a href="{{url('/courier/register')}}" class="btn btn-sm btn-primary" title="Register">Sign Up</a>
+                        </span>
+                    </h3>
+                    <div class="content-box-wrapper">
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus>
-
-                                @if ($errors->has('email'))
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="email" placeholder="Enter email" value="{{ old('email') }}">
+                                <span class="input-group-addon bg-blue">
+                                    <i class="glyph-icon icon-envelope-o"></i>
+                                </span>
+                            </div>
+                            @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
-                            </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
+                            <div class="input-group">
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <span class="input-group-addon bg-blue">
+                                    <i class="glyph-icon icon-unlock-alt"></i>
+                                </span>
+                            </div>
+                            @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                            </div>
                         </div>
-
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
+                            <a href="{{ url('courier/password/reset') }}" title="Recover password">Forgot Your Password?</a>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/courier/password/reset') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                        <button type="submit" class="btn btn-success btn-block">Sign In</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
+
     </div>
 </div>
-@endsection
+@include('courier.inc.footer')
+
+</body>
+</html>
