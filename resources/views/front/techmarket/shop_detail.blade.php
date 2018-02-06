@@ -16,7 +16,7 @@
 @endsection
 @section('custom_menu')
     <li class="menu-item animate-dropdown">
-        <a title="Headphones Sale" href="{{url('products')}}">Products</a>
+        <a title="Headphones Sale" href="{{url('shop/'.$shop->id.'/products')}}">Products</a>
     </li>
 @endsection
 @section('left_menu')
@@ -440,12 +440,14 @@
                                                         <div class="container-fluid">
                                                             <div class="woocommerce">
                                                                 <div class="products">
+                                                                    @foreach($products as $p)
                                                                     <div class="product">
+                                                                        <img src="{{asset('assets/images/ajax-loader.gif')}}" style="display: none;" id="ajax_loader_{{$p->id}}">
                                                                         <div class="yith-wcwl-add-to-wishlist">
-                                                                            <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
+                                                                            <a href="#" rel="nofollow" class="add_to_wishlist" data="{{$p->id}}"> Add to Wishlist</a>
                                                                         </div>
                                                                         <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                                            <img src="{{asset('assets/images/products/3.jpg')}}" width="224" height="197" class="wp-post-image" alt="">
+                                                                            <img src="{{asset('assets/images/products/3.jpg')}}" width= "224" height="197" class="wp-post-image" alt="">
                                                                             <span class="price">
                                                                                 <ins>
                                                                                     <span class="amount"> </span>
@@ -453,36 +455,17 @@
                                                                                 <span class="amount"> 456.00</span>
                                                                             </span>
                                                                             <!-- /.price -->
-                                                                            <h2 class="woocommerce-loop-product__title">On-ear Wireless NXTG</h2>
+                                                                            <h2 class="woocommerce-loop-product__title">{{$p->name}}</h2>
                                                                         </a>
                                                                         <div class="hover-area">
-                                                                            <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                                            <a class="add-to-compare-link" href="compare.html">Add to compare</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- /.product-outer -->
-                                                                    <div class="product">
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
-                                                                        </div>
-                                                                        <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                                            <img src="{{asset('assets/images/products/15.jpg')}}" width="224" height="197" class="wp-post-image" alt="">
-                                                                            <span class="price">
-                                                                                <ins>
-                                                                                    <span class="amount"> </span>
-                                                                                </ins>
-                                                                                <span class="amount"> 399.00</span>
-                                                                            </span>
-                                                                            <!-- /.price -->
-                                                                            <h2 class="woocommerce-loop-product__title">Band Fitbit Flex</h2>
-                                                                        </a>
-                                                                        <div class="hover-area">
-                                                                            <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
-                                                                            <a class="add-to-compare-link" href="compare.html">Add to compare</a>
+                                                                            <a class="button add_to_cart_button trigger" href="#" data="{{$p}}" rel="nofollow">Add to cart</a>
+                                                                            <a class="add-to-compare-link add_to_compare" data="{{$p->id}}" href="#">Add to compare</a>
                                                                         </div>
                                                                     </div>
                                                                     <!-- /.product-outer -->
 
+                                                                    <!-- /.product-outer -->
+                                                                     @endforeach
 
                                                                 </div>
                                                             </div>

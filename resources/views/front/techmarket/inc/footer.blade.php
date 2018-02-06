@@ -200,3 +200,5 @@
                 </div>
                 <!-- .col-full -->
             </footer>
+
+    @include('front.techmarket.inc.add-to-cart-modal')

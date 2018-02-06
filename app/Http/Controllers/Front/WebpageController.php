@@ -6,18 +6,34 @@ use App\Front\Plugins\Compare;
 use App\Front\Plugins\WishList;
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\Shop;
 use Illuminate\Http\Request;
 
 class WebpageController extends Controller
 {
     
     public function shops(){
-        return view('front.techmarket.shops');
+        $shops = Shop::all()->sortByDesc('created_at');
+        $data = [
+          'shops' => $shops
+        ];
+        return view('front.techmarket.shops')->with($data);
     }
 
 
-    public function shopDetail(){
-         return view('front.techmarket.shop_detail');
+    public function shopDetail($id){
+         $shop = Shop::find($id);
+         $products = $shop->products()->where('visibility',1)->get();
+         $data = [
+             'shop' => $shop,
+             'products' => $products
+         ];
+
+         return view('front.techmarket.shop_detail')->with($data);
+    }
+
+    public function addCart(Request $request){
+        return $request->qty;
     }
     
     public function addCompare(){
@@ -64,8 +80,13 @@ class WebpageController extends Controller
         return WishList::getInstance()->all();
     }
 
-    public function products(){
-        return view('front.techmarket.shop_products');
+    public function products($id){
+        $shop = Shop::find($id);
+        $products = $shop->products;
+        $data = [
+          'products' => $products
+        ];
+        return view('front.techmarket.shop_products')->with($data);
     }
 
     public function profile(){

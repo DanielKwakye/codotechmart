@@ -15,14 +15,15 @@
 Route::prefix('/')->group(function(){
     
     Route::get('/','Front\WebpageController@shops');
-    Route::get('/shop/detail','Front\WebpageController@shopDetail');
+    Route::get('/shop/{id}/detail','Front\WebpageController@shopDetail');
     Route::get('/cart','Front\WebpageController@cart');
+    Route::get('add/cart','Front\WebpageController@addCart');
     Route::get('add/compare','Front\WebpageController@addCompare');
     Route::get('add/wishlist','Front\WebpageController@addWishlist');
     Route::get('/checkout','Front\WebpageController@checkout');
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
-    Route::get('products','Front\WebpageController@products');
+    Route::get('shop/{id}/products','Front\WebpageController@products');
     Route::get('/favorites','Front\WebpageController@favorite');
     Route::get('/compare','Front\WebpageController@compare');
     Route::get('/faq','Front\WebpageController@faq');
