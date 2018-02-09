@@ -276,11 +276,21 @@ class CourierController extends Controller
     public function notify()
     {
       $user = Auth::guard('courier')->user();
-        event(new sentRequest('hello there'));
+        event(new sentRequest('hello samuel'));
+    }
+
+     public function listen(){
+      return view('courier.listen');
+      
     }
 
     public function notificationtest(){
       return notification::all();
+      
+    }
+
+    public function broadcast(Request $r){
+      return $r->all();
       
     }
 

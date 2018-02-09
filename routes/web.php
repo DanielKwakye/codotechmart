@@ -103,11 +103,13 @@ Route::group(['prefix' => 'courier'], function () {
   Route::post('profileinfo','Courier\CourierController@profileinfo');
   Route::post('changeoptions','Courier\CourierController@changeoptions');
   Route::get('notify','Courier\CourierController@notify');
+  Route::get('listen','Courier\CourierController@listen');
   Route::get('markasread/{id}','Courier\CourierController@markasread');
   Route::get('notification/get','Courier\CourierController@notificationtest');
   // Route::get('homes',function(){
   //   return view('courier.home');
   // });
+
 });
 
 
