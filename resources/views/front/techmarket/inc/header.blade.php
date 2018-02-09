@@ -92,21 +92,7 @@
                     </div>
                     <!-- .techmarket-sticky-wrap -->
                     <div class="row align-items-center">
-                        <div id="departments-menu" class="dropdown departments-menu">
-                            <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="tm tm-departments-thin"></i>
-                                <span>All Departments</span>
-                            </button>
-                            <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
-                                <li class="highlight menu-item animate-dropdown">
-                                    <a title="Value of the Day" href="home-v2.html">Value of the Day</a>
-                                </li>
-                                <li class="highlight menu-item animate-dropdown">
-                                    <a title="Top 100 Offers" href="home-v3.html">Top 100 Offers</a>
-                                </li>
-
-                            </ul>
-                        </div>
+                        @yield('branches')
                         <!-- .departments-menu -->
                         <form class="navbar-search" method="get" action="https://transvelo.github.io/techmarket-html/home-v1.html">
                             <label class="sr-only screen-reader-text" for="search">Search for:</label>
@@ -114,8 +100,17 @@
                                 <input type="text" id="search" class="form-control search-field product-search-field" dir="ltr" value="" name="s" placeholder="Search for products" />
                                 <div class="input-group-addon search-categories">
                                     <select name='product_cat' id='product_cat' class='postform resizeselect'>
-                                        <option value='0' selected='selected'>All Categories</option>
-                                        <option class="level-0" value="television">Televisions</option>                                       
+                                        <option value='0' selected='selected'>All Regions</option>
+                                        <option class="level-0" value="television">Asante Region</option>
+                                        <option class="level-0" value="television">Brong Ahafo Region</option>
+                                        <option class="level-0" value="television">Central Region</option>
+                                        <option class="level-0" value="television">Eastern Region</option>
+                                        <option class="level-0" value="television">Greater Accra</option>
+                                        <option class="level-0" value="television">Northern Region</option>
+                                        <option class="level-0" value="television">Upper East Region</option>
+                                        <option class="level-0" value="television">Upper West Region</option>
+                                        <option class="level-0" value="television">Volta Region</option>
+                                        <option class="level-0" value="television">Western Region</option>
                                     </select>
                                 </div>
                                 <!-- .input-group-addon -->

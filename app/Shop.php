@@ -15,6 +15,12 @@ class Shop extends Model
     protected $fillable = [
      'id','name','phone','type','latitude','longitude','creator_surname','creator_firstname','creator_email',
     'active'];
+<<<<<<< HEAD
+
+    public function products(){
+        return $this->hasMany('App\Product');
+    }
+=======
     
 
     public function shopcategory(){
@@ -33,4 +39,5 @@ class Shop extends Model
     }
 
     protected $dates = ['deleted_at'];
+>>>>>>> 4bd3b3a365da40b94de5cfe37b6a1f5711ead322
 }
