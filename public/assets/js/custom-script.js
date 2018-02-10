@@ -92,6 +92,36 @@ $('.add_to_compare').click(function(e){
     });
 });
 
+$(document).on('click','.remove_compare',function (e) {
+    e.preventDefault();
+    var url = $(this).attr('href');
+    $.get(url, function (result) {
+        result = JSON.parse(result);
+        console.log(result);
+        if(result.status){
+
+            $('#top-cart-compare-count').html(result.qty);
+            $('#compare_container').load(base_url + "/compare/section");
+            toast(result.message);
+        }
+    });
+});
+
+$(document).on('click','.remove_wishlist',function (e) {
+    e.preventDefault();
+    var url = $(this).attr('href');
+    $.get(url, function (result) {
+        result = JSON.parse(result);
+        console.log(result);
+        if(result.status){
+
+            $('#top-cart-compare-count').html(result.qty);
+            $('#compare_container').load(base_url + "/favorite/section");
+            toast(result.message);
+        }
+    });
+});
+
 $('#add-to-cart').click(function(event){
     event.preventDefault();
     var qty = $('#qty').val();

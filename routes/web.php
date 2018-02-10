@@ -21,17 +21,21 @@ Route::prefix('/')->group(function(){
     Route::get('remove/cart/{id}','Front\WebpageController@removeCart');
     Route::get('add/compare/{id}','Front\WebpageController@addCompare');
     Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
+    Route::get('remove/compare/{id}','Front\WebpageController@removeCompare');
+    Route::get('remove/wishlist/{id}','Front\WebpageController@removeWishlist');
     Route::get('/checkout','Front\WebpageController@checkout');
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('shop/{id}/products','Front\WebpageController@products');
-    Route::get('/favorites','Front\WebpageController@favorite');
+    Route::get('/wishlist','Front\WebpageController@favorite');
     Route::get('/compare','Front\WebpageController@compare');
     Route::get('/faq','Front\WebpageController@faq');
     Route::get('/about','Front\WebpageController@about');
     Route::get('order/detail','Front\WebpageController@orderDetail');
     Route::get('hang/cart','Front\WebpageController@hangCart');
     Route::get('main/cart','Front\WebpageController@mainCart');
+    Route::get('compare/section','Front\WebpageController@compareSection');
+    Route::get('favorite/section','Front\WebpageController@favoriteSection');
     Route::post('update/cart','Front\WebpageController@updateCart');
 
     Route::auth();
@@ -165,3 +169,12 @@ Route::post('/editattributefeature','AdministrationControllers\AttributeFeatures
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('test',function (){
+    $res = \App\Front\Plugins\Compare::getInstance()->all();
+    foreach ($res as $r){
+        print_r($r['item']->name) . " <br>";
+    }
+    //print_r($res);
+//    return "helo";
+});

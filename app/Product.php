@@ -12,5 +12,16 @@ class Product extends Model
     public function getMainimageAttribute(){
 
     }
+
+    public function getOldPriceAttribute(){
+        if("{$this->discount}" > 0){
+            return "{$this->price}";
+        }
+
+    }
+
+    public function getPriceAttribute($value){
+        return $value - ($value * "{$this->discount}" / 100);
+    }
 }
 

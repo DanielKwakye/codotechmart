@@ -68,9 +68,26 @@ class WebpageController extends Controller
         }else{
             return json_encode(['status' => true, 'message' => $item->name . " is already added", 'qty' => Compare::getInstance()->totalQty]);
         }
+    }
 
+    public function removeCompare($id){
+        $item = (new Product())->find($id);
+        Compare::getInstance()->removeItem($item);
+        return json_encode(['status' => true, 'message' => $item->name . " removed from compare", 'qty' => Compare::getInstance()->totalQty]);
+    }
 
+    public function removeWishlist($id){
+        $item = (new Product())->find($id);
+        WishList::getInstance()->removeItem($item);
+        return json_encode(['status' => true, 'message' => $item->name . " removed from favorite", 'qty' => Compare::getInstance()->totalQty]);
+    }
 
+    public function compareSection(){
+        return view('front.techmarket.inc.compare_section');
+    }
+
+    public function favoriteSection(){
+        return view('front.techmarket.inc.favorite_section');
     }
 
     public function addWishlist($id){
