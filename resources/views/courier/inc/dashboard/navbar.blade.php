@@ -1,3 +1,10 @@
+ @php
+   $shops = Auth::guard('courier')->user()->shops()->pluck('shops.id');
+    $unrequested_shops = \App\Shop::whereNotIn('id',$shops)->get();
+    $requested_shops=\App\Shop::whereIn('id',$shops)->get();
+@endphp
+
+
 <div id="page-header" class="{{Auth::guard('courier')->user()->option->header}}">
     <div id="mobile-navigation">
         <button id="nav-toggle" class="collapsed" data-toggle="collapse" data-target="#page-sidebar"><span></span></button>
@@ -170,14 +177,15 @@
     <li>
         <a href="#" title="Shops">
             <i class="glyph-icon icon-linecons-paper-plane"></i>
-            <span>Shops</span>
+            <span>Shops</span> <span class="bs-badge badge-purple">{{count(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',2)->get())+count(\App\Shop::whereNotIn('id',$shops)->get())+count(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',1)->get())}}</span>
         </a>
         <div class="sidebar-submenu">
 
             <ul>
-                <li><a href="{{url('courier/myshops')}}" title="Responsive tables"><span>My Shops</span></a></li>
-                <li><a href="{{url('courier/all-shops')}}" title="Basic tables"><span>All Shops</span></a></li>
-                <li><a href="{{url('courier/requestedshops')}}" title="Data tables"><span>Requested Shops</span></a></li>
+                <li><a href="{{url('courier/myshops')}}" title="Responsive tables"><span>My Shops</span>
+                    <span class="bs-badge badge-purple">{{count(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',2)->get())}}</span></a></li>
+                <li><a href="{{url('courier/all-shops')}}" title="Basic tables"><span>All Shops</span> <span class="bs-badge badge-yellow">{{count(\App\Shop::whereNotIn('id',$shops)->get())}}</span></a></li>
+                <li><a href="{{url('courier/requestedshops')}}" title="Data tables"><span>Requested Shops</span> <span class="bs-badge badge-danger">{{count(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',1)->get())}}</span></a></li>
             </ul>
 
         </div>

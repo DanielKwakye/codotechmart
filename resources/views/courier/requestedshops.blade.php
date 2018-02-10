@@ -58,9 +58,7 @@
                                         <thead>
                                             <tr>
                                                 <th>ShopName</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Start date</th>
+                                                <th>Category</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -68,9 +66,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Start date</th>
+                                                <th>Category</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -80,10 +76,8 @@
                                             @foreach(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',1)->get() as $p)
                                             
                                             <tr class="tr{{$p->shop_id}}">
-                                                <td>{{$p->shop->shopname}}</td>
-                                                <td>System Architect</td>
-                                                <td class="groupId">{{$p->shop_id}}</td>
-                                                <td>yhh</td>
+                                                <td>{{$p->shop->name}}</td>
+                                                <td class="groupId">{{$p->shop->shopcategory->name}}</td>
                                                 <td class="cancel{{$p->shop_id}}">
                                                 <div class="btn-group" id='cancelrequest{{$p->shop_id}}'>
                                                         <button type="button" class="btn btn-info btn-xs  popover-button-default" disabled="">Request Sent</button>

@@ -11,6 +11,7 @@ use App\CourierMonthlyPlan;
 use App\ShopMonthlyPlan;
 use App\Courier;
 use App\AdminOption;
+use App\Complaints;
 
 
 class AdminController extends Controller
@@ -71,7 +72,22 @@ class AdminController extends Controller
         return back();
     }
 
+    public function complaints(){
+        $data=Complaints::all();
+        return view('admin.complaint')->with(['data'=>$data]);
+    }
 
+    public function customDate(Request $r){
+        $r= explode('-', $r->date);
+        $date1= date("Y-m-d", strtotime($r[0]));
+        $date2= date("Y-m-d", strtotime($r[1]));
+        $adv=complaints::whereBetween('created_at', [$date1, $date2])->get();
+        return view('admin.complaint')->withData($adv);
+    }
+
+    public function dashboard(){
+        return view('admin.dashboard');
+    }
     /**
      * Display the specified resource.
      *

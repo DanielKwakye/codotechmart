@@ -26,11 +26,11 @@ class Shop extends Model
     	return $this->belongsTo('App\ShopCategory');
     }
     public function shopRequest(){
-    	return $this->hasOne('App\ShopRequest','shop_id');
+    	return $this->hasMany('App\ShopRequest');
     }
 
     public function couriers(){
-    	return $this->belongsToMany('App\User','shop_requests','shop_id','user_id');
+    	return $this->belongsToMany('App\Courier','shop_requests','shop_id','courier_id');
     }
 
     public function orders(){

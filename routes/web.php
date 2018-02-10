@@ -50,9 +50,13 @@ Route::group(['prefix'=>'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+
+
+
+  Route::get('/', 'Admin\AdminController@dashboard')->middleware('admin');
+
   Route::get('/shops', 'Admin\AdminController@index')->middleware('admin');
   Route::get('/couriers', 'Admin\AdminController@couriers')->middleware('admin');
-  Route::get('/', 'Admin\AdminController@index')->middleware('admin');
   Route::post('/addCategory', 'Admin\AdminController@addCategory');
   Route::post('/shop/deactivate', 'Admin\AdminController@deactivate');
   Route::post('/shop/activate', 'Admin\AdminController@activate');
@@ -68,7 +72,14 @@ Route::group(['prefix'=>'admin'], function () {
   Route::post('/shop/update', 'Admin\AdminController@ShopMonthupdate');
   Route::post('changeoptions','Admin\AdminController@changeoptions');
   Route::post('editCategory','Admin\AdminController@editCategory');
+
+
   Route::post('category/delete','Admin\AdminController@deleteCategory');
+  Route::post('complaint/custom-date','Admin\AdminController@customDate');
+  Route::get('complaints','Admin\AdminController@complaints')->middleware('admin');
+  Route::get('complaint/custom-date','Admin\AdminController@complaints')->middleware('admin');
+
+
   Route::get('options','Admin\AdminController@options')->middleware('admin');
   Route::get('shopcategories','Admin\AdminController@category')->middleware('admin');
 });

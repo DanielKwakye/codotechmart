@@ -61,7 +61,7 @@ class Courier extends Authenticatable
     }
 
     public function shops(){
-        return $this->belongsToMany('App\Shops','shop_requests','courier_id','shop_id')->withPivot('courier_id','shop_id');
+        return $this->belongsToMany('App\Shop','shop_requests','courier_id','shop_id')->withPivot('courier_id','shop_id');
     }
 
     public function option()
