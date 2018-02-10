@@ -31,6 +31,8 @@ Route::prefix('/')->group(function(){
     Route::get('/about','Front\WebpageController@about');
     Route::get('order/detail','Front\WebpageController@orderDetail');
     Route::get('hang/cart','Front\WebpageController@hangCart');
+    Route::get('main/cart','Front\WebpageController@mainCart');
+    Route::post('update/cart','Front\WebpageController@updateCart');
 
     Route::auth();
 });

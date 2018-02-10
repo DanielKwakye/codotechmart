@@ -34,9 +34,34 @@ $(document).on('click','.remove_cart', function (e) {
         result = JSON.parse(result);
         if(result.status){
             $("#hang_cart").load(base_url + "/hang/cart");
+            $(".main_cart").load(base_url + "/main/cart");
             toast(result.message);
         }
     });
+});
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+//update cart
+$('.woocommerce-cart-form').submit(function (e) {
+    e.preventDefault();
+    $('#loader').removeClass("none");
+    var data = $(this).serialize();
+    var url = base_url + "/update/cart";
+
+    $.post(url, data, function (result) {
+        result = JSON.parse(result);
+        $("#hang_cart").load(base_url + "/hang/cart");
+        $(".main_cart").load(base_url + "/main/cart");
+        $('#loader').addClass("none");
+        toast(result.message);
+    });
+
+
 });
 
 

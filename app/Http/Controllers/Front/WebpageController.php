@@ -38,10 +38,25 @@ class WebpageController extends Controller
         return view('front.techmarket.inc.hanging_cart');
     }
 
+    public function mainCart(){
+        return view('front.techmarket.inc.main_cart');
+    }
+
     public function addCart(Request $request){
         $product = (new Product())->find($request->product_id);
         Cart::getInstance()->add($product,$request->qty);
         return json_encode(['status' => 'success', 'message' => $product->name . 'added successfully']);
+    }
+
+    public function updateCart(Request $request){
+      //  return $request->all();
+        for ($i = 0 ; $i < sizeof($request->items) ; $i++){
+            $product_id = $request->items[$i];
+            $product = (new Product())->find($product_id);
+            Cart::getInstance()->update($product,$request->qtys[$i]);
+        }
+
+        return json_encode(['status' => true, 'message' => 'cart updated successfully']);
     }
     
     public function addCompare(){
