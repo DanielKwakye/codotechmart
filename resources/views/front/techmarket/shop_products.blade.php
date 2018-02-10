@@ -120,12 +120,12 @@
                                                 </div>
                                                 <!-- .yith-wcwl-add-to-wishlist -->
                                                 <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                    <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/1.jpg">
+                                                    <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{asset('assets/images/products/1.jpg')}}">
                                                     <span class="price">
                                                             <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>800.00</span>
+                                                                <span class="woocommerce-Price-currencySymbol">¢ </span>{{$p->price}}</span>
                                                         </span>
-                                                    <h2 class="woocommerce-loop-product__title">Bbd 23-Inch Screen LED-Lit Monitorss Buds</h2>
+                                                    <h2 class="woocommerce-loop-product__title">{{$p->name}}</h2>
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
@@ -144,18 +144,19 @@
                             <div id="grid-extended" class="tab-pane" role="tabpanel">
                                 <div class="woocommerce columns-5">
                                     <div class="products">
+                                        @foreach($products as $p)
                                         <div class="product">
                                             <div class="yith-wcwl-add-to-wishlist">
                                                 <a href="wishlist.html" rel="nofollow" class="add_to_wishlist"> Add to Wishlist</a>
                                             </div>
                                             <!-- .yith-wcwl-add-to-wishlist -->
                                             <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/1.jpg">
+                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{asset('assets/images/products/1.jpg')}}">
                                                 <span class="price">
                                                             <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>800.00</span>
+                                                                <span class="woocommerce-Price-currencySymbol">¢ </span>{{$p->price}}</span>
                                                         </span>
-                                                <h2 class="woocommerce-loop-product__title">Xtreme ultimate splashproof portable speaker</h2>
+                                                <h2 class="woocommerce-loop-product__title">{{$p->name}}</h2>
                                             </a>
                                             <!-- .woocommerce-LoopProduct-link -->
                                             <div class="techmarket-product-rating">
@@ -182,9 +183,10 @@
                                                 </ul>
                                             </div>
                                             <!-- .woocommerce-product-details__short-description -->
-                                            <a class="button product_type_simple add_to_cart_button" href="cart.html">Add to cart</a>
+                                            <a class="button product_type_simple add_to_cart_button trigger" data="{{$p}}" href="#">Add to cart</a>
                                             <a class="add-to-compare-link" href="compare.html">Add to compare</a>
                                         </div>
+                                        @endforeach
 
                                         <!-- .product -->
                                     </div>
@@ -196,9 +198,10 @@
                             <div id="list-view-large" class="tab-pane" role="tabpanel">
                                 <div class="woocommerce columns-1">
                                     <div class="products">
+                                        @foreach($products as $p)
                                         <div class="product list-view-large ">
                                             <div class="media">
-                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/1.jpg">
+                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{asset('assets/images/products/1.jpg')}}">
                                                 <div class="media-body">
                                                     <div class="product-info">
                                                         <div class="yith-wcwl-add-to-wishlist">
@@ -206,7 +209,7 @@
                                                         </div>
                                                         <!-- .yith-wcwl-add-to-wishlist -->
                                                         <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                            <h2 class="woocommerce-loop-product__title">60UH6150 60-Inch 4K Ultra HD Smart LED TV</h2>
+                                                            <h2 class="woocommerce-loop-product__title">{{$p->name}}</h2>
                                                             <div class="techmarket-product-rating">
                                                                 <div title="Rated 5.00 out of 5" class="star-rating">
                                                                             <span style="width:100%">
@@ -246,7 +249,7 @@
                                                                         <span class="woocommerce-Price-currencySymbol">$</span>730.00</span>
                                                                 </span>
                                                         <!-- .price -->
-                                                        <a class="button add_to_cart_button" href="cart.html">Add to Cart</a>
+                                                        <a class="button add_to_cart_button trigger" data="{{$p}}" href="#">Add to Cart</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to compare</a>
                                                     </div>
                                                     <!-- .product-actions -->
@@ -255,7 +258,7 @@
                                             </div>
                                             <!-- .media -->
                                         </div>
-
+                                        @endforeach
                                         <!-- .product -->
                                     </div>
                                     <!-- .products -->
@@ -266,9 +269,10 @@
                             <div id="list-view" class="tab-pane" role="tabpanel">
                                 <div class="woocommerce columns-1">
                                     <div class="products">
+                                        @foreach($products as $P)
                                         <div class="product list-view ">
                                             <div class="media">
-                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/1.jpg">
+                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{asset('assets/images/products/1.jpg')}}">
                                                 <div class="media-body">
                                                     <div class="product-info">
                                                         <div class="yith-wcwl-add-to-wishlist">
@@ -276,7 +280,7 @@
                                                         </div>
                                                         <!-- .yith-wcwl-add-to-wishlist -->
                                                         <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                            <h2 class="woocommerce-loop-product__title">60UH6150 60-Inch 4K Ultra HD Smart LED TV</h2>
+                                                            <h2 class="woocommerce-loop-product__title">{{$p->name}}</h2>
                                                             <div class="techmarket-product-rating">
                                                                 <div title="Rated 5.00 out of 5" class="star-rating">
                                                                             <span style="width:100%">
@@ -310,10 +314,10 @@
                                                         </div>
                                                         <span class="price">
                                                                     <span class="woocommerce-Price-amount amount">
-                                                                        <span class="woocommerce-Price-currencySymbol">$</span>730.00</span>
+                                                                        <span class="woocommerce-Price-currencySymbol">¢ </span>{{$p->price}}</span>
                                                                 </span>
                                                         <!-- .price -->
-                                                        <a class="button add_to_cart_button" href="cart.html">Add to Cart</a>
+                                                        <a class="button add_to_cart_button trigger" href="#" data="{{$p}}">Add to Cart</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to compare</a>
                                                     </div>
                                                     <!-- .product-actions -->
@@ -322,6 +326,7 @@
                                             </div>
                                             <!-- .media -->
                                         </div>
+                                        @endforeach
                                         <!-- .product -->
 
                                         <!-- .product -->
@@ -334,9 +339,10 @@
                             <div id="list-view-small" class="tab-pane" role="tabpanel">
                                 <div class="woocommerce columns-1">
                                     <div class="products">
+                                        @foreach($products as $p)
                                         <div class="product list-view-small ">
                                             <div class="media">
-                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/1.jpg">
+                                                <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{asset('assets/images/products/1.jpg')}}">
                                                 <div class="media-body">
                                                     <div class="product-info">
                                                         <div class="yith-wcwl-add-to-wishlist">
@@ -344,7 +350,7 @@
                                                         </div>
                                                         <!-- .yith-wcwl-add-to-wishlist -->
                                                         <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                            <h2 class="woocommerce-loop-product__title">60UH6150 60-Inch 4K Ultra HD Smart LED TV</h2>
+                                                            <h2 class="woocommerce-loop-product__title">{{$p->name}}</h2>
                                                             <div class="techmarket-product-rating">
                                                                 <div title="Rated 5.00 out of 5" class="star-rating">
                                                                             <span style="width:100%">
@@ -368,10 +374,10 @@
                                                     <div class="product-actions">
                                                                 <span class="price">
                                                                     <span class="woocommerce-Price-amount amount">
-                                                                        <span class="woocommerce-Price-currencySymbol">$</span>730.00</span>
+                                                                        <span class="woocommerce-Price-currencySymbol">¢ </span>{{$p->price}}</span>
                                                                 </span>
                                                         <!-- .price -->
-                                                        <a class="button add_to_cart_button" href="cart.html">Add to Cart</a>
+                                                        <a class="button add_to_cart_button trigger" data="{{$p}}" href="">Add to Cart</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to compare</a>
                                                     </div>
                                                     <!-- .product-actions -->
@@ -380,7 +386,7 @@
                                             </div>
                                             <!-- .media -->
                                         </div>
-
+                                        @endforeach
                                         <!-- .product -->
                                     </div>
                                     <!-- .products -->
@@ -447,5 +453,4 @@
 @include('front.techmarket.inc.foot_assets')
 </body>
 
-<!-- Mirrored from transvelo.github.io/techmarket-html/shop.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:54:29 GMT -->
 </html>

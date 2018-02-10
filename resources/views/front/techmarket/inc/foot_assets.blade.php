@@ -23,7 +23,7 @@
             var base_url = "{{url('/')}}";
         </script>
         <script src="{{asset('assets/js/custom-script.js')}}"></script>
-        @if ($errors->any())
+        @if (Session::has('errors') &&  $errors->any())
          @foreach ($errors->all() as $error)
                  <script type="text/javascript">
                      var message = '<?php echo $error; ?>';

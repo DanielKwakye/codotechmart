@@ -18,37 +18,45 @@ Route::prefix('/')->group(function(){
     Route::get('/shop/{id}/detail','Front\WebpageController@shopDetail');
     Route::get('/cart','Front\WebpageController@cart');
     Route::get('add/cart','Front\WebpageController@addCart');
-    Route::get('add/compare','Front\WebpageController@addCompare');
-    Route::get('add/wishlist','Front\WebpageController@addWishlist');
+    Route::get('remove/cart/{id}','Front\WebpageController@removeCart');
+    Route::get('add/compare/{id}','Front\WebpageController@addCompare');
+    Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
+    Route::get('remove/compare/{id}','Front\WebpageController@removeCompare');
+    Route::get('remove/wishlist/{id}','Front\WebpageController@removeWishlist');
     Route::get('/checkout','Front\WebpageController@checkout');
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('shop/{id}/products','Front\WebpageController@products');
-    Route::get('/favorites','Front\WebpageController@favorite');
+    Route::get('/wishlist','Front\WebpageController@favorite');
+    Route::get('attempt/save/wishlist','Front\WebpageController@saveWishlist');
     Route::get('/compare','Front\WebpageController@compare');
     Route::get('/faq','Front\WebpageController@faq');
     Route::get('/about','Front\WebpageController@about');
     Route::get('order/detail','Front\WebpageController@orderDetail');
+    Route::get('hang/cart','Front\WebpageController@hangCart');
+    Route::get('main/cart','Front\WebpageController@mainCart');
+    Route::get('compare/section','Front\WebpageController@compareSection');
+    Route::get('favorite/section','Front\WebpageController@favoriteSection');
+    Route::post('update/cart','Front\WebpageController@updateCart');
 
     Route::auth();
+
+//    =================== methods called when user is logged In ===================================
+    Route::get('save/wishlist','Front\UsersController@saveWishlist');
 });
 
 
 
-
-
-
 Route::group(['prefix'=>'admin'], function () {
-  Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
+  Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
   Route::post('/login', 'AdminAuth\LoginController@login');
-  Route::get('/logout', 'AdminAuth\LoginController@logout')->name('logout');
+  Route::get('/logout', 'AdminAuth\LoginController@logout');
 
-  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm');
   Route::post('/register', 'AdminAuth\RegisterController@register');
-
-  Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail');
+  Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset');
+  Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
   Route::get('/shops', 'Admin\AdminController@index')->middleware('admin');
   Route::get('/couriers', 'Admin\AdminController@couriers')->middleware('admin');
@@ -107,9 +115,7 @@ Route::group(['prefix' => 'courier'], function () {
   Route::get('listen','Courier\CourierController@listen');
   Route::get('markasread/{id}','Courier\CourierController@markasread');
   Route::get('notification/get','Courier\CourierController@notificationtest');
-  // Route::get('homes',function(){
-  //   return view('courier.home');
-  // });
+
 
 });
 
@@ -195,3 +201,12 @@ Route::get('slydepay','AdministrationControllers\SignupController@slydepay');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('test',function (){
+    $res = \App\Front\Plugins\Compare::getInstance()->all();
+    foreach ($res as $r){
+        print_r($r['item']->name) . " <br>";
+    }
+    //print_r($res);
+//    return "helo";
+});
