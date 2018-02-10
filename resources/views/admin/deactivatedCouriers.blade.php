@@ -1,6 +1,6 @@
 @extends('admin.layout.adminLayout')
 @section('title')
-    <title>Deactivated Shops</title>
+    <title>Deactivated Couriers</title>
 @endsection
 @section('content')
     
@@ -58,7 +58,6 @@
                                         <thead>
                                             <tr>
                                                 <th>ShopName</th>
-                                                <th>Category</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -67,7 +66,6 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Category</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -77,7 +75,6 @@
                                             
                                             @foreach(\App\Courier::onlyTrashed()->get() as $p)
                                             <tr class="tr{{$p->id}}">
-                                                <td>{{$p->name}}</td>
                                                 <td>{{$p->name}}</td>
                                                 <td>Inactive</td>
                                                 <td class="tr{{$p->id}}">

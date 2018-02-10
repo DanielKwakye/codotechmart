@@ -21,11 +21,12 @@
 <div id="app">
 <div id="sb-site">
     @include('admin.layout.inc.profileModal')
+     @include('admin.layout.inc.editCategoryModal')
     
 
     <div id="page-wrapper">
         @include('admin.layout.adminNavbar')
-
+        
         <div id="page-content-wrapper">
             <div id="page-content">
 
@@ -66,7 +67,7 @@
     </div>
 </div>
 </div>
-@include('admin.layout.inc.addMonthlyPlan')
+@include('admin.layout.inc.editMonthlyPlan')
 @include('courier.inc.footer')
 @include('admin.layout.inc.addCategoryModal')
 

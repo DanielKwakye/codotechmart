@@ -166,6 +166,13 @@
 
         </div><!-- .sidebar-submenu -->
     </li>
+    
+        <li>
+        <a href="{{url('admin/shopcategories')}}" title="Forms UI">
+            <i class="glyph-icon icon-linecons-eye"></i>
+            <span>Shop Categories</span>
+        </a>
+    </li>
     <li>
         <a href="#" title="Forms UI">
             <i class="glyph-icon icon-linecons-eye"></i>

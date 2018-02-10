@@ -15,7 +15,7 @@
                             
                         </div>
                         <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                            <input type="text" name="amount" class="form-control" placeholder="GHC Amount">
+                            <input type="text" name="amount" class="form-control amount">
                                 @if ($errors->has('amount'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('amount') }}</strong>

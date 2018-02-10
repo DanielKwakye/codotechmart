@@ -57,7 +57,6 @@
                                         <table id="datatable-tabletools" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>ShopId</th>
                                                 <th>Plan</th>
                                                 <th>Amount</th>
                                                 <th>Action</th>
@@ -66,7 +65,6 @@
 
                                         <tfoot>
                                             <tr>
-                                                <th>ShopId</th>
                                                 <th>Plan</th>
                                                 <th>Amount</th>
                                                 <th>Action</th>
@@ -77,7 +75,6 @@
                                             @if(\App\ShopMonthlyPlan::all()!==null)
                                             @foreach(\App\ShopMonthlyPlan::all() as $p)
                                             <tr>
-                                               <td>{{$p->id}}</td>
                                                 <td>{{$p->name}}</td>
                                                 <td class="amount">GH&cent; {{$p->amount}}</td>
                                                 <td class="tr{{$p->id}}">
@@ -100,6 +97,7 @@
         $('.plan').click(function(){
         var data = JSON.parse($(this).attr('data'));
         $('.month').val(data.name);
+        $('.amount').val(data.amount);
         $('.id').val(data.id);
         $('.modalform').attr('action','{{url('admin/shop/update')}}');
     }); 

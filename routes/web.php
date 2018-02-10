@@ -66,8 +66,11 @@ Route::group(['prefix'=>'admin'], function () {
   Route::get('/shopPlans', 'Admin\AdminController@shopPlans')->middleware('admin');;
   Route::post('/courier/update', 'Admin\AdminController@update');
   Route::post('/shop/update', 'Admin\AdminController@ShopMonthupdate');
-  Route::post('changeoptions','Admin\AdminController@changeoptions')->middleware('admin');
+  Route::post('changeoptions','Admin\AdminController@changeoptions');
+  Route::post('editCategory','Admin\AdminController@editCategory');
+  Route::post('category/delete','Admin\AdminController@deleteCategory');
   Route::get('options','Admin\AdminController@options')->middleware('admin');
+  Route::get('shopcategories','Admin\AdminController@category')->middleware('admin');
 });
 
 
