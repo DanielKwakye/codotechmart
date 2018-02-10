@@ -20,13 +20,10 @@ Vue.component('notification', require('./components/Notification.vue'));
 
 const app = new Vue({
 	el: '#app',
-     data: {
-        notifications: ''
-    },
     created() {
-        axios.get('/codotechmart/public/courier/notification/get').then(response => {
-            this.notifications = response.data;
-            console.log(this.notifications)
+        Echo.private('couriers')
+        .listen('sentRequest', (e) => {
+            console.log(e);
         });
     }
 });

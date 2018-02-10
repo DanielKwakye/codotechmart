@@ -12,6 +12,10 @@
 */
 use App\Courier;
 
-Broadcast::channel('App.Courier.{id}', function ($courier, $id) {
-    return $courier->id === Courier::findOrNew($id);
+// Broadcast::channel('App.Courier.{id}', function ($courier, $id) {
+//     return $courier->id === Courier::findOrNew($id);
+// });
+
+Broadcast::channel('couriers', function () {
+    return true;
 });

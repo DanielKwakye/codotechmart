@@ -36,6 +36,6 @@ class sentRequest implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('courier');
+        return new PrivateChannel('couriers');
     }
 }
