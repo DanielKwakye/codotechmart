@@ -16,6 +16,7 @@ use App\Events\sentRequest;
 
 
 
+
 class CourierController extends Controller
 {
   use notifiable;
@@ -293,6 +294,7 @@ class CourierController extends Controller
       return $r->all();
       
     }
+
 
 
 
