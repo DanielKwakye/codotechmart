@@ -154,6 +154,7 @@ Route::get('/addnewbranch','AdministrationControllers\BranchController@addNewBra
 Route::post('/addnewbranch','AdministrationControllers\BranchController@saveBranch');
 
 Route::get('/paymentmethod','AdministrationControllers\PaymentMethodController@index');
+Route::post('/savepaymentmethod','AdministrationControllers\PaymentMethodController@savePaymentMethod');
 
 Route::get('/attributes','AdministrationControllers\AttributeFeaturesController@index');
 Route::post('/addnewattribute','AdministrationControllers\AttributeFeaturesController@addNewAttribute');
@@ -180,6 +181,11 @@ Route::post('/savesmssettings','AdministrationControllers\EmailSettingsControlle
 
 Route::get('/generalsettings','AdministrationControllers\GeneralSettingsController@index');
 Route::post('/savegeneralsettings','AdministrationControllers\GeneralSettingsController@saveGeneralSettings');
+
+
+
+
+Route::get('slydepay','AdministrationControllers\SignupController@slydepay');
 });
 
 

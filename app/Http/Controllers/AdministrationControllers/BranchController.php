@@ -23,14 +23,13 @@ class BranchController extends Controller
     public function saveBranch(Request $r){
     	$add = Branch::create([
     		'name'=>$r->name,
-    		'store_id'=>1,
+    		'shop_id'=>Auth::guard('shopadmin')->user()->shop_id,
     		'description'=>$r->description,
     		'image'=>'',
     		'active'=>$r->active,
     		'latitude'=>$r->latitude,
     		'longitude'=>$r->longitude,
-    		'landmark'=>$r->landmark,
-    		'working_days'=>''
+    		'landmark'=>$r->landmark
     	]);
     	if($add){
     		Session::flash('success-message','New Branch Added Successfully');

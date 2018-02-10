@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Shop;
 use DB;
 use Hash;
+use App\Slydepay\Slydepay;
 
 class SignupController extends Controller
 {
@@ -43,5 +44,9 @@ class SignupController extends Controller
             return redirect('/administration/category');
         }
 
+    }
+
+    public function slydepay(){
+      $add = new Slydepay();
     }
 }

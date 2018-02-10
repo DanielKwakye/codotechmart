@@ -34,12 +34,12 @@
           </li>
              <li class=" nav-item"><a href="index.html"><i class="icon-grid2"></i><span data-i18n="nav.branches.main" class="menu-title">Branches</span></a>
             <ul class="menu-content">
-              <li><a href="dashboard-ecommerce.html" data-i18n="nav.branches.all" class="menu-item">All Branches</a>
+              <li><a href="{{url('/administration/branches')}}" data-i18n="nav.branches.all" class="menu-item">All Branches</a>
               </li>
-              <li><a href="dashboard-project.html" data-i18n="nav.branches.new" class="menu-item">Add New</a>
+              <li><a href="{{url('/administration/addnewbranch')}}" data-i18n="nav.branches.new" class="menu-item">Add New</a>
               </li>
-              <li><a href="dashboard-analytics.html" data-i18n="nav.branches.preferences" class="menu-item">Preferences</a>
-              </li>
+              {{-- <li><a href="dashboard-analytics.html" data-i18n="nav.branches.preferences" class="menu-item">Preferences</a>
+              </li> --}}
             </ul>
           </li>
                <li class=" nav-item"><a href="index.html"><i class="icon-home3"></i><span data-i18n="nav.tools.main" class="menu-title">Tools</span></a>
@@ -62,7 +62,7 @@
           </li>
            <li class=" nav-item"><a href="#"><i class="icon-support"></i><span data-i18n="nav.media.main" class="menu-title">Media</span></a>
           </li>
-           <li class=" nav-item"><a href="#"><i class="icon-support"></i><span data-i18n="nav.payment.main" class="menu-title">Payment</span></a>
+           <li class=" nav-item"><a href="{{url('/administration/paymentmethod')}}"><i class="icon-support"></i><span data-i18n="nav.payment.main" class="menu-title">Payment</span></a>
           </li>
           
           <li class=" nav-item"><a href="#"><i class="icon-support"></i><span data-i18n="nav.shipping.main" class="menu-title">Shipping</span></a>
