@@ -19,8 +19,8 @@ Route::prefix('/')->group(function(){
     Route::get('/cart','Front\WebpageController@cart');
     Route::get('add/cart','Front\WebpageController@addCart');
     Route::get('remove/cart/{id}','Front\WebpageController@removeCart');
-    Route::get('add/compare','Front\WebpageController@addCompare');
-    Route::get('add/wishlist','Front\WebpageController@addWishlist');
+    Route::get('add/compare/{id}','Front\WebpageController@addCompare');
+    Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
     Route::get('/checkout','Front\WebpageController@checkout');
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');

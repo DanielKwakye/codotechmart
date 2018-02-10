@@ -45,7 +45,7 @@ class WebpageController extends Controller
     public function addCart(Request $request){
         $product = (new Product())->find($request->product_id);
         Cart::getInstance()->add($product,$request->qty);
-        return json_encode(['status' => 'success', 'message' => $product->name . 'added successfully']);
+        return json_encode(['status' => 'success', 'message' => $product->name . ' added successfully']);
     }
 
     public function updateCart(Request $request){
@@ -59,16 +59,33 @@ class WebpageController extends Controller
         return json_encode(['status' => true, 'message' => 'cart updated successfully']);
     }
     
-    public function addCompare(){
+    public function addCompare($id){
         
-        $item = new Item();
-        $item->id = "db";
-        $item->price = 2.00;
-        $item->title = "shoe";
-        
-        Compare::getInstance()->addToCompare($item);
-        
-        return Compare::getInstance()->all();
+        $item = (new Product())->find($id);
+        $result = Compare::getInstance()->addToCompare($item);
+        if($result){
+            return json_encode(['status' => true, 'message' => $item->name . " is added to compare", 'qty' => Compare::getInstance()->totalQty]);
+        }else{
+            return json_encode(['status' => true, 'message' => $item->name . " is already added", 'qty' => Compare::getInstance()->totalQty]);
+        }
+
+
+
+    }
+
+    public function addWishlist($id){
+
+        $item = (new Product())->find($id);
+
+        $res = WishList::getInstance()->addToWishList($item);
+
+        if($res){
+            return json_encode(['status' => true, 'message' => $item->name . " is added to favorites", 'qty' => WishList::getInstance()->totalQty]);
+        }else{
+            return json_encode(['status' => true, 'message' => $item->name . " is added already added", 'qty' => WishList::getInstance()->totalQty]);
+        }
+
+
     }
 
     public function removeCart ($id){
@@ -76,6 +93,8 @@ class WebpageController extends Controller
         Cart::getInstance()->remove($product);
         return json_encode(['status' => true, 'message' => $product->name .' removed successfully']);
     }
+
+
 
     public function favorite(){
         return view('front.techmarket.favorite');
@@ -96,17 +115,6 @@ class WebpageController extends Controller
 
     public function compare(){
         return view('front.techmarket.compare');
-    }
-    
-    public function addWishlist(){
-         $item = new Item();
-        $item->id = str_random(3);
-        $item->price = 2.00;
-        $item->title = "shoe";
-        
-        WishList::getInstance()->addToWishList($item);
-
-        return WishList::getInstance()->all();
     }
 
     public function products($id){

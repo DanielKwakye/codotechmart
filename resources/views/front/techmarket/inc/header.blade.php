@@ -27,7 +27,7 @@
                                                                     <a href="#">Home Pages</a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a href="home-v1.html">Home v1</a>
+                                                                    <a href="{{url("")}}">Home v1</a>
                                                                 </li>                                                                
                                                             </ul>
                                                             <!-- .menu -->
@@ -39,7 +39,7 @@
                                                                     <a href="#">Landing Pages</a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a href="landing-page-v1.html">Landing v1</a>
+                                                                    <a href="{{url("")}}">Landing v1</a>
                                                                 </li>
                                                                 
                                                             </ul>
@@ -130,7 +130,7 @@
                             <li class="nav-item">
                                 <a href="{{url('compare')}}" class="nav-link">
                                     <i class="tm tm-compare"></i>
-                                    <span id="top-cart-compare-count" class="value">3</span>
+                                    <span id="top-cart-compare-count" class="value">{{\App\Front\Plugins\Compare::getInstance()->totalQty}}</span>
                                 </a>
                             </li>
                         </ul>
@@ -139,7 +139,7 @@
                             <li class="nav-item">
                                 <a href="{{url('wishlist')}}" class="nav-link">
                                     <i class="tm tm-favorites"></i>
-                                    <span id="top-cart-wishlist-count" class="value">3</span>
+                                    <span id="top-cart-wishlist-count" class="value">{{\App\Front\Plugins\WishList::getInstance()->totalQty}}</span>
                                 </a>
                             </li>
                         </ul>
@@ -156,7 +156,7 @@
                     <div class="handheld-header">
                         <div class="row">
                             <div class="site-branding">
-                                <a href="home-v1.html" class="custom-logo-link" rel="home">
+                                <a href="{{url('/')}}" class="custom-logo-link" rel="home">
                                     Tech Market
                                 </a>
                                 <!-- /.custom-logo-link -->
@@ -166,18 +166,18 @@
                             <div class="handheld-header-links">
                                 <ul class="columns-3">
                                     <li class="my-account">
-                                        <a href="login-and-register.html" class="has-icon">
+                                        <a href="{{url('login/register')}}" class="has-icon">
                                             <i class="tm tm-login-register"></i>
                                         </a>
                                     </li>
                                     <li class="wishlist">
-                                        <a href="wishlist.html" class="has-icon">
+                                        <a href="{{url('favorites')}}" class="has-icon">
                                             <i class="tm tm-favorites"></i>
                                             <span class="count">3</span>
                                         </a>
                                     </li>
                                     <li class="compare">
-                                        <a href="compare.html" class="has-icon">
+                                        <a href="{{url('compare')}}" class="has-icon">
                                             <i class="tm tm-compare"></i>
                                             <span class="count">3</span>
                                         </a>

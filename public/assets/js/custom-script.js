@@ -1,8 +1,7 @@
 function toast(message) {
 
-    iziToast.success({
+    iziToast.info({
         id: 'success',
-        title: 'Success',
         message: message,
         position: 'topLeft',
         transitionIn: 'bounceInLeft',
@@ -61,14 +60,36 @@ $('.woocommerce-cart-form').submit(function (e) {
         toast(result.message);
     });
 
-
 });
 
+$('.add_to_wishlist').click(function(e){
+    e.preventDefault();
+    var data = $(this).attr('data');
+    $('#ajax_loader_'+data).show();
+    var url = base_url + "/add/wishlist/" + data;
+    $.get(url,function (result) {
+        result = JSON.parse(result);
+        if(result.status){
+            $('#top-cart-wishlist-count').html(result.qty);
+            $('#ajax_loader_'+data).hide();
+            toast(result.message);
+        }
+    });
+});
 
 $('.add_to_compare').click(function(e){
     e.preventDefault();
      var data = $(this).attr('data');
-     $('#ajax_loader_'+data).show();    
+     $('#ajax_loader_'+data).show();
+    var url = base_url + "/add/compare/" + data;
+    $.get(url,function (result) {
+        result = JSON.parse(result);
+        if(result.status){
+            $('#top-cart-compare-count').html(result.qty);
+            $('#ajax_loader_'+data).hide();
+            toast(result.message);
+        }
+    });
 });
 
 $('#add-to-cart').click(function(event){

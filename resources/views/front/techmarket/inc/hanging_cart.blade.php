@@ -11,6 +11,7 @@
                 <div class="widget woocommerce widget_shopping_cart">
                     <div class="widget_shopping_cart_content">
                         <ul class="woocommerce-mini-cart cart_list product_list_widget ">
+                            @if(\App\Front\Plugins\Cart::getInstance()->getTotalQty() > 0)
                             @foreach(\App\Front\Plugins\Cart::getInstance()->all() as $c)
                             <li class="woocommerce-mini-cart-item mini_cart_item">
                                 <a href="#" class="remove remove_cart" data="{{$c->item->id}}" aria-label="Remove this item" data-product_id="65" data-product_sku="">×</a>
@@ -24,6 +25,7 @@
                                     </span>
                             </li>
                                 @endforeach
+                                @endif
 
                         </ul>
                         <!-- .cart_list -->
