@@ -14,6 +14,7 @@ class Shop extends Model
     
     protected $fillable = [
 
+
      'id','name','tag_line','phone','type','creator_surname','creator_firstname','creator_email',
     'active','logo','region'];
 
