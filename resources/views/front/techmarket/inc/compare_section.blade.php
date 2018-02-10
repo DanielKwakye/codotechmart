@@ -89,4 +89,6 @@
             </td>
         @endforeach
     </tr>
+    @else
+    Your Compare List Is Empty
 @endif

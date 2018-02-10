@@ -57,8 +57,22 @@
                                         <!-- .dropdown-menu -->
                                     </li>
 
+                                    <li class="menu-item menu-item-has-children animate-dropdown dropdown">
+                                        <a title="Browse Shops" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Browse Shops <span class="caret"></span></a>
+                                        <ul role="menu" class=" dropdown-menu">
+                                            @if(\App\Shop::all() != null)
+                                                @foreach(\App\Shop::all() as $s)
+                                            <li class="menu-item animate-dropdown">
+                                                <a title="Wishlist" href="{{url('shop/'.$s->id.'/detail')}}">{{$s->name}}</a>
+                                            </li>
+                                            @endforeach
+                                                @endif
+                                        </ul>
+                                        <!-- .dropdown-menu -->
+                                    </li>
+
                                     <li class="menu-item animate-dropdown">
-                                        <a title="Headphones Sale" href="{{url('/favorites')}}">Favorites</a>
+                                        <a title="Headphones Sale" href="{{url('/wishlist')}}">Favorites</a>
                                     </li>
                                     <li class="menu-item animate-dropdown">
                                         <a title="Headphones Sale" href="{{url('/compare')}}">Compare List</a>
@@ -171,15 +185,15 @@
                                         </a>
                                     </li>
                                     <li class="wishlist">
-                                        <a href="{{url('favorites')}}" class="has-icon">
+                                        <a href="{{url('wishlist')}}" class="has-icon">
                                             <i class="tm tm-favorites"></i>
-                                            <span class="count">3</span>
+                                            <span class="count">{{\App\Front\Plugins\Compare::getInstance()->totalQty}}</span>
                                         </a>
                                     </li>
                                     <li class="compare">
                                         <a href="{{url('compare')}}" class="has-icon">
                                             <i class="tm tm-compare"></i>
-                                            <span class="count">3</span>
+                                            <span class="count">{{\App\Front\Plugins\WishList::getInstance()->totalQty}}</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -189,7 +203,9 @@
                         </div>
                         <!-- /.row -->
                         {{--left Navbar Here--}}
-                        @include('front.techmarket.inc.left_navbar')
+                        <div class="techmarket-sticky-wrap">
+                           @include('front.techmarket.inc.left_navbar')
+                         </div>
                         <!-- .techmarket-sticky-wrap -->
                     </div>
                     <!-- .handheld-header -->

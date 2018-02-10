@@ -1,3 +1,4 @@
+@if(\App\Front\Plugins\WishList::getInstance()->totalQty > 0)
 <table class="shop_table cart wishlist_table">
     <thead>
     <tr>
@@ -20,17 +21,17 @@
     </tr>
     </thead>
     <tbody>
-    @if(\App\Front\Plugins\WishList::getInstance()->totalQty > 0)
+
     @foreach(\App\Front\Plugins\WishList::getInstance()->all() as $p)
     <tr>
         <td class="product-remove">
             <div>
-                <a title="Remove this product" class="remove remove_wishlist" href="{{url('remove/favorite/'.$p['item']->id}}">×</a>
+                <a title="Remove this product" class="remove remove_wishlist" href="{{url('remove/favorite/'.$p['item']->id)}}">×</a>
             </div>
         </td>
         <td class="product-thumbnail">
             <a href="single-product-fullwidth.html">
-                <img width="180" height="180" alt="" class="wp-post-image" src="assets/images/products/cart-1.jpg">
+                <img width="180" height="180" alt="" class="wp-post-image" src="{{asset('assets/images/products/cart-1.jpg')}}">
             </a>
         </td>
         <td class="product-name">
@@ -54,15 +55,20 @@
         </td>
     </tr>
         @endforeach
-        @endif
+
     </tbody>
     <tfoot>
     <tr>
         <td colspan="6">
             <div class="yith-wcwl-share" style="text-align: center">
-                <a class="button add_to_cart_button button alt" style="margin: auto;" href="cart.html"> Save your wishlist</a>
+                <img id="loader" src="{{asset('assets/images/load.gif')}}" class="none" width="30" height="30" style="margin: auto;">
+                <a class="button save_my_wishlist button alt" style="margin: auto;" href="{{url('attempt/save/wishlist')}}"> Save your wishlist</a>
             </div>
         </td>
     </tr>
     </tfoot>
 </table>
+@else
+    Your Wish List Is Empty
+
+@endif

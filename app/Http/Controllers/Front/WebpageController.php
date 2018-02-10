@@ -9,7 +9,10 @@ use App\Http\Controllers\Controller;
 use App\Item;
 use App\Product;
 use App\Shop;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WebpageController extends Controller
 {
@@ -45,7 +48,7 @@ class WebpageController extends Controller
     public function addCart(Request $request){
         $product = (new Product())->find($request->product_id);
         Cart::getInstance()->add($product,$request->qty);
-        return json_encode(['status' => 'success', 'message' => $product->name . ' added successfully']);
+        return json_encode(['status' => 'success', 'message' => $product->name . ' added successfully', 'qty' => Cart::getInstance()->getTotalQty()]);
     }
 
     public function updateCart(Request $request){
@@ -57,6 +60,31 @@ class WebpageController extends Controller
         }
 
         return json_encode(['status' => true, 'message' => 'cart updated successfully']);
+    }
+
+    public function saveWishlist(){
+
+        if(Auth::user()){
+            $data = [];
+            foreach (WishList::getInstance()->all() as $item){
+                $arr = [
+                    'product_id' => $item['item']->id,
+                    'user_id' => Auth::user()->id,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ];
+                array_push($data,$arr);
+            }
+
+            DB::table('wishlists')->insert($data);
+
+            return json_encode(['status' => true, 'message' => 'Your wish list is saved']);
+        }
+
+        return json_encode(['status' => false, 'link' => url('save/wishlist')]);
+
+
+
     }
     
     public function addCompare($id){

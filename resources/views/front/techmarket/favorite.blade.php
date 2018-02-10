@@ -37,7 +37,7 @@
                             </header>
                             <!-- .entry-header -->
                             <div class="entry-content">
-                                <form class="woocommerce" method="post" action="#">
+                                <form class="woocommerce wishlist_container">
                                     @include('front.techmarket.inc.favorite_section')
                                     <!-- .wishlist_table -->
                                 </form>

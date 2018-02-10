@@ -92,6 +92,19 @@ $('.add_to_compare').click(function(e){
     });
 });
 
+$('.save_my_wishlist').click(function (e) {
+    e.preventDefault();
+    $('#loader').removeClass('none');
+    var url = $(this).attr('href');
+    $.get(url,function (result) {
+        result = JSON.parse(result);
+        $('#loader').addClass('none');
+        if(!result.status){
+            window.location.href = result.link;
+        }
+    });
+});
+
 $(document).on('click','.remove_compare',function (e) {
     e.preventDefault();
     var url = $(this).attr('href');
@@ -115,8 +128,8 @@ $(document).on('click','.remove_wishlist',function (e) {
         console.log(result);
         if(result.status){
 
-            $('#top-cart-compare-count').html(result.qty);
-            $('#compare_container').load(base_url + "/favorite/section");
+            $('#top-cart-wishlist-count').html(result.qty);
+            $('#wishlist_container').load(base_url + "/favorite/section");
             toast(result.message);
         }
     });
@@ -184,9 +197,7 @@ $('#add-to-cart').click(function(event){
 
 //        check if the person wants delivery------
 
-
         $('#add-to-cart').removeClass('none');
-
 
         $('#loader').addClass('none');
 
@@ -195,6 +206,7 @@ $('#add-to-cart').click(function(event){
 //        this method is called if adding to cart is successfull
         if(result.status === "success"){
         // console.log('hand url is ' + url  + "/hang/cart");
+            $("#count_mini_cart").html(result.qty);
             $("#hang_cart").load(base_url + "/hang/cart");
 
             toast(result.message);
