@@ -20,6 +20,7 @@
 </style>
 <div id="app">
 <div id="sb-site">
+    @include('admin.layout.inc.profileModal')
     
 
     <div id="page-wrapper">
@@ -65,8 +66,9 @@
     </div>
 </div>
 </div>
+@include('admin.layout.inc.addMonthlyPlan')
 @include('courier.inc.footer')
-@include('admin.layout.inc.addCategory')
+@include('admin.layout.inc.addCategoryModal')
 
 </div>
 </body>

@@ -15,14 +15,15 @@
 Route::prefix('/')->group(function(){
     
     Route::get('/','Front\WebpageController@shops');
-    Route::get('/shop/detail','Front\WebpageController@shopDetail');
+    Route::get('/shop/{id}/detail','Front\WebpageController@shopDetail');
     Route::get('/cart','Front\WebpageController@cart');
+    Route::get('add/cart','Front\WebpageController@addCart');
     Route::get('add/compare','Front\WebpageController@addCompare');
     Route::get('add/wishlist','Front\WebpageController@addWishlist');
     Route::get('/checkout','Front\WebpageController@checkout');
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
-    Route::get('products','Front\WebpageController@products');
+    Route::get('shop/{id}/products','Front\WebpageController@products');
     Route::get('/favorites','Front\WebpageController@favorite');
     Route::get('/compare','Front\WebpageController@compare');
     Route::get('/faq','Front\WebpageController@faq');
@@ -49,9 +50,24 @@ Route::group(['prefix'=>'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+  Route::get('/shops', 'Admin\AdminController@index')->middleware('admin');
+  Route::get('/couriers', 'Admin\AdminController@couriers')->middleware('admin');
   Route::get('/', 'Admin\AdminController@index')->middleware('admin');
   Route::post('/addCategory', 'Admin\AdminController@addCategory');
-
+  Route::post('/shop/deactivate', 'Admin\AdminController@deactivate');
+  Route::post('/shop/activate', 'Admin\AdminController@activate');
+  Route::post('/courier/deactivate', 'Admin\AdminController@deactivateCourier');
+  Route::post('/courier/activate', 'Admin\AdminController@activateCourier');
+  Route::get('/active-shops', 'Admin\AdminController@activeShops')->middleware('admin');;
+  Route::get('/active-couriers', 'Admin\AdminController@activeCouriers')->middleware('admin');;
+  Route::get('/deactivated-shops', 'Admin\AdminController@deactivatedShops')->middleware('admin');
+  Route::get('/deactivated-couriers', 'Admin\AdminController@deactivatedCouriers')->middleware('admin');
+  Route::get('/courierPlans', 'Admin\AdminController@courierPlans')->middleware('admin');;
+  Route::get('/shopPlans', 'Admin\AdminController@shopPlans')->middleware('admin');;
+  Route::post('/courier/update', 'Admin\AdminController@update');
+  Route::post('/shop/update', 'Admin\AdminController@ShopMonthupdate');
+  Route::post('changeoptions','Admin\AdminController@changeoptions')->middleware('admin');
+  Route::get('options','Admin\AdminController@options')->middleware('admin');
 });
 
 
@@ -88,11 +104,13 @@ Route::group(['prefix' => 'courier'], function () {
   Route::post('profileinfo','Courier\CourierController@profileinfo');
   Route::post('changeoptions','Courier\CourierController@changeoptions');
   Route::get('notify','Courier\CourierController@notify');
+  Route::get('listen','Courier\CourierController@listen');
   Route::get('markasread/{id}','Courier\CourierController@markasread');
-  // Route::get('notification/get','Courier\CourierController@notificationtest');
+  Route::get('notification/get','Courier\CourierController@notificationtest');
   // Route::get('homes',function(){
   //   return view('courier.home');
   // });
+
 });
 
 

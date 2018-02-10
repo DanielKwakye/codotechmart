@@ -991,18 +991,12 @@ window.Vue = __webpack_require__(37);
 Vue.component('notification', __webpack_require__(40));
 
 var app = new Vue({
-    el: '#app',
-    data: {
-        notifications: ''
-    },
-    created: function created() {
-        var _this = this;
-
-        axios.get('/codotechmart/public/courier/notification/get').then(function (response) {
-            _this.notifications = response.data;
-            console.log(_this.notifications);
-        });
-    }
+  el: '#app',
+  created: function created() {
+    Echo.private('couriers').listen('sentRequest', function (e) {
+      console.log(e);
+    });
+  }
 });
 
 /***/ }),
@@ -32088,7 +32082,7 @@ var EventFormatter = function () {
         key: 'format',
         value: function format(event) {
             if (event.charAt(0) === '.' || event.charAt(0) === '\\') {
-                event = event.substr(1);
+                return event.substr(1);
             } else if (this.namespace) {
                 event = this.namespace + '.' + event;
             }

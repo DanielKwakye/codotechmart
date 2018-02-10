@@ -6,17 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
+<<<<<<< HEAD
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+=======
 <meta name="csrf-token" content="{{ csrf_token() }}">
+>>>>>>> 4bd3b3a365da40b94de5cfe37b6a1f5711ead322
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<<<<<<< HEAD
+=======
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+>>>>>>> 4bd3b3a365da40b94de5cfe37b6a1f5711ead322
 </head>
 <body>
     <div id="app">
@@ -77,7 +84,10 @@
         </nav>
 
         @yield('content')
+<<<<<<< HEAD
+=======
         <notification :userid="10" v-bind:notifications="notifications"></notification>
+>>>>>>> 4bd3b3a365da40b94de5cfe37b6a1f5711ead322
     </div>
 
     <!-- Scripts -->

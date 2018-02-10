@@ -9,11 +9,11 @@
                 <div class="modal-body">
                     
                         {{ csrf_field() }} 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <input type="text" name="name" class="form-control" placeholder="Category Name" value="{{ old('name') }}">
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
                         </div>
