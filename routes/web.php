@@ -18,6 +18,7 @@ Route::prefix('/')->group(function(){
     Route::get('/shop/{id}/detail','Front\WebpageController@shopDetail');
     Route::get('/cart','Front\WebpageController@cart');
     Route::get('add/cart','Front\WebpageController@addCart');
+    Route::get('remove/cart/{id}','Front\WebpageController@removeCart');
     Route::get('add/compare','Front\WebpageController@addCompare');
     Route::get('add/wishlist','Front\WebpageController@addWishlist');
     Route::get('/checkout','Front\WebpageController@checkout');
@@ -29,12 +30,10 @@ Route::prefix('/')->group(function(){
     Route::get('/faq','Front\WebpageController@faq');
     Route::get('/about','Front\WebpageController@about');
     Route::get('order/detail','Front\WebpageController@orderDetail');
+    Route::get('hang/cart','Front\WebpageController@hangCart');
 
     Route::auth();
 });
-
-
-
 
 
 

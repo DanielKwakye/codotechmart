@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Front\Plugins\Cart;
 use App\Front\Plugins\Compare;
 use App\Front\Plugins\WishList;
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\Product;
 use App\Shop;
 use Illuminate\Http\Request;
 
@@ -32,8 +34,14 @@ class WebpageController extends Controller
          return view('front.techmarket.shop_detail')->with($data);
     }
 
+    public function hangCart(){
+        return view('front.techmarket.inc.hanging_cart');
+    }
+
     public function addCart(Request $request){
-        return $request->qty;
+        $product = (new Product())->find($request->product_id);
+        Cart::getInstance()->add($product,$request->qty);
+        return json_encode(['status' => 'success', 'message' => $product->name . 'added successfully']);
     }
     
     public function addCompare(){
@@ -46,6 +54,12 @@ class WebpageController extends Controller
         Compare::getInstance()->addToCompare($item);
         
         return Compare::getInstance()->all();
+    }
+
+    public function removeCart ($id){
+        $product = (new Product())->find($id);
+        Cart::getInstance()->remove($product);
+        return json_encode(['status' => true, 'message' => $product->name .' removed successfully']);
     }
 
     public function favorite(){

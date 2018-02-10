@@ -120,10 +120,10 @@
                                                 </div>
                                                 <!-- .yith-wcwl-add-to-wishlist -->
                                                 <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="single-product-fullwidth.html">
-                                                    <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="assets/images/products/1.jpg">
+                                                    <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{asset('assets/images/products/1.jpg')}}">
                                                     <span class="price">
                                                             <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>800.00</span>
+                                                                <span class="woocommerce-Price-currencySymbol">¢ </span>{{$p->price}}</span>
                                                         </span>
                                                     <h2 class="woocommerce-loop-product__title">Bbd 23-Inch Screen LED-Lit Monitorss Buds</h2>
                                                 </a>
@@ -447,5 +447,4 @@
 @include('front.techmarket.inc.foot_assets')
 </body>
 
-<!-- Mirrored from transvelo.github.io/techmarket-html/shop.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:54:29 GMT -->
 </html>
