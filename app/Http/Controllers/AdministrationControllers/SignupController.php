@@ -22,10 +22,7 @@ class SignupController extends Controller
     }
 
     public function addNewShop(Request $r){
-        //return $r->all();
-    	$id = mt_rand(10000,999999);
         $addnewstore = Shop::create([
-            'id'=>$id,
             'name'=>$r->storename,
             'phone'=>$r->phone,
             'type'=>$r->type,

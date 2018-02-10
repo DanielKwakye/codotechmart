@@ -19,6 +19,16 @@
 				</div>
 				<div class="card-body collapse in">
 					<div class="card-block">
+						<ul class="nav nav-tabs nav-underline no-hover-bg">
+							<li class="nav-item">
+								<a class="nav-link active" id="settingstab" data-toggle="tab" aria-controls="settings" href="#settings" aria-expanded="true">Basic Setting</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="quantitiestab" data-toggle="tab" aria-controls="quantities" href="#templates" aria-expanded="false">Templates</a>
+							</li>
+						</ul>
+						<div class="tab-content px-1 pt-1">
+							<div role="tabpanel" class="tab-pane active" id="settings" aria-expanded="true" aria-labelledby="base-tab31">
 						<form class="form" method="post" action="{{url('administration/saveemailsettings')}}">
 							{{csrf_field()}}
 							<div class="form-body">
@@ -87,6 +97,50 @@
 								
 							</div>
 						</form>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="templates" aria-expanded="true" aria-labelledby="base-tab31">
+						<form method="post" action="{{url('/administration/savetemplatesettings')}}">
+							{{csrf_field()}}
+						 <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Type</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<tr>
+                            	<td><span class="tag tag-success">Delivered</span></td>
+                            	<td><textarea rows="2" class="form-control" name="delivery_subject">{{json_decode($emailsettings->delivery)->subject}}</textarea></td>
+                            	<td><textarea rows="2" class="form-control" name="delivery_message">{{json_decode($emailsettings->delivery)->message}}</textarea></td>
+                                </tr>
+                                <tr>
+                            	<td><span class="tag tag-primary">Order Successful</span></td>
+                            	<td><textarea rows="2" class="form-control" name="order_subject">{{json_decode($emailsettings->order_successful)->subject}}</textarea></td>
+                            	<td><textarea rows="2" class="form-control" name="order_message">{{json_decode($emailsettings->order_successful)->message}}</textarea></td>
+                                </tr>
+                                <tr>
+                            	<td><span class="tag tag-danger">Cancelled</span></td>
+                            	<td><textarea rows="2" class="form-control" name="cancelled_subject">{{json_decode($emailsettings->cancelled)->subject}}</textarea></td>
+                            	<td><textarea rows="2" class="form-control" name="cancelled_message">{{json_decode($emailsettings->cancelled)->message}}</textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <div class="form-actions offset-md-2">
+								<button type="submit" class="btn btn-success">
+									<i class="icon-check2"></i> Save
+								</button>
+								<button type="button" class="btn btn-danger mr-1">
+									<i class="icon-cross2"></i> Cancel
+								</button>
+								
+							</div> 
+                    </form>
+					</div>
+				</div>
 					</div>
 				</div>
 			</div>
