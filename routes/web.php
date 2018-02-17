@@ -23,7 +23,7 @@ Route::prefix('/')->group(function(){
     Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
     Route::get('remove/compare/{id}','Front\WebpageController@removeCompare');
     Route::get('remove/wishlist/{id}','Front\WebpageController@removeWishlist');
-    Route::get('/checkout','Front\WebpageController@checkout');
+    Route::get('/checkout','Front\WebpageController@checkout')->middleware('auth');
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('shop/{id}/products','Front\WebpageController@products');
@@ -39,6 +39,7 @@ Route::prefix('/')->group(function(){
     Route::get('favorite/section','Front\WebpageController@favoriteSection');
     Route::get('product/detail/{id}','Front\WebpageController@productDetail');
     Route::post('update/cart','Front\WebpageController@updateCart');
+    Route::get('cart/summary', 'Front\WebpageController@cartSummary');
 
     Route::auth();
 

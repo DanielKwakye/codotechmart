@@ -168,6 +168,10 @@ class WebpageController extends Controller
         return view('front.techmarket.compare');
     }
 
+    public function cartSummary(){
+        return view('front.techmarket.inc.cart_summary');
+    }
+
     public function products($id){
         $shop = Shop::find($id);
         $products = $shop->products;
@@ -187,6 +191,9 @@ class WebpageController extends Controller
     }
 
     public function checkout(){
+        if (Cart::getInstance()->getTotalQty() < 1){
+            return redirect('/')->withErrors('Add Items To Cart To Proceed');
+        }
         return view('front.techmarket.checkout');
     }
 
