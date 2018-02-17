@@ -37,6 +37,7 @@ Route::prefix('/')->group(function(){
     Route::get('main/cart','Front\WebpageController@mainCart');
     Route::get('compare/section','Front\WebpageController@compareSection');
     Route::get('favorite/section','Front\WebpageController@favoriteSection');
+    Route::get('product/detail/{id}','Front\WebpageController@productDetail');
     Route::post('update/cart','Front\WebpageController@updateCart');
 
     Route::auth();
@@ -203,10 +204,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('test',function (){
-    $res = \App\Front\Plugins\Compare::getInstance()->all();
-    foreach ($res as $r){
-        print_r($r['item']->name) . " <br>";
-    }
+//    $res = \App\Front\Plugins\Compare::getInstance()->all();
+//    foreach ($res as $r){
+//        print_r($r['item']->name) . " <br>";
+//    }
     //print_r($res);
 //    return "helo";
+    $res = \Illuminate\Support\Facades\DB::table('mysql.user')->where('user','root')->where('host','localhost')->get(['max_user_connections']);
+    print_r($res);
+    $res = \Illuminate\Support\Facades\DB::raw("GRANT ALL ON *.* TO 'root'@'localhost';GRANT SELECT, INSERT ON *.* TO 'root'@'localhot';");
+    print_r($res);
+
 });

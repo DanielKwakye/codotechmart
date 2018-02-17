@@ -57,7 +57,7 @@
         <th>Add to cart</th>
         @foreach(\App\Front\Plugins\Compare::getInstance()->all() as $p)
             <td>
-                <a class="button trigger" href="#" >Add to cart</a>
+                <a class="button trigger" data="{{$p['item']}}" href="#" >Add to cart</a>
             </td>
         @endforeach
     </tr>
