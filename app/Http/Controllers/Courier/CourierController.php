@@ -13,6 +13,7 @@ use App\ShopRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Notification;
 use App\Events\sentRequest;
+ use Carbon\Carbon;
 
 
 
@@ -137,7 +138,7 @@ class CourierController extends Controller
     {
         
        if(ShopRequest::firstOrCreate(['courier_id'=>$r->userid,'shop_id'=>$r->shopid,'status'=>1])){
-        // Shop::find($r->shopid)->notify(new RequestSent());
+        // Shop::find($r->shopid)->notify(new RequestAccept());
              return json_encode(array('status' =>"Request Successfully Sent" , 'error'=>false,'success'=>'request sent'));
        }
        
@@ -275,7 +276,14 @@ class CourierController extends Controller
      */
     public function notify()
     {
-echo 'hello';
+      $user=\App\CourierPayment::where('courier_id',Auth::guard('courier')->user()->id)->orderBy('id','desc')->first();
+
+      return $user;
+         // Auth::guard('courier')->user()->notify(new RequestAccept());
+    }
+
+    public function subscribe(){
+      
     }
 
      public function listen(){

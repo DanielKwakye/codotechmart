@@ -117,6 +117,9 @@ Route::group(['prefix' => 'courier'], function () {
   Route::post('cancelRequest','Courier\CourierController@cancelRequest');
   Route::post('profileinfo','Courier\CourierController@profileinfo');
   Route::post('changeoptions','Courier\CourierController@changeoptions');
+
+  Route::get('subscription','Courier\CourierController@subscribe');
+
   Route::get('notify','Courier\CourierController@notify');
   Route::get('listen','Courier\CourierController@listen');
   Route::get('markasread/{id}','Courier\CourierController@markasread');

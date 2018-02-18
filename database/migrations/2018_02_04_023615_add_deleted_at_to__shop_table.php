@@ -13,7 +13,7 @@ class AddDeletedAtToShopTable extends Migration
      */
     public function up()
     {
-        Schema::table('shops', function (Blueprint $table) {
+        Schema::table('shop', function (Blueprint $table) {
             $table->softDeletes()->after('active');
         });
     }

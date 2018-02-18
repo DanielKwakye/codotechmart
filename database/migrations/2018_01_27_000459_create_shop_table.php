@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddShopidToShopCategoryTable extends Migration
+class CreateShopTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddShopidToShopCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::table('shop_categories', function (Blueprint $table) {
-            $table->integer('shop_id')->after('id');
+        Schema::create('shop', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('shopname',100);
+            $table->text('active');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddShopidToShopCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::table('ShopCategory', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('shop');
     }
 }

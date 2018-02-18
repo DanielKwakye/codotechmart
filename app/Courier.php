@@ -19,7 +19,7 @@ class Courier extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','image'
+        'name', 'email', 'password','image','active'
     ];
 
     /**

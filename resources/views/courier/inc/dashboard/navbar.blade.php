@@ -1,9 +1,14 @@
  @php
-   $shops = Auth::guard('courier')->user()->shops()->pluck('shops.id');
+   $shops = Auth::guard('courier')->user()->shops()->pluck('shop.id');
     $unrequested_shops = \App\Shop::whereNotIn('id',$shops)->get();
     $requested_shops=\App\Shop::whereIn('id',$shops)->get();
 @endphp
-
+<style type="text/css">
+.smalltext{
+    /*padding-top: 5px;*/
+    font-size: 10px;
+}
+</style>
 
 <div id="page-header" class="{{Auth::guard('courier')->user()->option->header}}">
     <div id="mobile-navigation">
@@ -55,13 +60,24 @@
             </div>
         </div>
     </div><!-- #header-nav-left -->
-
     <div id="header-nav-right">
-        <a href="#" class="hdr-btn" id="fullscreen-btn" title="Fullscreen">
-            <i class="glyph-icon icon-arrows-alt"></i>
+        @if($almostexpired)
+        <a href="#" class="hdr-btn " title="Days To Expire">
+
+           <span class="days"></span> <br><span class="smalltext">Days</span>
         </a>
-        <a href="#" class="hdr-btn sb-toggle-left" id="chatbox-btn" title="Chat sidebar">
-            <i class="glyph-icon icon-linecons-paper-plane"></i>
+        <a href="#" class="hdr-btn" title="Hours To Expire">
+           <span class="hours"></span> <br><span class="smalltext">Hours</span>
+        </a>
+        <a href="#" class="hdr-btn"  title="Minutes to Expire">
+         <span class="mins"></span><br><span class="smalltext">Min(s)</span>
+        </a>
+        <a href="#" class="hdr-btn" title="Seconds To Expire">
+          <span class="secs"></span><br><span class="smalltext">Sec(s)</span>
+        </a>
+        @endif
+        <a class="header-btn" id="fullscreen-btn" title="Fullscreen" href="#" >
+            <i class="glyph-icon icon-arrows-alt"></i>
         </a>
         <div class="dropdown" id="notifications-btn">
             <a data-toggle="dropdown" href="#" title="">
@@ -197,12 +213,12 @@
             <span class="appearance">Appearance<span class="bs-badge badge-purple">New</span></span>
         </a><!-- .sidebar-submenu -->
     </li>
-    <li>
+    {{-- <li>
         <a href="{{url('courier/options')}}" title="Notifications">
             <i class="glyph-icon icon-linecons-paper-plane"></i>
             <span class="appearance">notifications<span class="bs-badge badge-purple">{{count(Auth::guard('courier')->user()->unreadNotifications)}}</span></span>
         </a><!-- .sidebar-submenu -->
-    </li>
+    </li> --}}
     </ul><!-- #sidebar-menu -->
 
 

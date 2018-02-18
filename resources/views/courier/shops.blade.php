@@ -75,13 +75,17 @@
 
                                         <tbody>
                             
-                           
+                            @php
+                               $shops = Auth::guard('courier')->user()->shops()->pluck('shop.id');
+                                $unrequested_shops = \App\Shop::whereNotIn('id',$shops)->get();
+                                $requested_shops=\App\Shop::whereIn('id',$shops)->get();
+                            @endphp
                                             
                             @if(\App\Shop::all()!==null)
                                 @foreach($unrequested_shops as $p)
                             <tr class="tr{{$p->id}}">
                                 <td>{{$p->id}}</td>
-                                <td>{{$p->name}}</td>
+                                <td>{{$p->shopname}}</td>
                                 <td>{{$p->shopcategory->name}}</td>
                                 <td class="groupId">
                                 <button class="btn btn-xs btn-danger requestbutton" id="requestbutton{{$p->id}}" shopid="{{$p->id}}" userid="{{Auth::guard('courier')->user()->id}}">Request</button>
