@@ -41,6 +41,10 @@ class AdminController extends Controller
         return view('admin.activeCouriers');
     }
 
+    public function referral(){
+        return view('admin.referrals');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

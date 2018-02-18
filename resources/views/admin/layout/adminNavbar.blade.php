@@ -181,6 +181,12 @@
         </a>
     </li>
     <li>
+        <a href="{{url('admin/referrals')}}" title="Forms UI">
+            <i class="glyph-icon icon-linecons-eye"></i>
+            <span>Referrals</span>
+        </a>
+    </li>
+     <li>
         <a href="{{url('admin/complaints')}}" title="Forms UI">
             <i class="glyph-icon icon-linecons-eye"></i>
             <span>Complaints</span>

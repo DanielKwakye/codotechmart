@@ -79,6 +79,8 @@ Route::group(['prefix'=>'admin'], function () {
   Route::get('complaints','Admin\AdminController@complaints')->middleware('admin');
   Route::get('complaint/custom-date','Admin\AdminController@complaints')->middleware('admin');
 
+    Route::get('referrals','Admin\AdminController@referral');
+
 
   Route::get('options','Admin\AdminController@options')->middleware('admin');
   Route::get('shopcategories','Admin\AdminController@category')->middleware('admin');
