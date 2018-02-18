@@ -283,7 +283,7 @@ class CourierController extends Controller
     }
 
     public function subscribe(){
-      
+      //
     }
 
      public function listen(){
