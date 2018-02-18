@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Techmarket HTML</title>
+    <title>Login / Register</title>
     @include('front.techmarket.inc.head_assets')
 </head>
 <body class="page home page-template-default">
@@ -156,5 +156,5 @@
 <!-- For demo purposes – can be removed on production : End -->
 </body>
 
-<!-- Mirrored from transvelo.github.io/techmarket-html/login-and-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:57:27 GMT -->
+
 </html>

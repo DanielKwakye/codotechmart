@@ -23,7 +23,6 @@ Route::prefix('/')->group(function(){
     Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
     Route::get('remove/compare/{id}','Front\WebpageController@removeCompare');
     Route::get('remove/wishlist/{id}','Front\WebpageController@removeWishlist');
-    Route::get('/checkout','Front\WebpageController@checkout')->middleware('auth');
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('shop/{id}/products','Front\WebpageController@products');
@@ -41,10 +40,13 @@ Route::prefix('/')->group(function(){
     Route::post('update/cart','Front\WebpageController@updateCart');
     Route::get('cart/summary', 'Front\WebpageController@cartSummary');
 
+
     Route::auth();
 
 //    =================== methods called when user is logged In ===================================
     Route::get('save/wishlist','Front\UsersController@saveWishlist');
+    Route::get('/checkout','Front\UsersController@checkout');
+    Route::get('order/received','Front\UsersController@orderReceived');
 });
 
 

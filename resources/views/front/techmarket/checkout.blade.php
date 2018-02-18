@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Techmarket HTML</title>
+    <title>Checkout</title>
     @include('front.techmarket.inc.head_assets')
 </head>
 <body class="woocommerce-active page-template-default woocommerce-checkout woocommerce-page can-uppercase">
@@ -184,7 +184,7 @@
                                                             </label>
                                                             <input type="hidden" value="1" name="terms-field">
                                                         </p>
-                                                        <a href="order-received.html" class="button wc-forward text-center">Place order</a>
+                                                        <a href="{{url('order/received')}}" class="button wc-forward text-center">Place order</a>
                                                     </div>
                                                 </div>
                                                 <!-- /.woocommerce-checkout-payment -->
@@ -218,5 +218,5 @@
 @include('front.techmarket.inc.foot_assets')
 </body>
 
-<!-- Mirrored from transvelo.github.io/techmarket-html/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:57:27 GMT -->
+
 </html>

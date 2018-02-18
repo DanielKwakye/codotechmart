@@ -190,13 +190,6 @@ class WebpageController extends Controller
         return view('front.techmarket.login_register');
     }
 
-    public function checkout(){
-        if (Cart::getInstance()->getTotalQty() < 1){
-            return redirect('/')->withErrors('Add Items To Cart To Proceed');
-        }
-        return view('front.techmarket.checkout');
-    }
-
     public function cart(){
         return view('front.techmarket.cart');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Front\Plugins\Cart;
 use App\Front\Plugins\WishList;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -36,5 +37,16 @@ class UsersController extends Controller
         DB::table('wishlists')->insert($data);
 
         return view('wishlist')->withErrors(['Your wishlist is saved']);
+    }
+
+    public function orderReceived(){
+        return view('front.techmarket.order_received');
+    }
+
+    public function checkout(){
+        if (Cart::getInstance()->getTotalQty() < 1){
+            return redirect('/')->withErrors('Add Items To Cart To Proceed');
+        }
+        return view('front.techmarket.checkout');
     }
 }

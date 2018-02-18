@@ -1,4 +1,4 @@
-<div class="cart-collaterals">
+
     <div class="cart_totals">
         <h2>Cart totals</h2>
         <table class="shop_table shop_table_responsive">
@@ -40,4 +40,3 @@
         <!-- .wc-proceed-to-checkout -->
     </div>
     <!-- .cart_totals -->
-</div>

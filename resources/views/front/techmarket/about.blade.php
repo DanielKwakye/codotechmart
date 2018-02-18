@@ -169,5 +169,5 @@
 @include('front.techmarket.inc.foot_assets')
 </body>
 
-<!-- Mirrored from transvelo.github.io/techmarket-html/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:54:41 GMT -->
+
 </html>
