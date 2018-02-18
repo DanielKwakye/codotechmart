@@ -27,7 +27,7 @@
                                                                     <a href="#">Home Pages</a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a href="home-v1.html">Home v1</a>
+                                                                    <a href="{{url("")}}">Home v1</a>
                                                                 </li>                                                                
                                                             </ul>
                                                             <!-- .menu -->
@@ -39,7 +39,7 @@
                                                                     <a href="#">Landing Pages</a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a href="landing-page-v1.html">Landing v1</a>
+                                                                    <a href="{{url("")}}">Landing v1</a>
                                                                 </li>
                                                                 
                                                             </ul>
@@ -57,8 +57,26 @@
                                         <!-- .dropdown-menu -->
                                     </li>
 
+                                    <li class="menu-item menu-item-has-children animate-dropdown dropdown">
+                                        <a title="Browse Shops" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Browse Shops <span class="caret"></span></a>
+                                        <ul role="menu" class=" dropdown-menu">
+                                            @if(\App\Shop::all() != null)
+                                                @foreach(\App\Shop::all() as $s)
+                                            <li class="menu-item animate-dropdown">
+                                                <a title="Wishlist" href="{{url('shop/'.$s->id.'/detail')}}">{{$s->name}}</a>
+                                            </li>
+                                            @endforeach
+                                                @endif
+                                        </ul>
+                                        <!-- .dropdown-menu -->
+                                    </li>
+
                                     <li class="menu-item animate-dropdown">
-                                        <a title="Headphones Sale" href="{{url('/favorites')}}">Favorites</a>
+                                        <a title="Headphones Sale" href="{{url('/checkout')}}">Checkout</a>
+                                    </li>
+
+                                    <li class="menu-item animate-dropdown">
+                                        <a title="Headphones Sale" href="{{url('/wishlist')}}">Favorites</a>
                                     </li>
                                     <li class="menu-item animate-dropdown">
                                         <a title="Headphones Sale" href="{{url('/compare')}}">Compare List</a>
@@ -128,75 +146,25 @@
                         <!-- .navbar-search -->
                         <ul class="header-compare nav navbar-nav">
                             <li class="nav-item">
-                                <a href="compare.html" class="nav-link">
+                                <a href="{{url('compare')}}" class="nav-link">
                                     <i class="tm tm-compare"></i>
-                                    <span id="top-cart-compare-count" class="value">3</span>
+                                    <span id="top-cart-compare-count" class="value">{{\App\Front\Plugins\Compare::getInstance()->totalQty}}</span>
                                 </a>
                             </li>
                         </ul>
                         <!-- .header-compare -->
                         <ul class="header-wishlist nav navbar-nav">
                             <li class="nav-item">
-                                <a href="wishlist.html" class="nav-link">
+                                <a href="{{url('wishlist')}}" class="nav-link">
                                     <i class="tm tm-favorites"></i>
-                                    <span id="top-cart-wishlist-count" class="value">3</span>
+                                    <span id="top-cart-wishlist-count" class="value">{{\App\Front\Plugins\WishList::getInstance()->totalQty}}</span>
                                 </a>
                             </li>
                         </ul>
                         <!-- .header-wishlist -->
-                        <ul id="site-header-cart" class="site-header-cart menu">
-                            <li class="animate-dropdown dropdown ">
-                                <a class="cart-contents" href="cart.html" data-toggle="dropdown" title="View your shopping cart">
-                                    <i class="tm tm-shopping-bag"></i>
-                                    <span class="count">2</span>
-                                    <span class="amount">
-                                        <span class="price-label">Your Cart</span>&#036;136.99</span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-mini-cart">
-                                    <li>
-                                        <div class="widget woocommerce widget_shopping_cart">
-                                            <div class="widget_shopping_cart_content">
-                                                <ul class="woocommerce-mini-cart cart_list product_list_widget ">
-                                                    <li class="woocommerce-mini-cart-item mini_cart_item">
-                                                        <a href="#" class="remove" aria-label="Remove this item" data-product_id="65" data-product_sku="">×</a>
-                                                        <a href="single-product-sidebar.html">
-                                                            <img src="assets/images/products/mini-cart1.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">XONE Wireless Controller&nbsp;
-                                                        </a>
-                                                        <span class="quantity">1 ×
-                                                            <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>64.99</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="woocommerce-mini-cart-item mini_cart_item">
-                                                        <a href="#" class="remove" aria-label="Remove this item" data-product_id="27" data-product_sku="">×</a>
-                                                        <a href="single-product-sidebar.html">
-                                                            <img src="assets/images/products/mini-cart2.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">Gear Virtual Reality 3D with Bluetooth Glasses&nbsp;
-                                                        </a>
-                                                        <span class="quantity">1 ×
-                                                            <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>72.00</span>
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                                <!-- .cart_list -->
-                                                <p class="woocommerce-mini-cart__total total">
-                                                    <strong>Subtotal:</strong>
-                                                    <span class="woocommerce-Price-amount amount">
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>136.99</span>
-                                                </p>
-                                                <p class="woocommerce-mini-cart__buttons buttons">
-                                                    <a href="cart.html" class="button wc-forward">View cart</a>
-                                                    <a href="checkout.html" class="button checkout wc-forward">Checkout</a>
-                                                </p>
-                                            </div>
-                                            <!-- .widget_shopping_cart_content -->
-                                        </div>
-                                        <!-- .widget_shopping_cart -->
-                                    </li>
-                                </ul>
-                                <!-- .dropdown-menu-mini-cart -->
-                            </li>
-                        </ul>
+                            <div id="hang_cart">
+                        @include('front.techmarket.inc.hanging_cart')
+                            </div>
                         <!-- .site-header-cart -->
                     </div>
                     <!-- /.row -->
@@ -206,7 +174,7 @@
                     <div class="handheld-header">
                         <div class="row">
                             <div class="site-branding">
-                                <a href="home-v1.html" class="custom-logo-link" rel="home">
+                                <a href="{{url('/')}}" class="custom-logo-link" rel="home">
                                     Tech Market
                                 </a>
                                 <!-- /.custom-logo-link -->
@@ -216,20 +184,20 @@
                             <div class="handheld-header-links">
                                 <ul class="columns-3">
                                     <li class="my-account">
-                                        <a href="login-and-register.html" class="has-icon">
+                                        <a href="{{url('login/register')}}" class="has-icon">
                                             <i class="tm tm-login-register"></i>
                                         </a>
                                     </li>
                                     <li class="wishlist">
-                                        <a href="wishlist.html" class="has-icon">
+                                        <a href="{{url('wishlist')}}" class="has-icon">
                                             <i class="tm tm-favorites"></i>
-                                            <span class="count">3</span>
+                                            <span class="count">{{\App\Front\Plugins\Compare::getInstance()->totalQty}}</span>
                                         </a>
                                     </li>
                                     <li class="compare">
-                                        <a href="compare.html" class="has-icon">
+                                        <a href="{{url('compare')}}" class="has-icon">
                                             <i class="tm tm-compare"></i>
-                                            <span class="count">3</span>
+                                            <span class="count">{{\App\Front\Plugins\WishList::getInstance()->totalQty}}</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -239,7 +207,9 @@
                         </div>
                         <!-- /.row -->
                         {{--left Navbar Here--}}
-                        @include('front.techmarket.inc.left_navbar')
+                        <div class="techmarket-sticky-wrap">
+                           @include('front.techmarket.inc.left_navbar')
+                         </div>
                         <!-- .techmarket-sticky-wrap -->
                     </div>
                     <!-- .handheld-header -->

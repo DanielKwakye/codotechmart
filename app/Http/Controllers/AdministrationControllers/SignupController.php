@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Shop;
 use DB;
 use Hash;
+use App\Slydepay\Slydepay;
 
 class SignupController extends Controller
 {
@@ -22,10 +23,7 @@ class SignupController extends Controller
     }
 
     public function addNewShop(Request $r){
-        //return $r->all();
-    	$id = mt_rand(10000,999999);
         $addnewstore = Shop::create([
-            'id'=>$id,
             'name'=>$r->storename,
             'phone'=>$r->phone,
             'type'=>$r->type,
@@ -46,5 +44,9 @@ class SignupController extends Controller
             return redirect('/administration/category');
         }
 
+    }
+
+    public function slydepay(){
+      $add = new Slydepay();
     }
 }

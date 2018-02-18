@@ -7,7 +7,7 @@
             <h4 class="modal-title" style="color:#3fa962;"></h4>
         </div>
         <div class="modal-body">
-            <input type="number" id="qty" placeholder="How many ?" value="1" name="qty" class="form-control form-control-plain" required=""/>
+            <input type="number" id="qty" placeholder="How many ?" value="1" name="qty" min="1" class="form-control form-control-plain" required=""/>
             <input type="hidden" id="product_id"/>
             <input type="hidden" id="product_price">
             <input type="hidden" id="branch_id"/>

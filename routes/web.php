@@ -18,37 +18,49 @@ Route::prefix('/')->group(function(){
     Route::get('/shop/{id}/detail','Front\WebpageController@shopDetail');
     Route::get('/cart','Front\WebpageController@cart');
     Route::get('add/cart','Front\WebpageController@addCart');
-    Route::get('add/compare','Front\WebpageController@addCompare');
-    Route::get('add/wishlist','Front\WebpageController@addWishlist');
-    Route::get('/checkout','Front\WebpageController@checkout');
+    Route::get('remove/cart/{id}','Front\WebpageController@removeCart');
+    Route::get('add/compare/{id}','Front\WebpageController@addCompare');
+    Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
+    Route::get('remove/compare/{id}','Front\WebpageController@removeCompare');
+    Route::get('remove/wishlist/{id}','Front\WebpageController@removeWishlist');
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('shop/{id}/products','Front\WebpageController@products');
-    Route::get('/favorites','Front\WebpageController@favorite');
+    Route::get('/wishlist','Front\WebpageController@favorite');
+    Route::get('attempt/save/wishlist','Front\WebpageController@saveWishlist');
     Route::get('/compare','Front\WebpageController@compare');
     Route::get('/faq','Front\WebpageController@faq');
     Route::get('/about','Front\WebpageController@about');
     Route::get('order/detail','Front\WebpageController@orderDetail');
+    Route::get('hang/cart','Front\WebpageController@hangCart');
+    Route::get('main/cart','Front\WebpageController@mainCart');
+    Route::get('compare/section','Front\WebpageController@compareSection');
+    Route::get('favorite/section','Front\WebpageController@favoriteSection');
+    Route::get('product/detail/{id}','Front\WebpageController@productDetail');
+    Route::post('update/cart','Front\WebpageController@updateCart');
+    Route::get('cart/summary', 'Front\WebpageController@cartSummary');
+
 
     Route::auth();
+
+//    =================== methods called when user is logged In ===================================
+    Route::get('save/wishlist','Front\UsersController@saveWishlist');
+    Route::get('/checkout','Front\UsersController@checkout');
+    Route::get('order/received','Front\UsersController@orderReceived');
 });
 
 
 
-
-
-
 Route::group(['prefix'=>'admin'], function () {
-  Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
+  Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
   Route::post('/login', 'AdminAuth\LoginController@login');
-  Route::get('/logout', 'AdminAuth\LoginController@logout')->name('logout');
+  Route::get('/logout', 'AdminAuth\LoginController@logout');
 
-  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm');
   Route::post('/register', 'AdminAuth\RegisterController@register');
-
-  Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail');
+  Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset');
+  Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
 
 
@@ -140,10 +152,13 @@ Route::post('/sendemail','AdministrationControllers\SignupController@sendMail');
 Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop');
 });
 
+
+
+
 Route::group(['prefix' => 'administration'], function () {
 Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'ShopadminAuth\LoginController@login');
-Route::post('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
+Route::get('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
 
 Route::get('/register', 'ShopadminAuth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'ShopadminAuth\RegisterController@register');
@@ -168,6 +183,7 @@ Route::get('/addnewbranch','AdministrationControllers\BranchController@addNewBra
 Route::post('/addnewbranch','AdministrationControllers\BranchController@saveBranch');
 
 Route::get('/paymentmethod','AdministrationControllers\PaymentMethodController@index');
+Route::post('/savepaymentmethod','AdministrationControllers\PaymentMethodController@savePaymentMethod');
 
 Route::get('/attributes','AdministrationControllers\AttributeFeaturesController@index');
 Route::post('/addnewattribute','AdministrationControllers\AttributeFeaturesController@addNewAttribute');
@@ -176,10 +192,49 @@ Route::get('deletevalue/{id}','AdministrationControllers\AttributeFeaturesContro
 Route::post('/addvaluetoattribute','AdministrationControllers\AttributeFeaturesController@addValueToAttribute');
 Route::get('/attributefeaturedetails/{id}','AdministrationControllers\AttributeFeaturesController@attributeDetails');
 Route::post('/editattributefeature','AdministrationControllers\AttributeFeaturesController@editAttributeFeatureValue');
+
+
+Route::get('/brand','AdministrationControllers\ProductBrandController@index');
+Route::post('/addbrand','AdministrationControllers\ProductBrandController@addBrand');
+Route::get('/deletebrand','AdministrationControllers\ProductBrandController@deleteBrand');
+Route::post('/editbrand','AdministrationControllers\ProductBrandController@editBrand');
+
+Route::get('/addproduct','AdministrationControllers\ProductsController@index');
+Route::post('/addnewproduct','AdministrationControllers\ProductsController@addNewProduct');
+
+Route::get('/emailsettings','AdministrationControllers\EmailSettingsController@index');
+Route::post('/saveemailsettings','AdministrationControllers\EmailSettingsController@saveEmailSettings');
+Route::post('/savetemplatesettings','AdministrationControllers\EmailSettingsController@saveTemplateSettings');
+Route::get('/smssettings','AdministrationControllers\EmailSettingsController@smsSettings');
+Route::post('/savesmssettings','AdministrationControllers\EmailSettingsController@saveSmsSettings');
+
+Route::get('/generalsettings','AdministrationControllers\GeneralSettingsController@index');
+Route::post('/savegeneralsettings','AdministrationControllers\GeneralSettingsController@saveGeneralSettings');
+
+
+
+
+Route::get('slydepay','AdministrationControllers\SignupController@slydepay');
 });
+
+
 
 /************************** End of Admin Route.Please do not touch ******************************************/
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('test',function (){
+//    $res = \App\Front\Plugins\Compare::getInstance()->all();
+//    foreach ($res as $r){
+//        print_r($r['item']->name) . " <br>";
+//    }
+    //print_r($res);
+//    return "helo";
+    $res = \Illuminate\Support\Facades\DB::table('mysql.user')->where('user','root')->where('host','localhost')->get(['max_user_connections']);
+    print_r($res);
+    $res = \Illuminate\Support\Facades\DB::raw("GRANT ALL ON *.* TO 'root'@'localhost';GRANT SELECT, INSERT ON *.* TO 'root'@'localhot';");
+    print_r($res);
+
+});

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<html lang="en-US" itemscope="itemscope" itemtype="">
     
 <!-- Mirrored from transvelo.github.io/techmarket-html/shop-listing.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:57:24 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-        <title>Techmarket HTML</title>
+        <title>Shops</title>
         @include('front.techmarket.inc.head_assets')
     </head>
     <body class="woocommerce-active left-sidebar">
@@ -167,5 +167,4 @@
 
     </body>
 
-<!-- Mirrored from transvelo.github.io/techmarket-html/shop-listing.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:57:24 GMT -->
 </html>

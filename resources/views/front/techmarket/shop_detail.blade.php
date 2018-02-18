@@ -30,7 +30,7 @@
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-        <title>Techmarket HTML</title>
+        <title>Shop</title>
         @include('front.techmarket.inc.head_assets')
     </head>
     <body class="woocommerce-active page-template-template-homepage-v1 can-uppercase">
@@ -446,7 +446,7 @@
                                                                         <div class="yith-wcwl-add-to-wishlist">
                                                                             <a href="#" rel="nofollow" class="add_to_wishlist" data="{{$p->id}}"> Add to Wishlist</a>
                                                                         </div>
-                                                                        <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
+                                                                        <a href="{{url('product/detail/'.$p->id)}}" class="woocommerce-LoopProduct-link">
                                                                             <img src="{{asset('assets/images/products/3.jpg')}}" width= "224" height="197" class="wp-post-image" alt="">
                                                                             <span class="price">
                                                                                 <ins>

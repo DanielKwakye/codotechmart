@@ -4,14 +4,40 @@ namespace App\Http\Controllers\AdministrationControllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Product;
+use App\Product;
+use Auth;
+use Session;
 
 class ProductsController extends Controller
 {
     //
     public function index(){
-    	$products = 
-    	return view('administration.products.tags',compact('tags'));
+    	return view('administration.products.addproduct');
+    }
+
+    public function addNewProduct(Request $r){
+    	 $add = Product::create([
+    	'shop_id'=>Auth::guard('shopadmin')->user()->shop_id,
+    	 'name'=>$r->name,
+    	 'description'=>$r->description,
+    	 'category_id'=>$r->parent_id,
+    	 'quantity'=>$r->quantity0,
+    	 'minimum'=>$r->minimum,
+    	 'type'=>$r->producttype,
+    	 'availability'=>$r->availability,
+    	 'barcode'=>$r->barcode,
+    	 'condition'=>$r->condition,
+    	 'mainimage'=>'',
+    	 'price'=>$r->price
+    	]);
+    	if($add){
+    		Session::flash('success-message','New Product Added Successfully');
+    		return back();
+    	}else{
+    		Session::flash('error-message','Error Adding New Product.. Try Again');
+    		return back();
+    	}
+
     }
 
    

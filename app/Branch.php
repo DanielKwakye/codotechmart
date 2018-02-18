@@ -8,5 +8,5 @@ class Branch extends Model
 {
     //
     protected $table = 'branches';
-    protected $fillable = ['name','store_id','name','description','image','active','latitude','longitude','landmark','working_days'];
+    protected $fillable = ['name','shop_id','name','description','image','active','latitude','longitude','landmark'];
 }
