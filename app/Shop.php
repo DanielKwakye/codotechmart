@@ -15,8 +15,8 @@ class Shop extends Model
     protected $fillable = [
 
 
-     'id','name','tag_line','phone','type','creator_surname','creator_firstname','creator_email',
-    'active','logo','region'];
+     'id','name','tag_line','phone','type','latitude','longitude','creator_surname','creator_firstname','creator_email',
+    'active','logo','region','documents'];
 
     public function products(){
         return $this->hasMany('App\Product');

@@ -12,7 +12,7 @@ class Product extends Model
     public function getMainimageAttribute(){
         }
 
-    protected $table = 'products';
+    //protected $table = 'products';
     protected $fillable = [
     	'shop_id',
     	'name',
@@ -28,14 +28,16 @@ class Product extends Model
     	'mainimage'
     ];
    
-
+    public function category(){
+        return $this->belongsTo('App\Category','category_id');
+    }
     
 
     public function getOldPriceAttribute(){
         if("{$this->discount}" > 0){
             return "{$this->price}";
         }
-
+     
     }
 
     public function getPriceAttribute($value){

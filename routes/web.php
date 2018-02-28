@@ -127,6 +127,7 @@ Route::group(['prefix'=>'welcome'],function(){
 Route::get('/signup','AdministrationControllers\SignupController@index');
 Route::post('/sendemail','AdministrationControllers\SignupController@sendMail');
 Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop');
+Route::get('/validatetoken','AdministrationControllers\SignupController@validateToken');
 });
 
 
@@ -144,6 +145,9 @@ Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendReset
 Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset')->name('password.email');
 Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
 Route::get('/password/reset/{token}', 'ShopadminAuth\ResetPasswordController@showResetForm');
+
+
+Route::get('/dashboard','AdministrationControllers\DashboardController@index');
 
 Route::get('/tags','AdministrationControllers\TagsController@index');
 Route::get('/deletetag','AdministrationControllers\TagsController@deleteTag');
@@ -177,16 +181,21 @@ Route::get('/deletebrand','AdministrationControllers\ProductBrandController@dele
 Route::post('/editbrand','AdministrationControllers\ProductBrandController@editBrand');
 
 Route::get('/addproduct','AdministrationControllers\ProductsController@index');
+Route::get('/productlist','AdministrationControllers\ProductsController@productList');
+Route::get('/deleteproduct','AdministrationControllers\ProductsController@deleteproduct');
 Route::post('/addnewproduct','AdministrationControllers\ProductsController@addNewProduct');
 
 Route::get('/emailsettings','AdministrationControllers\EmailSettingsController@index');
 Route::post('/saveemailsettings','AdministrationControllers\EmailSettingsController@saveEmailSettings');
 Route::post('/savetemplatesettings','AdministrationControllers\EmailSettingsController@saveTemplateSettings');
+
 Route::get('/smssettings','AdministrationControllers\EmailSettingsController@smsSettings');
 Route::post('/savesmssettings','AdministrationControllers\EmailSettingsController@saveSmsSettings');
 
 Route::get('/generalsettings','AdministrationControllers\GeneralSettingsController@index');
 Route::post('/savegeneralsettings','AdministrationControllers\GeneralSettingsController@saveGeneralSettings');
+
+
 
 
 

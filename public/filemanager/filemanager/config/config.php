@@ -248,7 +248,7 @@ $config = array(
 	// If you set $image_resizing to TRUE the script converts all uploaded images exactly to image_resizing_width x image_resizing_height dimension
 	// If you set width or height to 0 the script automatically calculates the other dimension
 	// Is possible that if you upload very big images the script not work to overcome this increase the php configuration of memory and time limit
-	'image_resizing'                          => false,
+	'image_resizing'                          => true,
 	'image_resizing_width'                    => 0,
 	'image_resizing_height'                   => 0,
 	'image_resizing_mode'                     => 'auto', // same as $image_max_mode
@@ -385,7 +385,7 @@ $config = array(
 	// path_from_filemanager/test/test1/
 	// PS if there isn't write permission in your destination folder you must set it
 	//
-	'fixed_image_creation'                    => false, //activate or not the creation of one or more image resized with fixed path from filemanager folder
+	'fixed_image_creation'                    => true, //activate or not the creation of one or more image resized with fixed path from filemanager folder
 	'fixed_path_from_filemanager'             => array( '../test/', '../test1/' ), //fixed path of the image folder from the current position on upload folder
 	'fixed_image_creation_name_to_prepend'    => array( '', 'test_' ), //name to prepend on filename
 	'fixed_image_creation_to_append'          => array( '_test', '' ), //name to appendon filename

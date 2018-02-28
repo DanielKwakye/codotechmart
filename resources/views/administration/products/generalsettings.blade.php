@@ -20,7 +20,7 @@
 				<div class="card-body collapse in">
 					<div class="card-block">
 						{{-- settings here --}}
-						<form class="form" method="post" action="{{url('administration/savegeneralsettings')}}">
+						<form class="form" method="post" action="{{url('administration/savegeneralsettings')}}" enctype="multipart/form-data">
 							{{csrf_field()}}
 							<div class="form-body">
 
@@ -76,14 +76,14 @@
 								  <div class="form-group">
 					                <label>Choose Store Logo</label>
 					                <label id="projectinput7" class="file center-block">
-					                    <input type="file" id="file" >
+					                    <input type="file" id="file" name="image">
 					                    <span class="file-custom"></span>
 					                </label>
 					            </div>
 					             <div class="form-group">
 					                <label>Upload Store Documents</label>
 					                <label id="projectinput7" class="file center-block">
-					                    <input type="file" id="file">
+					                    <input type="file" id="file" name="document">
 					                    <span class="file-custom"></span>
 					                </label>
 					            </div>
