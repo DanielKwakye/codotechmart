@@ -18,6 +18,21 @@ class GeneralSettingsController extends Controller
     }
 
     public function saveGeneralSettings(Request $r){
+        $picname = '';
+        $document = '';
+       if($file = $r->file('image')) {
+            $name = $file->getClientOriginalName();
+            $picname = str_random(25).$name;
+            $file->move('shops/images', $picname); 
+        }
+
+        if($file = $r->file('document')) {
+            $name = $file->getClientOriginalName();
+            $document = str_random(25).$name;
+            $file->move('shops/documents', $document); 
+        }
+
+
         $update = Shop::where('id',Auth::guard('shopadmin')->user()->shop_id)->update([
          'name'=>$r->name,
          'tag_line'=>$r->tag_line,
@@ -26,7 +41,8 @@ class GeneralSettingsController extends Controller
          'creator_firstname'=>$r->creator_firstname,
          'creator_email'=>$r->creator_email,
          'phone'=>$r->phone,
-         'logo'=>'',
+         'logo'=>$picname,
+         'documents'=>$document
         ]);
         if($update){
             Session::flash('success-message','General Settings Updated');

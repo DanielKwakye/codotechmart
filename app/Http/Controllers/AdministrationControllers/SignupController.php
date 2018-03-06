@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Shop;
 use DB;
 use Hash;
+use Session;
+use Auth;
 use App\Slydepay\Slydepay;
 
 class SignupController extends Controller
@@ -19,7 +21,21 @@ class SignupController extends Controller
     public function sendMail(){
     	$token = str_random(5);
     	//send mail here
-    	return ['status'=>'success','token'=>$token];
+        $sendmessage = true;
+        if($sendmessage){
+            Session::put('token',$token);
+           return ['status'=>'success','token'=>$token]; 
+        }
+    	
+    }
+
+    public function validateToken(Request $r){
+       if($r->token==Session::get('token')){
+        Session::forget('token');
+        return ['status'=>'success'];
+       }else{
+        return ['status'=>'error'];
+       }
     }
 
     public function addNewShop(Request $r){
@@ -32,6 +48,7 @@ class SignupController extends Controller
             'creator_surname'=>$r->surname,
             'creator_firstname'=>$r->firstname,
             'creator_email'=>$r->email,
+            'region'=>$r->region,
             'active'=>1
         ]);
         if($addnewstore){
@@ -39,9 +56,22 @@ class SignupController extends Controller
                 'username'=>$r->username,
                 'email'=>$r->email,
                 'password'=>Hash::make($r->password),
-                'shop_id'=>$id
+                'shop_id'=>$addnewstore->id
             ]);
-            return redirect('/administration/category');
+            Auth::guard('shopadmin')->attempt(['email' => $r->email, 'password' => Hash::make($r->password)]);
+            $addbranch = DB::table('branches')->insert([
+                'shop_id'=>$addnewstore->id,
+                'name'=>$r->storename,
+                'description'=>'',
+                'image'=>'',
+                'active'=>1,
+                'latitude'=>$r->latitude,
+                'longitude'=>$r->longitude,
+                'landmark'=>''
+            ]);
+            return ['status'=>'success','responseurl'=>url('/administration/dashboard')];
+        }else{
+
         }
 
     }

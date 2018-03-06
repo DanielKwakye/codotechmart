@@ -3,6 +3,7 @@
 
 <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/fileinput.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/vendors/css/forms/selects/select2.min.css')}}">
+<link rel="stylesheet" href="/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 {{-- <link rel="stylesheet" type="text/css" href="{{asset('admin-assets/css/plugins/file-uploaders/dropzone.min.css')}}"> --}}
 <style type="text/css">
 	.hide{
@@ -236,12 +237,17 @@
 			</div>
 		</div>
 	</div>
+
+	<a href="{{Request::root().'/filemanager/filemanager/dialog.php?type=0'}}" class="btn iframe-btn" type="button">Open Filemanager</a>
 </section>
 @endsection
 @section('scripts-below')
 <script src="{{asset('admin-assets/vendors/js/forms/select/select2.full.min.js')}}" type="text/javascript"></script>
  <script src="{{asset('admin-assets/js/core/fileinput.min.js')}}" type="text/javascript"></script>
  <script src="{{asset('admin-assets/vendors/js/forms/repeater/jquery.repeater.min.js')}}" type="text/javascript"></script>
+ <script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+ <script type="text/javascript" src="/fancybox/jquery.easing-1.4.pack.js"></script>
+ <script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
  {{--  <script src="{{asset('admin-assets/vendors/js/extensions/dropzone.min.js')}}" type="text/javascript"></script> --}}
 <script type="text/javascript">
 	$("#parent_id").select2({placeholder:"Select Product Category"});
@@ -258,6 +264,13 @@
         }
   });
 	 $('.repeater-default').repeater();
+
+	  $('.iframe-btn').fancybox({	
+	'width'		: 900,
+	'height'	: 600,
+	'type'		: 'iframe',
+        'autoScale'    	: false
+    });
 </script>
 
 

@@ -115,7 +115,14 @@
         
 
     <ul id="sidebar-menu">
-    
+    <li class="header"><span>Dashboard</span></li>
+       <li>
+        <a href="{{url('admin')}}" title="Forms UI">
+            <i class="glyph-icon icon-linecons-eye"></i>
+            <span>HOME</span>
+        </a>
+    </li>
+
     <li class="header"><span>Components</span></li>
     <li>
         <a href="#" title="All Orders">
@@ -166,8 +173,21 @@
 
         </div><!-- .sidebar-submenu -->
     </li>
+    
+        <li>
+        <a href="{{url('admin/shopcategories')}}" title="Forms UI">
+            <i class="glyph-icon icon-linecons-eye"></i>
+            <span>Shop Categories</span>
+        </a>
+    </li>
     <li>
-        <a href="#" title="Forms UI">
+        <a href="{{url('admin/referrals')}}" title="Forms UI">
+            <i class="glyph-icon icon-linecons-eye"></i>
+            <span>Referrals</span>
+        </a>
+    </li>
+     <li>
+        <a href="{{url('admin/complaints')}}" title="Forms UI">
             <i class="glyph-icon icon-linecons-eye"></i>
             <span>Complaints</span>
         </a>

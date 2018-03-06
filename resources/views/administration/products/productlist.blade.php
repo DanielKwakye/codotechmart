@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-body collapse in">
                     <div class="card-block card-dashboard">
-                        <a class="btn btn-success"><i class="icon-plus4"></i> Add New Product</button>
+                        <a class="btn btn-success" href="{{url('administration/addproduct')}}"><i class="icon-plus4"></i> Add New Product</a>
                         <br><br>
                         <table class="table table-striped table-bordered tagstable">
                             <thead>
@@ -36,16 +36,19 @@
                             </thead>
                             <tbody>
                             	@foreach($products as $p)
-                               {{--  <tr>
+                                <tr>
                                     <td><input type="checkbox" name="checkall" class="form-control"></td>
-                                    <td>{{$t->id}}</td>
-                                    <td>{{$t->name}}</td>
-                                    <td>{{$t->description}}</td>
+                                    <td>{{$p->id}}</td>
+                                    <td>{{$p->mainimage}}</td>
+                                    <td>{{$p->name}}</td>
+                                    <td>{{$p->category->name}}</td>
+                                    <td>{{$p->price}}</td>
+                                    <td>{{$p->quantity}}</td>
                                     <td>
-                                    	<a data="{{$t}}" class="btn btn-outline-primary btn-sm edit"><i class="icon-head"></i> Edit</a>
+                                    	<a data="{{$p}}" class="btn btn-outline-primary btn-sm edit"><i class="icon-head"></i> Edit</a>
                                     	<a class="btn btn-outline-danger btn-sm remove"><i class="icon-trash4"></i> Delete</a>
                                     </td>
-                                </tr> --}}
+                                </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
@@ -87,7 +90,7 @@
             },function(isConfirm){
                 if (isConfirm){
                     var data = table.row($tr).data();
-                 $.get("{{url('/administration/deletetag')}}",{id:data[1]},function(response){
+                 $.get("{{url('/administration/deleteproduct')}}",{id:data[1]},function(response){
                  	console.log(response);
                  if(response.status=='success'){
                      console.log(table.row($tr).remove().draw()); 

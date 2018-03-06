@@ -29,6 +29,9 @@ transparent = true;
                     type: {
                       required: true
                     },
+                    region:{
+                        required:true
+                    },
                     username: {
                       required: true
                     },
@@ -53,16 +56,13 @@ transparent = true;
                 'previousSelector': '.btn-previous',
 
                 onNext: function(tab, navigation, index) {
-                    console.log(tab);
-                    console.log(navigation);
-                    console.log(index);
                 	var $valid = $('.wizard-card form').valid();
                 	if(!$valid) {
                 		$validator.focusInvalid();
                 		return false;
                 	}
                     if(index === 3 && $valid){
-                        console.log("am here");
+                        //console.log("am here");
                     }
                 },
 
@@ -89,7 +89,7 @@ transparent = true;
                 },
 
                 onLast: function (index){
-                        console.log(index);
+                        //console.log(index);
                 },
 
                 onTabShow: function(tab, navigation, index) {

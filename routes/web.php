@@ -65,9 +65,13 @@ Route::group(['prefix'=>'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+
+
+
+  Route::get('/', 'Admin\AdminController@dashboard')->middleware('admin');
+
   Route::get('/shops', 'Admin\AdminController@index')->middleware('admin');
   Route::get('/couriers', 'Admin\AdminController@couriers')->middleware('admin');
-  Route::get('/', 'Admin\AdminController@index')->middleware('admin');
   Route::post('/addCategory', 'Admin\AdminController@addCategory');
   Route::post('/shop/deactivate', 'Admin\AdminController@deactivate');
   Route::post('/shop/activate', 'Admin\AdminController@activate');
@@ -81,8 +85,20 @@ Route::group(['prefix'=>'admin'], function () {
   Route::get('/shopPlans', 'Admin\AdminController@shopPlans')->middleware('admin');;
   Route::post('/courier/update', 'Admin\AdminController@update');
   Route::post('/shop/update', 'Admin\AdminController@ShopMonthupdate');
-  Route::post('changeoptions','Admin\AdminController@changeoptions')->middleware('admin');
+  Route::post('changeoptions','Admin\AdminController@changeoptions');
+  Route::post('editCategory','Admin\AdminController@editCategory');
+
+
+  Route::post('category/delete','Admin\AdminController@deleteCategory');
+  Route::post('complaint/custom-date','Admin\AdminController@customDate');
+  Route::get('complaints','Admin\AdminController@complaints')->middleware('admin');
+  Route::get('complaint/custom-date','Admin\AdminController@complaints')->middleware('admin');
+
+    Route::get('referrals','Admin\AdminController@referral');
+
+
   Route::get('options','Admin\AdminController@options')->middleware('admin');
+  Route::get('shopcategories','Admin\AdminController@category')->middleware('admin');
 });
 
 
@@ -118,6 +134,9 @@ Route::group(['prefix' => 'courier'], function () {
   Route::post('cancelRequest','Courier\CourierController@cancelRequest');
   Route::post('profileinfo','Courier\CourierController@profileinfo');
   Route::post('changeoptions','Courier\CourierController@changeoptions');
+
+  Route::get('subscription','Courier\CourierController@subscribe');
+
   Route::get('notify','Courier\CourierController@notify');
   Route::get('listen','Courier\CourierController@listen');
   Route::get('markasread/{id}','Courier\CourierController@markasread');
@@ -134,6 +153,7 @@ Route::group(['prefix'=>'welcome'],function(){
 Route::get('/signup','AdministrationControllers\SignupController@index');
 Route::post('/sendemail','AdministrationControllers\SignupController@sendMail');
 Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop');
+Route::get('/validatetoken','AdministrationControllers\SignupController@validateToken');
 });
 
 
@@ -151,6 +171,9 @@ Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendReset
 Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset')->name('password.email');
 Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
 Route::get('/password/reset/{token}', 'ShopadminAuth\ResetPasswordController@showResetForm');
+
+
+Route::get('/dashboard','AdministrationControllers\DashboardController@index');
 
 Route::get('/tags','AdministrationControllers\TagsController@index');
 Route::get('/deletetag','AdministrationControllers\TagsController@deleteTag');
@@ -184,16 +207,21 @@ Route::get('/deletebrand','AdministrationControllers\ProductBrandController@dele
 Route::post('/editbrand','AdministrationControllers\ProductBrandController@editBrand');
 
 Route::get('/addproduct','AdministrationControllers\ProductsController@index');
+Route::get('/productlist','AdministrationControllers\ProductsController@productList');
+Route::get('/deleteproduct','AdministrationControllers\ProductsController@deleteproduct');
 Route::post('/addnewproduct','AdministrationControllers\ProductsController@addNewProduct');
 
 Route::get('/emailsettings','AdministrationControllers\EmailSettingsController@index');
 Route::post('/saveemailsettings','AdministrationControllers\EmailSettingsController@saveEmailSettings');
 Route::post('/savetemplatesettings','AdministrationControllers\EmailSettingsController@saveTemplateSettings');
+
 Route::get('/smssettings','AdministrationControllers\EmailSettingsController@smsSettings');
 Route::post('/savesmssettings','AdministrationControllers\EmailSettingsController@saveSmsSettings');
 
 Route::get('/generalsettings','AdministrationControllers\GeneralSettingsController@index');
 Route::post('/savegeneralsettings','AdministrationControllers\GeneralSettingsController@saveGeneralSettings');
+
+
 
 
 

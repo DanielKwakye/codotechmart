@@ -13,11 +13,11 @@ class CreateDayUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('day_user', function (Blueprint $table) {
+        Schema::create('courier_day', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('courier_id');
             $table->integer('day_id');
-            $table->string('time');
+            $table->string('time')->nullable();
             $table->timestamps();
         });
     }

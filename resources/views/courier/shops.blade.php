@@ -59,9 +59,7 @@
                                             <tr>
                                                 <th>shop id</th>
                                                 <th>ShopName</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Start date</th>
+                                                <th>Category</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -70,9 +68,7 @@
                                             <tr>
                                                 <th>shop id</th>
                                                 <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Start date</th>
+                                                <th>Category</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -80,22 +76,17 @@
                                         <tbody>
                             
                             @php
-                               $shops = Auth::guard('courier')->user()->shops()->pluck('shops.id');
-                                $unrequested_shops = \App\Shops::whereNotIn('id',$shops)->get();
-                                $requested_shops=\App\Shops::whereIn('id',$shops)->get();
-                               
-
-                                
+                               $shops = Auth::guard('courier')->user()->shops()->pluck('shop.id');
+                                $unrequested_shops = \App\Shop::whereNotIn('id',$shops)->get();
+                                $requested_shops=\App\Shop::whereIn('id',$shops)->get();
                             @endphp
                                             
-                            @if(\App\Shops::all()!==null)
+                            @if(\App\Shop::all()!==null)
                                 @foreach($unrequested_shops as $p)
                             <tr class="tr{{$p->id}}">
                                 <td>{{$p->id}}</td>
                                 <td>{{$p->shopname}}</td>
-                                <td>System Architect</td>
-                                <td class="groupId">{{$p->id}}</td>
-                                <td>{{$p->shopRequest['status']}}</td>
+                                <td>{{$p->shopcategory->name}}</td>
                                 <td class="groupId">
                                 <button class="btn btn-xs btn-danger requestbutton" id="requestbutton{{$p->id}}" shopid="{{$p->id}}" userid="{{Auth::guard('courier')->user()->id}}">Request</button>
                                 </td>

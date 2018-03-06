@@ -75,17 +75,19 @@
 
                                         <tbody>
                                             
-                                            @foreach(\App\Shop::all() as $p)
-                                            <tr class="tr{{$p->id}}">
-                                                <td>{{$p->name}}</td>
-                                                <td>{{$p->shopcategory->name}}</td>
-                                                <td>{{$p->active==1?'Active':'Deactivated'}}</td>
-                                                <td class="tr{{$p->id}}">
-                                                    <button class="btn btn-warning btn-xs view" data-toggle="modal" data-target="#myProfile" data="{{$p}}">VIEW</button>
-                                                    <button class="btn btn-danger btn-xs deactivate" id="deactivate{{$p->id}}" shopid="{{$p->id}}">DEACTIVATE</button>
-                                                </td>
-                                            </tr>
-                                            @endforeach
+                                            @if(\App\Shop::all()!==null)
+                                                @foreach(\App\Shop::all() as $p)
+                                                <tr class="tr{{$p->id}}">
+                                                    <td>{{$p->name}}</td>
+                                                    <td>{{$p->shopcategory->name}}</td>
+                                                    <td>{{$p->active==1?'Active':'Deactivated'}}</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-xs view" data-toggle="modal" data-target="#myProfile" data="{{$p}}">VIEW</button>
+                                                        <button class="btn btn-danger btn-xs deactivate" id="deactivate{{$p->id}}" shopid="{{$p->id}}">DEACTIVATE</button>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                     </div>

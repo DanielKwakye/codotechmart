@@ -1,6 +1,6 @@
 @extends('admin.layout.adminLayout')
 @section('title')
-    <title>Active Shops</title>
+    <title>Active Couriers</title>
 @endsection
 @section('content')
     
@@ -57,8 +57,7 @@
                                         <table id="datatable-tabletools" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>ShopName</th>
-                                                <th>Category</th>
+                                                <th>Courier Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -66,8 +65,7 @@
 
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Category</th>
+                                                <th>Courier Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -77,7 +75,6 @@
                                             
                                             @foreach(\App\Courier::all() as $p)
                                             <tr class="tr{{$p->id}}">
-                                                <td>{{$p->name}}</td>
                                                 <td>{{$p->name}}</td>
                                                 <td>Active</td>
                                                 <td class="tr{{$p->id}}">

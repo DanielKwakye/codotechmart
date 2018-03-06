@@ -10,12 +10,13 @@ class Shop extends Model
 {
 	use SoftDeletes;
     
-    protected $table = 'shops';
+    protected $table = 'shop';
     
     protected $fillable = [
+     'id','name','tag_line','phone','type','latitude','longitude','creator_surname','creator_firstname','creator_email',
+    'active','logo','region','documents'];
+     
 
-     'id','name','tag_line','phone','type','creator_surname','creator_firstname','creator_email',
-    'active','logo','region'];
 
     public function products(){
         return $this->hasMany('App\Product');
@@ -23,14 +24,14 @@ class Shop extends Model
     
 
     public function shopcategory(){
-    	return $this->hasOne('App\ShopCategory','shop_id');
+    	return $this->belongsTo('App\ShopCategory');
     }
     public function shopRequest(){
-    	return $this->hasOne('App\ShopRequest','shop_id');
+    	return $this->hasMany('App\ShopRequest');
     }
 
     public function couriers(){
-    	return $this->belongsToMany('App\User','shop_requests','shop_id','user_id');
+    	return $this->belongsToMany('App\Courier','shop_requests','shop_id','courier_id');
     }
 
     public function orders(){

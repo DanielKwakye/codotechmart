@@ -10,6 +10,6 @@ class ShopCategory extends Model
     protected $fillable=['name'];
 
     public function shop(){
-    	return $this->belongsTo('App\Shop','type');
+    	return $this->hasMany('App\Shop','shopcategory_id');
     }
 }

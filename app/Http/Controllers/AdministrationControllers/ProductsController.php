@@ -40,5 +40,20 @@ class ProductsController extends Controller
 
     }
 
+    public function productList(){
+        $products = Product::all();
+        return view('administration.products.productlist',compact('products'));
+    }
+
+    public function deleteproduct(Request $r){
+        $del = Product::find($r->id)->delete();
+        if($del){
+             return ['status'=>'success']; 
+         }else{
+            return ['status'=>'error'];
+         }
+      
+    }
+
    
 }
