@@ -78,7 +78,8 @@
                                         </form>
                                     </div>
                                     <!-- .collapse -->
-                                    <form action="#" class="checkout woocommerce-checkout" method="post" name="checkout">
+                                    <form action="{{url('checkout')}}" class="checkout woocommerce-checkout place_order_form" method="post">
+                                        {{csrf_field()}}
                                         <div id="customer_details" class="col2-set">
                                             <div class="col-1">
                                                 <div class="woocommerce-billing-fields">
@@ -95,7 +96,7 @@
                                                                 <label class="" for="billing_last_name">Phone Number
                                                                     <abbr title="required" class="required">*</abbr>
                                                                 </label>
-                                                                <input type="text" value="" placeholder="" id="billing_last_name" name="billing_last_name" class="input-text ">
+                                                                <input type="text" value="" placeholder="Contact Number" id="billing_last_name" name="phone_number" class="input-text ">
                                                             </p>
 
 
@@ -104,12 +105,12 @@
                                                                 <label class="" for="billing_address_1">Address
                                                                     <abbr title="required" class="required">*</abbr>
                                                                 </label>
-                                                                <input type="text" value="" placeholder="Street address" id="billing_address_1" name="billing_address_1" class="input-text ">
+                                                                <input type="text" value="" placeholder="Street address" id="billing_address_1" name="full_address" class="input-text ">
                                                             </p>
 
                                                             <p id="order_comments_field" class="form-row notes">
                                                                 <label class="" for="order_comments">Order notes</label>
-                                                                <textarea cols="5" rows="2" placeholder="Notes about your order, e.g. special notes for delivery." id="order_comments" class="input-text " name="order_comments"></textarea>
+                                                                <textarea cols="5" rows="2" placeholder="Notes about your order, e.g. special notes for delivery." id="order_comments" class="input-text " name="notes"></textarea>
                                                             </p>
 
                                                         </div>
@@ -184,7 +185,7 @@
                                                             </label>
                                                             <input type="hidden" value="1" name="terms-field">
                                                         </p>
-                                                        <a href="{{url('order/received')}}" class="button wc-forward text-center">Place order</a>
+                                                        <button type="submit" class="button wc-forward text-center">Place order</button>
                                                     </div>
                                                 </div>
                                                 <!-- /.woocommerce-checkout-payment -->
@@ -216,6 +217,16 @@
 <!-- For demo purposes – can be removed on production -->
 @include('front.techmarket.inc.config')
 @include('front.techmarket.inc.foot_assets')
+<script>
+   $(".place_order_form").submit(function (e) {
+
+       if(!$("#terms").is(":checked")){
+           toast("Agree to the terms and conditions to continue");
+           e.preventDefault();
+       }
+
+   });
+</script>
 </body>
 
 

@@ -39,6 +39,16 @@ class UsersController extends Controller
         return view('wishlist')->withErrors(['Your wishlist is saved']);
     }
 
+    public function submitCheckout(Request $request){
+
+        $this->validate($request, [
+            'phone_number' => 'required|numeric|regex:/(0)[0-9]{9}$/',
+            'full_address' => 'required'
+        ]);
+
+
+    }
+
     public function orderReceived(){
         return view('front.techmarket.order_received');
     }
@@ -48,5 +58,11 @@ class UsersController extends Controller
             return redirect('/')->withErrors('Add Items To Cart To Proceed');
         }
         return view('front.techmarket.checkout');
+    }
+
+    public function Order(){
+//        credit person who referred him if any and he hasn't been credited already ----
+
+//        check if business cert is provided for payonline
     }
 }

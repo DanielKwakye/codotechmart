@@ -3,7 +3,7 @@ function toast(message) {
     iziToast.info({
         id: 'success',
         message: message,
-        position: 'topLeft',
+        position: 'bottomCenter',
         transitionIn: 'bounceInLeft',
         // iconText: 'star',
         onOpened: function(instance, toast){

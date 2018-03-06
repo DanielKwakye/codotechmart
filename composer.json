@@ -6,9 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "atayahmet/laravel-nestable": "^0.8.6",
         "fideloper/proxy": "~3.3",
-         "atayahmet/laravel-nestable": "^0.8.6",
         "hesto/multi-auth": "^2.0",
+        "jowusu837/laravelhubtelmerchantaccount": "^1.1",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "pusher/pusher-php-server": "~3.0"

@@ -24,6 +24,12 @@ class Product extends Model
     	'minimum',
     	'mainimage'
     ];
+
+    public function shop(){
+        return $this->belongsTo("App\Shop");
+    }
+
+
    
 
 }
