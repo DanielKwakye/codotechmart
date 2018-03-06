@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -67,15 +68,18 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'role_id'=>1,
             'image'=>'couriers/img/upload/ijbbBi7sIVF2wrr2SsDerIc96study-in-usa.jpeg',
+            'active'=>1
         ]);
        
         foreach ($data['days'] as $k) {
           \App\day_user::create(array('courier_id' => $user->id, 'day_id' => $k));
         }
         
+        
         \App\Option::firstOrCreate(['courier_id'=>$user->id,'header'=>'bg-gradient-9']);
+
+        \App\CourierPayment::create(['paid_on'=>Carbon::now(),'expired_at'=>Carbon::now()->addMonths(2),'courier_id' => $user->id,'amount'=>0.00,'months'=>2]);
 
         return $user;
     }

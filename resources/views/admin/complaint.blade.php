@@ -1,12 +1,13 @@
 @extends('admin.layout.adminLayout')
 @section('title')
-    <title>Monthly Plans</title>
+    <title> Complaint || Admin</title>
 @endsection
 @section('content')
     
      <!-- Data tables -->
 
                         <!--<link rel="stylesheet" type="text/css" href="assets/widgets/datatable/datatable.css">-->
+
                         <script type="text/javascript" src="{{asset('couriers/assets/widgets/datatable/datatable.js')}}"></script>
                         <script type="text/javascript" src="{{asset('couriers/assets/widgets/datatable/datatable-bootstrap.js')}}"></script>
                         <script type="text/javascript" src="{{asset('couriers/assets/widgets/datatable/datatable-tabletools.js')}}"></script>
@@ -47,8 +48,39 @@
 
                         </script>
                         
-                        <div id="page-title">
-                            <h2>Shop Monthly Plans <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
+                        
+                        <div class="row">
+                            
+                            <div class="col-md-6">
+                                <div class="panel">
+                            <div class="panel-body">
+                                <div class="example-box-wrapper">
+                                    <form class="form-horizontal form" action="{{url('admin/complaint/custom-date')}}" method="post">
+                                        {{csrf_field()}}
+                                            <div class="form-group">
+                                        
+                            
+                            <div class="col-sm-8">
+                                <div class="input-prepend input-group">
+                                    <span class="add-on input-group-addon">
+                                        <i class="glyph-icon icon-calendar"></i>
+                                    </span>
+                                    <input type="text" name="date" id="daterangepicker-example" class="form-control" value="01/18/2018 - 01/23/2018">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <a href="{{url('admin/complaints')}}" class="btn btn-warning">View All</a>
+                        </div>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="" style="margin-top: 30px;">
+                            <h2>Courier Monthly Plans <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
+                        </div>
+                            </div>
                         </div>
                         <div class="panel">
                             <div class="panel-body">
@@ -57,29 +89,31 @@
                                         <table id="datatable-tabletools" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Plan</th>
-                                                <th>Amount</th>
+                                                <th>Customer</th>
+                                                <th>Complaint</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
                                         <tfoot>
                                             <tr>
-                                                <th>Plan</th>
-                                                <th>Amount</th>
+                                                <th>Customer</th>
+                                                <th>Complaint</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
+                                        
 
                                         <tbody>
-                                            @if(\App\ShopMonthlyPlan::all()!==null)
-                                            @foreach(\App\ShopMonthlyPlan::all() as $p)
+                                             
+                                            @if($data->count()>0)
+
+                                            @foreach($data as $p)
                                             <tr>
-                                                <td>{{$p->name}}</td>
-                                                <td class="amount">GH&cent; {{$p->amount}}</td>
-                                                <td class="tr{{$p->id}}">
-                                                    <button class="btn btn-warning btn-xs plan" data-toggle="modal" data-target="#monthlyPlan" data="{{$p}}">UPDATE</button>
-                                                </td>
+                                                <td>{{$p->user->name}}</td>
+                                                <td>{{$p->subject}}</td>
+                                                <td>No action</td>
+                                               
                                             </tr>
                                             @endforeach
                                             @endif
@@ -91,15 +125,15 @@
                         </div>
                         
 @endsection
-
 @section('script')
+<script type="text/javascript" src="{{asset('couriers/assets/widgets/daterangepicker/moment.js')}}"></script>
+<script type="text/javascript" src="{{asset('couriers/assets/widgets/daterangepicker/daterangepicker.js')}}"></script>
+
 <script type="text/javascript">
-        $('.plan').click(function(){
-        var data = JSON.parse($(this).attr('data'));
-        $('.month').val(data.name);
-        $('.amount').val(data.amount);
-        $('.id').val(data.id);
-        $('.modalform').attr('action','{{url('admin/shop/update')}}');
-    }); 
-    </script>
+$(function() {
+  
+    $('#daterangepicker-example').daterangepicker();
+
+});
+</script>
 @endsection

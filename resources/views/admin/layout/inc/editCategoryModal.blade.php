@@ -1,21 +1,18 @@
-    <form method="POST" action="{{ url('admin/addCategory') }}">
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form method="POST" action="{{ url('admin/editCategory') }}">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Edit Shop Category</h4>
+                    <h4 class="modal-title">Add Shop Category</h4>
                 </div>
                 <div class="modal-body">
                     
                         {{ csrf_field() }} 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <input type="text" name="name" class="form-control" placeholder="Category Name" value="{{ old('name') }}">
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                            <input type="hidden" name="id" class="id">
+                            <input type="text" name="name" class="form-control name">
+    
                         </div>
                     
                 </div>

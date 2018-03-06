@@ -63,5 +63,5 @@
 <!-- For demo purposes – can be removed on production : End -->
 </body>
 
-<!-- Mirrored from transvelo.github.io/techmarket-html/compare.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:54:34 GMT -->
+
 </html>

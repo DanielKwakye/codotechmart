@@ -13,6 +13,10 @@
                     </li>
 
                     <li class="highlight menu-item animate-dropdown">
+                        <a title="New Arrivals" href="{{url('/checkout')}}">Checkout</a>
+                    </li>
+
+                    <li class="highlight menu-item animate-dropdown">
                         <a title="New Arrivals" href="{{url('/favorite')}}">Favorites</a>
                     </li>
 

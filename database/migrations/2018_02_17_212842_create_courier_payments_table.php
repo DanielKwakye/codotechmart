@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDayUsersTable extends Migration
+class CreateCourierPaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateDayUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('courier_day', function (Blueprint $table) {
+        Schema::create('courier_payments', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('paid_on');
+            $table->date('expired_at');
             $table->integer('courier_id');
-            $table->integer('day_id');
-            $table->string('time')->nullable();
+            $table->integer('amount');
+            $table->tinyInteger('months');
+            $table->string('type',100);
+            $table->tinyInteger('active',10);
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ class CreateDayUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('day_user');
+        Schema::dropIfExists('courier_payments');
     }
 }

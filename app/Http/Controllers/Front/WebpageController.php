@@ -62,6 +62,14 @@ class WebpageController extends Controller
         return json_encode(['status' => true, 'message' => 'cart updated successfully']);
     }
 
+    public function productDetail($id){
+        $product = (new Product())->find($id);
+        $data = [
+            'product' => $product
+        ];
+        return view('front.techmarket.product_detail')->with($data);
+    }
+
     public function saveWishlist(){
 
         if(Auth::user()){
@@ -83,8 +91,6 @@ class WebpageController extends Controller
 
         return json_encode(['status' => false, 'link' => url('save/wishlist')]);
 
-
-
     }
     
     public function addCompare($id){
@@ -94,7 +100,7 @@ class WebpageController extends Controller
         if($result){
             return json_encode(['status' => true, 'message' => $item->name . " is added to compare", 'qty' => Compare::getInstance()->totalQty]);
         }else{
-            return json_encode(['status' => true, 'message' => $item->name . " is already added", 'qty' => Compare::getInstance()->totalQty]);
+            return json_encode(['status' => true, 'message' => $item->name . " is already added to compare", 'qty' => Compare::getInstance()->totalQty]);
         }
     }
 
@@ -127,7 +133,7 @@ class WebpageController extends Controller
         if($res){
             return json_encode(['status' => true, 'message' => $item->name . " is added to favorites", 'qty' => WishList::getInstance()->totalQty]);
         }else{
-            return json_encode(['status' => true, 'message' => $item->name . " is added already added", 'qty' => WishList::getInstance()->totalQty]);
+            return json_encode(['status' => true, 'message' => $item->name . " is added already added to favorite", 'qty' => WishList::getInstance()->totalQty]);
         }
 
 
@@ -162,6 +168,10 @@ class WebpageController extends Controller
         return view('front.techmarket.compare');
     }
 
+    public function cartSummary(){
+        return view('front.techmarket.inc.cart_summary');
+    }
+
     public function products($id){
         $shop = Shop::find($id);
         $products = $shop->products;
@@ -178,10 +188,6 @@ class WebpageController extends Controller
     public function loginOrRegister(){
 
         return view('front.techmarket.login_register');
-    }
-
-    public function checkout(){
-        return view('front.techmarket.checkout');
     }
 
     public function cart(){

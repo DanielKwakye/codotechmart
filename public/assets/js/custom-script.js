@@ -34,6 +34,7 @@ $(document).on('click','.remove_cart', function (e) {
         if(result.status){
             $("#hang_cart").load(base_url + "/hang/cart");
             $(".main_cart").load(base_url + "/main/cart");
+            $(".cart-collaterals").load(base_url + "/cart/summary");
             toast(result.message);
         }
     });
@@ -56,6 +57,7 @@ $('.woocommerce-cart-form').submit(function (e) {
         result = JSON.parse(result);
         $("#hang_cart").load(base_url + "/hang/cart");
         $(".main_cart").load(base_url + "/main/cart");
+        $(".cart-collaterals").load(base_url + "/cart/summary");
         $('#loader').addClass("none");
         toast(result.message);
     });

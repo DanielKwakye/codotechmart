@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddShopidToShopCategoryTable extends Migration
+class AddReferralsColumnToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddShopidToShopCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::table('shop_categories', function (Blueprint $table) {
-            $table->integer('shop_id')->after('id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('referral_link')->nullable();
+            $table->integer('referred_by')->nullable();
         });
     }
 
@@ -25,7 +26,7 @@ class AddShopidToShopCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::table('ShopCategory', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

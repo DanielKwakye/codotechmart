@@ -16,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Techmarket HTML</title>
+    <title>Products</title>
     @include('front.techmarket.inc.head_assets')
 </head>
 <body class="woocommerce-active left-sidebar">

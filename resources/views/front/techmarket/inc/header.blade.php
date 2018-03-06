@@ -72,6 +72,10 @@
                                     </li>
 
                                     <li class="menu-item animate-dropdown">
+                                        <a title="Headphones Sale" href="{{url('/checkout')}}">Checkout</a>
+                                    </li>
+
+                                    <li class="menu-item animate-dropdown">
                                         <a title="Headphones Sale" href="{{url('/wishlist')}}">Favorites</a>
                                     </li>
                                     <li class="menu-item animate-dropdown">

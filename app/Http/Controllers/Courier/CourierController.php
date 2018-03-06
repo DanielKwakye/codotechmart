@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Courier;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Notifications\RequestSent;
+use App\Notifications\RequestAccept;
 use App\Orders;
 use App\Courier;
 use App\Option;
-use App\shops;
+use App\Shop;
 use App\ShopRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Notification;
 use App\Events\sentRequest;
+ use Carbon\Carbon;
 
 
 
@@ -136,9 +137,8 @@ class CourierController extends Controller
     public function request(Request $r)
     {
         
-       $checkrequest= ShopRequest::firstOrCreate(['courier_id'=>$r->userid,'shop_id'=>$r->shopid,'status'=>1]);
-       shops::find($r->shopid)->notify(new RequestSent());
-       if($checkrequest){
+       if(ShopRequest::firstOrCreate(['courier_id'=>$r->userid,'shop_id'=>$r->shopid,'status'=>1])){
+        // Shop::find($r->shopid)->notify(new RequestAccept());
              return json_encode(array('status' =>"Request Successfully Sent" , 'error'=>false,'success'=>'request sent'));
        }
        
@@ -276,8 +276,14 @@ class CourierController extends Controller
      */
     public function notify()
     {
-      $user = Auth::guard('courier')->user();
-        event(new sentRequest('hello samuel'));
+      $user=\App\CourierPayment::where('courier_id',Auth::guard('courier')->user()->id)->orderBy('id','desc')->first();
+
+      return $user;
+         // Auth::guard('courier')->user()->notify(new RequestAccept());
+    }
+
+    public function subscribe(){
+      //
     }
 
      public function listen(){

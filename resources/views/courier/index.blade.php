@@ -27,10 +27,6 @@
                     @endif
 
                 </div>
-                <small>
-                    <i class="glyph-icon icon-caret-up"></i>
-                    +7,6% new users in the first quarter
-                </small>
             </div>
             <a href="#" class="tile-footer tooltip-button" data-placement="bottom" title="This is a link example!">
                 view details
@@ -48,10 +44,6 @@
                 <div class="tile-content">
                 6
                 </div>
-                <small>
-                    <i class="glyph-icon icon-caret-up"></i>
-                    +7,6% new users in the first quarter
-                </small>
             </div>
             <a href="#" class="tile-footer tooltip-button" data-placement="bottom" title="This is a link example!">
                 view details
@@ -69,13 +61,8 @@
                 <div class="tile-content">
                     @if(\App\Orders::all()!==null)
                         {{count(\App\Orders::where('status',3)->where('user_id',Auth::guard('courier')->user()->id)->get())}}
-                    @endif
-                    
+                    @endif                 
                 </div>
-                <small>
-                    <i class="glyph-icon icon-caret-up"></i>
-                    +7,6% new users in the first quarter
-                </small>
             </div>
             <a href="#" class="tile-footer tooltip-button" data-placement="bottom" title="This is a link example!">
                 view details
@@ -102,7 +89,11 @@
                     Deliveries Per Store
                 </h3>
                 <div class="example-box-wrapper">
+                    @if($activeUsers->count()>0)
                     <div id="example1" style="width: 100%; height: 300px;"></div>
+                    @else
+                        You have Not Made a Delivery yet
+                    @endif
                 </div>
             </div>
         </div>
@@ -113,6 +104,7 @@
 
 <script type="text/javascript" src="{{asset('couriers/assets/js-core/d3.js')}}"></script>
 <script type="text/javascript" src="{{asset('couriers/assets/widgets/charts/xcharts/xcharts.js')}}"></script>
+ @if($activeUsers->count()>0)
 <script type="text/javascript">
      $(function() {
 
@@ -135,4 +127,5 @@
 
 });
 </script>
+@endif
 @endsection

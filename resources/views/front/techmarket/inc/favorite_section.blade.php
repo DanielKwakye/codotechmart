@@ -51,7 +51,7 @@
             <span class="wishlist-in-stock">In Stock</span>
         </td>
         <td class="product-add-to-cart">
-            <a class="button add_to_cart_button button alt" href="#"> Add to Cart</a>
+            <a class="button add_to_cart_button button alt trigger" data="{{$p['item']}}" href="#"> Add to Cart</a>
         </td>
     </tr>
         @endforeach

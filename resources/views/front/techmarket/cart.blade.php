@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Techmarket HTML</title>
+    <title>Cart</title>
     @include('front.techmarket.inc.head_assets')
 </head>
 <body class="page home page-template-default">
@@ -39,7 +39,10 @@
                                             @include('front.techmarket.inc.main_cart')
                                         </form>
                                         <!-- .woocommerce-cart-form -->
+                                        <div class="cart-collaterals">
                                         @include('front.techmarket.inc.cart_summary')
+                                        </div>
+
                                         <!-- .cart-collaterals -->
                                     </div>
                                     <!-- .cart-wrapper -->

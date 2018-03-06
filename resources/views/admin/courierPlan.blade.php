@@ -48,7 +48,7 @@
                         </script>
                         
                         <div id="page-title">
-                            <h2>Shop Monthly Plans <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
+                            <h2>Courier Monthly Plans <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#myModal"><i class="glyph-icon icon-plus"> </i>Add Shop Category</button></h2>
                         </div>
                         <div class="panel">
                             <div class="panel-body">
@@ -57,7 +57,6 @@
                                         <table id="datatable-tabletools" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                 <th>ShopId</th>
                                                 <th>Plan</th>
                                                 <th>Amount</th>
                                                 <th>Action</th>
@@ -66,7 +65,6 @@
 
                                         <tfoot>
                                             <tr>
-                                                 <th>ShopId</th>
                                                 <th>Plan</th>
                                                 <th>Amount</th>
                                                 <th>Action</th>
@@ -78,7 +76,6 @@
 
                                             @foreach(\App\CourierMonthlyPlan::all() as $p)
                                             <tr>
-                                               <td>{{$p->id}}</td>
                                                 <td>{{$p->name}}</td>
                                                 <td class="amount">GH&cent; {{$p->amount}}</td>
                                                 <td class="tr{{$p->id}}">
@@ -100,6 +97,7 @@
         $('.plan').click(function(){
         var data = JSON.parse($(this).attr('data'));
         $('.month').val(data.name);
+        $('.amount').val(data.amount);
         $('.id').val(data.id);
         $('.modalform').attr('action','{{url('admin/courier/update')}}');
     }); 

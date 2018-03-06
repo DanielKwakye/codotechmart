@@ -11,6 +11,7 @@ use App\CourierMonthlyPlan;
 use App\ShopMonthlyPlan;
 use App\Courier;
 use App\AdminOption;
+use App\Complaints;
 
 
 class AdminController extends Controller
@@ -40,6 +41,10 @@ class AdminController extends Controller
         return view('admin.activeCouriers');
     }
 
+    public function referral(){
+        return view('admin.referrals');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -60,8 +65,8 @@ class AdminController extends Controller
         $r->validate([
             'name'=>'required'
         ]);
-        $user = ShopCategory::where('name', '=', $r->name)->first();
-        if ($user === null) {
+        $category = ShopCategory::where('name', '=', $r->name)->first();
+        if ($category === null) {
            ShopCategory::create($r->all());
            Session::flash('success','Category Added successfully...');
             return back();
@@ -71,7 +76,22 @@ class AdminController extends Controller
         return back();
     }
 
+    public function complaints(){
+        $data=Complaints::all();
+        return view('admin.complaint')->with(['data'=>$data]);
+    }
 
+    public function customDate(Request $r){
+        $r= explode('-', $r->date);
+        $date1= date("Y-m-d", strtotime($r[0]));
+        $date2= date("Y-m-d", strtotime($r[1]));
+        $adv=complaints::whereBetween('created_at', [$date1, $date2])->get();
+        return view('admin.complaint')->withData($adv);
+    }
+
+    public function dashboard(){
+        return view('admin.dashboard');
+    }
     /**
      * Display the specified resource.
      *
@@ -167,6 +187,10 @@ class AdminController extends Controller
     {
         return view('admin.courierPlan');
     }
+     public function category()
+    {
+        return view('admin.category');
+    }
 
      public function update(Request $r)
     {
@@ -201,6 +225,30 @@ class AdminController extends Controller
 
     public function options(){
       return view('admin.options');
+    }
+
+    public function editCategory(Request $r){
+        $r->validate([
+            'name'=>'required'
+        ]);
+        if (ShopCategory::find($r->id)->update(['name'=>$r->name])) {
+            Session::flash('success','Category Updated Successfully');
+            return back();
+        }
+        else{
+            Session::flash('error','Error Whiles Updating Category');
+            return back();
+        }
+        
+    }
+
+    public function deleteCategory(Request $r){
+        if (ShopCategory::find($r->id)->delete()) {
+            return json_encode(['error'=>false,'status'=>'Category Deleted Successfully']);
+        }
+        else{
+            return json_encode(['error'=>true,'status'=>'Error Deleting Category']);
+        }
     }
 
 

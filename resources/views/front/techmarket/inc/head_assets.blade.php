@@ -12,6 +12,7 @@
         <!-- Demo Purpose Only. Should be removed in production -->
         <link rel="stylesheet" href="{{asset('assets/css/config.css')}}">
         <!-- Demo Purpose Only. Should be removed in production : END -->
+
         <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
         <link rel="shortcut icon" href="{{asset('assets/images/fav-icon.png')}}">
         <link rel="stylesheet" href="{{asset('assets/css/iziModal.min.css ') }}" />

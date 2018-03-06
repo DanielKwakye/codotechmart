@@ -23,7 +23,6 @@ Route::prefix('/')->group(function(){
     Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
     Route::get('remove/compare/{id}','Front\WebpageController@removeCompare');
     Route::get('remove/wishlist/{id}','Front\WebpageController@removeWishlist');
-    Route::get('/checkout','Front\WebpageController@checkout');
     Route::get('/login/register','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('shop/{id}/products','Front\WebpageController@products');
@@ -37,12 +36,17 @@ Route::prefix('/')->group(function(){
     Route::get('main/cart','Front\WebpageController@mainCart');
     Route::get('compare/section','Front\WebpageController@compareSection');
     Route::get('favorite/section','Front\WebpageController@favoriteSection');
+    Route::get('product/detail/{id}','Front\WebpageController@productDetail');
     Route::post('update/cart','Front\WebpageController@updateCart');
+    Route::get('cart/summary', 'Front\WebpageController@cartSummary');
+
 
     Route::auth();
 
 //    =================== methods called when user is logged In ===================================
     Route::get('save/wishlist','Front\UsersController@saveWishlist');
+    Route::get('/checkout','Front\UsersController@checkout');
+    Route::get('order/received','Front\UsersController@orderReceived');
 });
 
 
@@ -58,9 +62,13 @@ Route::group(['prefix'=>'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+
+
+
+  Route::get('/', 'Admin\AdminController@dashboard')->middleware('admin');
+
   Route::get('/shops', 'Admin\AdminController@index')->middleware('admin');
   Route::get('/couriers', 'Admin\AdminController@couriers')->middleware('admin');
-  Route::get('/', 'Admin\AdminController@index')->middleware('admin');
   Route::post('/addCategory', 'Admin\AdminController@addCategory');
   Route::post('/shop/deactivate', 'Admin\AdminController@deactivate');
   Route::post('/shop/activate', 'Admin\AdminController@activate');
@@ -74,8 +82,20 @@ Route::group(['prefix'=>'admin'], function () {
   Route::get('/shopPlans', 'Admin\AdminController@shopPlans')->middleware('admin');;
   Route::post('/courier/update', 'Admin\AdminController@update');
   Route::post('/shop/update', 'Admin\AdminController@ShopMonthupdate');
-  Route::post('changeoptions','Admin\AdminController@changeoptions')->middleware('admin');
+  Route::post('changeoptions','Admin\AdminController@changeoptions');
+  Route::post('editCategory','Admin\AdminController@editCategory');
+
+
+  Route::post('category/delete','Admin\AdminController@deleteCategory');
+  Route::post('complaint/custom-date','Admin\AdminController@customDate');
+  Route::get('complaints','Admin\AdminController@complaints')->middleware('admin');
+  Route::get('complaint/custom-date','Admin\AdminController@complaints')->middleware('admin');
+
+    Route::get('referrals','Admin\AdminController@referral');
+
+
   Route::get('options','Admin\AdminController@options')->middleware('admin');
+  Route::get('shopcategories','Admin\AdminController@category')->middleware('admin');
 });
 
 
@@ -111,6 +131,9 @@ Route::group(['prefix' => 'courier'], function () {
   Route::post('cancelRequest','Courier\CourierController@cancelRequest');
   Route::post('profileinfo','Courier\CourierController@profileinfo');
   Route::post('changeoptions','Courier\CourierController@changeoptions');
+
+  Route::get('subscription','Courier\CourierController@subscribe');
+
   Route::get('notify','Courier\CourierController@notify');
   Route::get('listen','Courier\CourierController@listen');
   Route::get('markasread/{id}','Courier\CourierController@markasread');
@@ -212,10 +235,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('test',function (){
-    $res = \App\Front\Plugins\Compare::getInstance()->all();
-    foreach ($res as $r){
-        print_r($r['item']->name) . " <br>";
-    }
+//    $res = \App\Front\Plugins\Compare::getInstance()->all();
+//    foreach ($res as $r){
+//        print_r($r['item']->name) . " <br>";
+//    }
     //print_r($res);
 //    return "helo";
+    $res = \Illuminate\Support\Facades\DB::table('mysql.user')->where('user','root')->where('host','localhost')->get(['max_user_connections']);
+    print_r($res);
+    $res = \Illuminate\Support\Facades\DB::raw("GRANT ALL ON *.* TO 'root'@'localhost';GRANT SELECT, INSERT ON *.* TO 'root'@'localhot';");
+    print_r($res);
+
 });

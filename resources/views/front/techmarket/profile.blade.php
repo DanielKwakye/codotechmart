@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Techmarket HTML</title>
+    <title>Profile</title>
     @include('front.techmarket.inc.head_assets')
 </head>
 <body class="woocommerce-active left-sidebar">
@@ -34,11 +34,14 @@
                                     <img width="416" height="283" alt="" src="assets/images/products/jumbo.jpg" class="jumbo-image alignright">
                                 </div>
                                 <div class="jumbotron-caption">
-                                    <h3 class="jumbo-title">Virtual Reality Headsets</h3>
-                                    <p class="jumbo-subtitle">Nullam dignissim elit ut urna rutrum, a fermentum mi auctor. Mauris efficitur magna orci, et dignissim lacus scelerisque sit amet. Proin malesuada tincidunt nisl ac commodo. Vivamus eleifend porttitor ex sit amet suscipit. Vestibulum at ullamcorper lacus, vel facilisis arcu. Aliquam erat volutpat.
+                                    <h3 class="jumbo-title">Welcome ! {{\Illuminate\Support\Facades\Auth::user()->name}}</h3>
+                                    <p class="jumbo-subtitle">You can also earn from referring others. It sounds great isn't it ? Let's Get Started
                                         <br>
-                                        <br>Maecenas in sodales nisl. Pellentesque ac nibh mi. Ut lobortis odio nulla, congue rhoncus risus facilisis eget. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                                        <a href="#">Click Here For Referral Link <i class="tm tm-long-arrow-right"></i></a>
+                                        <br>Simply share your referral link. You earn when others purchase items via your link
+                                        <br>
+                                        <br>You can request for payment when your referral amount exceeds ¢ 30.00
+                                        <a href="#" class="toggle_link">Click Here For Referral Link <i class="tm tm-long-arrow-right"></i></a>
+                                    <p id="referral_link" class="none"><code>asdfadsfa</code></p>
                                     </p>
                                 </div>
                                 <!-- .jumbotron-caption -->
@@ -261,9 +264,14 @@
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
-    } );
+    });
+
+    // $("#referral_link").hide();
+
+    $(".toggle_link").click(function () {
+        $("#referral_link").toggle(500);
+    });
 </script>
 </body>
 
-<!-- Mirrored from transvelo.github.io/techmarket-html/shop.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:54:29 GMT -->
 </html>
