@@ -29,12 +29,12 @@
 									<div class="col-md-8 offset-md-2">
 										<div class="form-group">
 											<label for="name">Mail domain name</label>
-											<input type="text" id="server" class="form-control" placeholder="Eg. mail.server.com" name="servername" value="{{$emailsettings->server}}">
+											<input type="text" id="server" class="form-control" placeholder="Eg. mail.server.com" name="servername" value="">
 										</div>
 									
 								<div class="form-group">
 										<label for="username">Username</label>
-										<input type="text" id="username" class="form-control" placeholder="Username" name="username" value="{{$emailsettings->username}}">
+										<input type="text" id="username" class="form-control" placeholder="Username" name="username" value="">
 								 </div>
 							
 								

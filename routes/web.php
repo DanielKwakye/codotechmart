@@ -12,6 +12,8 @@
 */
 
 
+use App\Front\Plugins\Cart;
+
 Route::prefix('/')->group(function(){
     
     Route::get('/','Front\WebpageController@shops');
@@ -23,7 +25,7 @@ Route::prefix('/')->group(function(){
     Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
     Route::get('remove/compare/{id}','Front\WebpageController@removeCompare');
     Route::get('remove/wishlist/{id}','Front\WebpageController@removeWishlist');
-    Route::get('/login/register','Front\WebpageController@loginOrRegister');
+    Route::get('/login/register/{token?}','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('shop/{id}/products','Front\WebpageController@products');
     Route::get('/wishlist','Front\WebpageController@favorite');
@@ -47,6 +49,7 @@ Route::prefix('/')->group(function(){
     Route::get('save/wishlist','Front\UsersController@saveWishlist');
     Route::get('/checkout','Front\UsersController@checkout');
     Route::get('order/received','Front\UsersController@orderReceived');
+    Route::post('checkout', 'Front\UsersController@submitCheckout');
 });
 
 
@@ -152,6 +155,7 @@ Route::get('/signup','AdministrationControllers\SignupController@index');
 Route::post('/sendemail','AdministrationControllers\SignupController@sendMail');
 Route::get('/validatetoken','AdministrationControllers\SignupController@validateEmail');
 Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop');
+Route::get('/validatetoken','AdministrationControllers\SignupController@validateToken');
 });
 
 
@@ -169,6 +173,9 @@ Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendReset
 Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset')->name('password.email');
 Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
 Route::get('/password/reset/{token}', 'ShopadminAuth\ResetPasswordController@showResetForm');
+
+
+Route::get('/dashboard','AdministrationControllers\DashboardController@index');
 
 Route::get('/tags','AdministrationControllers\TagsController@index');
 Route::get('/deletetag','AdministrationControllers\TagsController@deleteTag');
@@ -202,17 +209,29 @@ Route::get('/deletebrand','AdministrationControllers\ProductBrandController@dele
 Route::post('/editbrand','AdministrationControllers\ProductBrandController@editBrand');
 
 Route::get('/addproduct','AdministrationControllers\ProductsController@index');
+Route::get('/productlist','AdministrationControllers\ProductsController@productList');
+Route::get('/deleteproduct','AdministrationControllers\ProductsController@deleteproduct');
 Route::post('/addnewproduct','AdministrationControllers\ProductsController@addNewProduct');
 
 Route::get('/emailsettings','AdministrationControllers\EmailSettingsController@index');
 Route::post('/saveemailsettings','AdministrationControllers\EmailSettingsController@saveEmailSettings');
 Route::post('/savetemplatesettings','AdministrationControllers\EmailSettingsController@saveTemplateSettings');
+
 Route::get('/smssettings','AdministrationControllers\EmailSettingsController@smsSettings');
 Route::post('/savesmssettings','AdministrationControllers\EmailSettingsController@saveSmsSettings');
 
 Route::get('/generalsettings','AdministrationControllers\GeneralSettingsController@index');
 Route::post('/savegeneralsettings','AdministrationControllers\GeneralSettingsController@saveGeneralSettings');
 
+
+Route::get('/customers','AdministrationControllers\CustomersController@customerList');
+
+
+
+Route::get('/sendsmstocustomer','AdministrationControllers\CustomersController@sendSmsToCustomer');
+Route::get('/sendemailtocustomers','AdministrationControllers\CustomersController@sendEmailToCustomers');
+
+Route::get('/livechatscript','AdministrationControllers\LiveChatController@liveChat');
 
 
 
@@ -233,10 +252,11 @@ Route::get('test',function (){
 //        print_r($r['item']->name) . " <br>";
 //    }
     //print_r($res);
+    return Cart::getInstance()->getFirstItem()->item->shop->id;
 //    return "helo";
-    $res = \Illuminate\Support\Facades\DB::table('mysql.user')->where('user','root')->where('host','localhost')->get(['max_user_connections']);
-    print_r($res);
-    $res = \Illuminate\Support\Facades\DB::raw("GRANT ALL ON *.* TO 'root'@'localhost';GRANT SELECT, INSERT ON *.* TO 'root'@'localhot';");
-    print_r($res);
+//    $res = \Illuminate\Support\Facades\DB::table('mysql.user')->where('user','root')->where('host','localhost')->get(['max_user_connections']);
+//    print_r($res);
+//    $res = \Illuminate\Support\Facades\DB::raw("GRANT ALL ON *.* TO 'root'@'localhost';GRANT SELECT, INSERT ON *.* TO 'root'@'localhot';");
+//    print_r($res);
 
 });

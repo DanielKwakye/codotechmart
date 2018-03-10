@@ -29,6 +29,9 @@ transparent = true;
                     type: {
                       required: true
                     },
+                    region:{
+                        required:true
+                    },
                     username: {
                       required: true
                     },
@@ -59,7 +62,7 @@ transparent = true;
                 		return false;
                 	}
                     if(index === 3 && $valid){
-                        console.log("am here");
+                        //console.log("am here");
                     }
                      if(index > 0){
                         $('.btn-home').hide();
@@ -95,7 +98,7 @@ transparent = true;
                 },
 
                 onLast: function (index){
-                        console.log(index);
+                        //console.log(index);
                 },
 
                 onTabShow: function(tab, navigation, index) {

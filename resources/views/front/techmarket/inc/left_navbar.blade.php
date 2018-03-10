@@ -63,7 +63,7 @@
             <!-- .widget -->
         </div>
         <!-- .site-search -->
-        <a class="handheld-header-cart-link has-icon" href="{{url('/')}}" title="View your shopping cart">
+        <a class="handheld-header-cart-link has-icon" href="{{url('/cart')}}" title="View your shopping cart">
             <i class="tm tm-shopping-bag"></i>
             <span class="count count_mini_cart">{{\App\Front\Plugins\Cart::getInstance()->getTotalQty()}}</span>
         </a>

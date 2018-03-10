@@ -54,5 +54,9 @@ class EmailSettingsController extends Controller
         
     }
 
+    public function smsSettings(){
+        return view('administration.products.smssettings');
+    }
+
    
 }

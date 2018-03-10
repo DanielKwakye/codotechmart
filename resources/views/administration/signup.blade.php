@@ -28,7 +28,11 @@
 		            <!--      Wizard container        -->
 		            <div class="wizard-container">
 		                <div class="card wizard-card" data-color="azure" id="wizard">
+<<<<<<< HEAD
 		                    <form id="signformid" action="{{url('/welcome/addnewshop')}}" method="post">
+=======
+		                    <form id="signupform">
+>>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
 		                 {{csrf_field()}}
 
 		                    	<div class="wizard-header">
@@ -73,6 +77,8 @@
 		                                	<div class="col-sm-12">
 		                                    	<h5 class="info-text"> Let's start with the basic details</h5>
 		                                	</div>
+		                                </div>
+		                                <div class="row">
 			                                <div class="col-sm-5 col-sm-offset-1">
 			                                    <div class="form-group">
 			                                        <label>Surname</label>
@@ -85,6 +91,8 @@
 			                                       <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your Firstname">
 			                                    </div>
 			                                </div>
+			                            </div>
+			                            <div class="row">
 			                                <div class="col-sm-5 col-sm-offset-1">
 			                                    <div class="form-group">
 			                                        <label>Email</label>
@@ -97,7 +105,8 @@
 		                                        	<input type="text" class="form-control phone-inputmask" id="phone" name="phone" placeholder="Phone Number">
 			                                    </div>
 			                                </div>
-		                            	</div>
+			                            </div>
+		                            	
 		                        	</div>
 		                            <div class="tab-pane" id="captain">
 		                                 <div class="row">
@@ -113,6 +122,7 @@
 			                                <div class="col-sm-5">
 			                                    <div class="form-group">
 			                                        <label>Type</label>
+<<<<<<< HEAD
 			                                       
 			                                        	{{-- <option value="automobiles">automobiles</option> --}}
 			                                        	 <select class="form-control" name="type" required="required">
@@ -120,6 +130,12 @@
 			                                        	<?php $types = DB::table('shop_categories')->get(['id','name']);?>
 			                                        	@foreach($types as $t)
 			                                        	<option value="{{$t->id}}">{{$t->name}}</option>
+=======
+			                                        <select class="form-control" name="type">
+			                                        	<option value="">Select Shop Type</option>
+			                                        	@foreach(\App\ShopCategory::get(['name','id']) as $cat)
+			                                        	<option value="{{$cat->id}}">{{$cat->name}}</option>
+>>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
 			                                        	@endforeach
 			                                        </select>
 			                                       
@@ -144,9 +160,28 @@
 			                                         <input type="hidden" name="longitude" id="longitude">
 			                                         <input type="hidden" name="latitude" id="latitude">
 			                                    </div>
+			                                </div>     
+		                            	</div>
+		                            	<div class="row">
+		                            		<div class="col-sm-5 col-sm-offset-1">
+			                                  		<div class="form-group">
+			                                        <label>Region</label>
+			                                        <select class="form-control" name="region" required="required">
+			                                        	<option value=''>Select Region</option>
+			                                        	<option value="Greater Accra">Greater Accra</option>
+			                                        	<option value="Brong Ahafo">Brong Ahafo</option>
+			                                        	<option value="Ashanti">Ashanti</option>
+			                                        	<option value="Eastern">Eastern</option>
+			                                        	<option value="Western">Western</option>
+			                                        	<option value="Central">Central</option>
+			                                        	<option value="Upper East">Upper East</option>
+			                                        	<option value="Upper West">Upper West</option>
+			                                        	<option value="Northern">Northern</option>
+			                                        	<option value="Volta">Volta</option>
+			                        
+			                                        </select>
+			                                    </div>                            
 			                                </div>
-			                               
-			                               
 		                            	</div>
 
 		                            	<div class="row">
@@ -198,7 +233,7 @@
 			                                <div class="col-sm-5 col-sm-offset-1">		                                	
 			                                    <div class="form-group" id="security1">
 			                                        <label>Security Key</label>
-			                                         <input type="text" class="form-control" name="securitykey" placeholder="Enter Security Token">			                         
+			                                         <input type="text" class="form-control" id="securitykey" name="securitykey" placeholder="Enter Security Token">			                         
 			                                    </div>
 			                                    
 			                                </div>
@@ -228,7 +263,13 @@
 	    </div> <!--  big container -->
 
 	    <div class="footer">
+<<<<<<< HEAD
 	      
+=======
+	      {{--   <div class="container text-center">
+	             Made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>. Free download <a href="http://www.creative-tim.com/product/paper-bootstrap-wizard">here.</a>
+	        </div> --}}
+>>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
 	    </div>
 	</div>
 
@@ -290,15 +331,42 @@ function getLocation() {
       autocomplete = new google.maps.places.Autocomplete(input, options);
 
        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-          var place = autocomplete.getPlace();  
+          var place = autocomplete.getPlace(); 
+          console.log() 
           $('#latitude').val(place.geometry.location.lat());
           $('#longitude').val(place.geometry.location.lng());
       });
 </script>
 <script type="text/javascript">
+<<<<<<< HEAD
 	$('.btn-finish').click(function(){
 		$('#signformid').submit();
 	})
+=======
+	$('#signupform').submit(function(e){
+		e.preventDefault();
+		$.get('{{url('/welcome/validatetoken')}}',{token:$('#securitykey').val()},function(resp){
+			if(resp.status==='success'){
+				if($('#signupform').valid()){
+				$.post("{{url('/welcome/addnewshop')}}",$('#signupform').serialize(),function(res){
+						if(res.status==='success'){
+							window.location.href=res.responseurl;
+						}
+				}).fail(function(){
+					alert("Error Connecting");
+				})
+			}else{
+				//form is invalid
+			}
+			}else{
+				alert("Invalid Token. Try Again");
+			}
+		}).fail(function(){
+			alert("Error Connecting");
+		});
+
+	});
+>>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
 </script>
 
 </html>
