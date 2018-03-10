@@ -219,7 +219,14 @@ Route::get('/generalsettings','AdministrationControllers\GeneralSettingsControll
 Route::post('/savegeneralsettings','AdministrationControllers\GeneralSettingsController@saveGeneralSettings');
 
 
+Route::get('/customers','AdministrationControllers\CustomersController@customerList');
 
+
+
+Route::get('/sendsmstocustomer','AdministrationControllers\CustomersController@sendSmsToCustomer');
+Route::get('/sendemailtocustomers','AdministrationControllers\CustomersController@sendEmailToCustomers');
+
+Route::get('/livechatscript','AdministrationControllers\LiveChatController@liveChat');
 
 
 

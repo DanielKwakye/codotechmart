@@ -80,15 +80,15 @@
             </ul>
           </li>
 
-          <li class=" nav-item"><a href="index.html"><i class="icon-home3"></i><span data-i18n="nav.customers.main" class="menu-title">Customers</span></a>
+          <li class=" nav-item"><a href="#"><i class="icon-home3"></i><span data-i18n="nav.customers.main" class="menu-title">Customers</span></a>
             <ul class="menu-content">
-              <li><a href="#" data-i18n="nav.customers.allcustomers" class="menu-item">All Customers</a>
+              <li><a href="{{url('/administration/customers')}}" data-i18n="nav.customers.allcustomers" class="menu-item">All Customers</a>
               </li>
-              <li><a href="#" data-i18n="nav.customers.reviews" class="menu-item">Reviews</a>
+             {{--  <li><a href="#" data-i18n="nav.customers.reviews" class="menu-item">Reviews</a>
               </li> 
               <li><a href="#" data-i18n="nav.customers.messsages" class="menu-item">Messages</a>
-              </li>
-               <li><a href="#" data-i18n="nav.customers.chats" class="menu-item">Live Chats</a>
+              </li> --}}
+               <li><a href="{{url('/administration/livechatscript')}}" data-i18n="nav.customers.chats" class="menu-item">Live Chats</a>
               </li>      
             </ul>
           </li>
