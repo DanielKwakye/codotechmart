@@ -41,7 +41,7 @@
                                         <br>
                                         <br>You can request for payment when your referral amount exceeds ¢ 30.00
                                         <a href="#" class="toggle_link">Click Here For Referral Link <i class="tm tm-long-arrow-right"></i></a>
-                                    <p id="referral_link" class="none"><code>asdfadsfa</code></p>
+                                    <p id="referral_link" class="none"><code>{{url('login/register/'.\Illuminate\Support\Facades\Auth::user()->referral_link)}}</code></p>
                                     </p>
                                 </div>
                                 <!-- .jumbotron-caption -->

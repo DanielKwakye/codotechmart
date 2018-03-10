@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class WebpageController extends Controller
 {
@@ -47,6 +48,14 @@ class WebpageController extends Controller
 
     public function addCart(Request $request){
         $product = (new Product())->find($request->product_id);
+
+//        check if user is purchasing from a different shop -----------------
+        if(Cart::getInstance()->getTotalQty() > 0){
+            $shop_id = Cart::getInstance()->getFirstItem()->item->shop->id;
+            if($product->shop->id != $shop_id){
+                Cart::getInstance()->clear();
+            }
+        }
         Cart::getInstance()->add($product,$request->qty);
         return json_encode(['status' => 'success', 'message' => $product->name . ' added successfully', 'qty' => Cart::getInstance()->getTotalQty()]);
     }
@@ -133,7 +142,7 @@ class WebpageController extends Controller
         if($res){
             return json_encode(['status' => true, 'message' => $item->name . " is added to favorites", 'qty' => WishList::getInstance()->totalQty]);
         }else{
-            return json_encode(['status' => true, 'message' => $item->name . " is added already added to favorite", 'qty' => WishList::getInstance()->totalQty]);
+            return json_encode(['status' => true, 'message' => $item->name . " already added to favorite", 'qty' => WishList::getInstance()->totalQty]);
         }
 
 
@@ -185,8 +194,16 @@ class WebpageController extends Controller
         return view('front.techmarket.profile');
     }
 
-    public function loginOrRegister(){
+    public function loginOrRegister($token = null)
+    {
 
+        if ($token == null) {
+            return view('front.techmarket.login_register');
+        }
+
+        $email = \App\Security::getInstance()->decode($token);
+        $user = \App\User::where('email', $email)->first();
+        Session::put('referral', $user->id);
         return view('front.techmarket.login_register');
     }
 

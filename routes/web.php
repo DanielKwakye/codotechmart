@@ -12,6 +12,8 @@
 */
 
 
+use App\Front\Plugins\Cart;
+
 Route::prefix('/')->group(function(){
     
     Route::get('/','Front\WebpageController@shops');
@@ -23,7 +25,7 @@ Route::prefix('/')->group(function(){
     Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
     Route::get('remove/compare/{id}','Front\WebpageController@removeCompare');
     Route::get('remove/wishlist/{id}','Front\WebpageController@removeWishlist');
-    Route::get('/login/register','Front\WebpageController@loginOrRegister');
+    Route::get('/login/register/{token?}','Front\WebpageController@loginOrRegister');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('shop/{id}/products','Front\WebpageController@products');
     Route::get('/wishlist','Front\WebpageController@favorite');
@@ -47,6 +49,7 @@ Route::prefix('/')->group(function(){
     Route::get('save/wishlist','Front\UsersController@saveWishlist');
     Route::get('/checkout','Front\UsersController@checkout');
     Route::get('order/received','Front\UsersController@orderReceived');
+    Route::post('checkout', 'Front\UsersController@submitCheckout');
 });
 
 
@@ -247,10 +250,11 @@ Route::get('test',function (){
 //        print_r($r['item']->name) . " <br>";
 //    }
     //print_r($res);
+    return Cart::getInstance()->getFirstItem()->item->shop->id;
 //    return "helo";
-    $res = \Illuminate\Support\Facades\DB::table('mysql.user')->where('user','root')->where('host','localhost')->get(['max_user_connections']);
-    print_r($res);
-    $res = \Illuminate\Support\Facades\DB::raw("GRANT ALL ON *.* TO 'root'@'localhost';GRANT SELECT, INSERT ON *.* TO 'root'@'localhot';");
-    print_r($res);
+//    $res = \Illuminate\Support\Facades\DB::table('mysql.user')->where('user','root')->where('host','localhost')->get(['max_user_connections']);
+//    print_r($res);
+//    $res = \Illuminate\Support\Facades\DB::raw("GRANT ALL ON *.* TO 'root'@'localhost';GRANT SELECT, INSERT ON *.* TO 'root'@'localhot';");
+//    print_r($res);
 
 });
