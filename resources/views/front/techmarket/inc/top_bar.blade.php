@@ -5,10 +5,10 @@
                             <a title="TechMarket eCommerce - Always free delivery" href="contact-v1.html">Welcome to the biggest market place</a>
                         </li>
                         <li class="menu-item animate-dropdown">
-                            <a title="Quality Guarantee of products" href="{{url('shops/register')}}">Join our shops now</a>
+                            <a title="Quality Guarantee of products" href="{{url('welcome/signup')}}">Join our shops now</a>
                         </li>
                         <li class="menu-item animate-dropdown">
-                            <a title="Fast returnings program" href="{{url('/register/courier')}}">Register with our delivery service</a>
+                            <a title="Fast returnings program" href="{{url('/courier')}}">Register with our delivery service</a>
                         </li>
                         <li class="menu-item animate-dropdown">
                             <a title="No additional fees" href="{{url('login/register')}}">Refer & Earn</a>

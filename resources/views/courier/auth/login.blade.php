@@ -50,7 +50,7 @@
                 <div class="content-box wow bounceInDown modal-content" style="padding: 5px;">
                     <h3 class="content-box-header content-box-header-alt bg-default">
                         <span class="icon-separator">
-                            <i class="glyph-icon icon-cog"></i>
+                            <a href="{{url('/')}}"><i class="glyph-icon icon-home"></i></a>
                         </span>
                         <span class="header-wrapper">
                                 couriers Service

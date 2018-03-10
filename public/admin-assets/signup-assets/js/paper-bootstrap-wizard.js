@@ -53,9 +53,6 @@ transparent = true;
                 'previousSelector': '.btn-previous',
 
                 onNext: function(tab, navigation, index) {
-                    console.log(tab);
-                    console.log(navigation);
-                    console.log(index);
                 	var $valid = $('.wizard-card form').valid();
                 	if(!$valid) {
                 		$validator.focusInvalid();
@@ -63,6 +60,14 @@ transparent = true;
                 	}
                     if(index === 3 && $valid){
                         console.log("am here");
+                    }
+                     if(index > 0){
+                        $('.btn-home').hide();
+                    }
+
+                      if(index == 0){
+                        $('.btn-home').show();
+                        console.log("0");
                     }
                 },
 
@@ -73,7 +78,8 @@ transparent = true;
                   $width = 100/$total;
 
                   navigation.find('li').css('width',$width + '%');
-
+                  $('.btn-home').show();
+                  
                 },
 
                 onTabClick : function(tab, navigation, index){
@@ -93,6 +99,15 @@ transparent = true;
                 },
 
                 onTabShow: function(tab, navigation, index) {
+                    console.log(tab);
+                    console.log(navigation);
+                    console.log(index);
+                    if(index > 0){
+                        $('.btn-home').hide();
+                    }
+                     if(index == 0){
+                        $('.btn-home').show();
+                    }
                     var $total = navigation.find('li').length;
                     var $current = index+1;
 
@@ -101,7 +116,7 @@ transparent = true;
                     // If it's the last tab then hide the last button and show the finish instead
                     if($current >= $total) {
                         $($wizard).find('.btn-next').hide();
-                        $($wizard).find('.btn-finish').attr('type','submit').show();
+                        $($wizard).find('.btn-finish').show();
                     } else {
                         $($wizard).find('.btn-next').show();
                         $($wizard).find('.btn-finish').hide();

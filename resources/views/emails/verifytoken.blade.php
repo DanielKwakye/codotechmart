@@ -1,0 +1,1 @@
+Your verification token is {{$token}}

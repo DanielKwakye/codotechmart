@@ -17,7 +17,7 @@ use Carbon\Carbon;
       }
   }
   $expired=\App\CourierPayment::where('courier_id',Auth::guard('courier')->user()->id)->orderBy('id','desc')->first();
-  $user=Auth::guard('courier')->user();
+  
   if (Carbon::now() >= $expired->expired_at) {
      $user= Auth::guard('courier')->user()->update(['active'=>0]);
   }
@@ -25,7 +25,10 @@ use Carbon\Carbon;
   if (Carbon::now()->addWeeks(2) >= $expired->expired_at) {
       $almostexpired=true;
   }
-
+  if (Carbon::now() >= $expired->expired_at) {
+      $expiration=true;
+  }
+// $user=Auth::guard('courier')->user();
 @endphp
 <body>
     <style type="text/css">
@@ -88,7 +91,7 @@ use Carbon\Carbon;
                     </div>        
                 @endif
 
-                @if($user->active==0)
+                @if(Auth::guard('courier')->user()->active==0)
                     <div class="row">
                         <div class="col-md-12">
                             <div class="alert alert-dismissable" style="background-color: #cf4436; color: white;">
@@ -174,6 +177,13 @@ use Carbon\Carbon;
     </script>
 
     @endif
+
+    {{-- @if($expiration)
+        <script type="text/javascript">
+            document.getElementById("demo").innerHTML = "EXPIRED";
+        </script>
+
+    @endif --}}
 
 
 

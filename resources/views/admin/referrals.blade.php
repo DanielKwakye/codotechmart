@@ -57,9 +57,8 @@
                                         <table id="datatable-tabletools" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>ShopName</th>
-                                                <th>Category</th>
-                                                <th>Status</th>
+                                                <th>Name</th>
+                                                <th>Amount Earned</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -67,23 +66,20 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Status</th>
+                                                <th>Amount Earned</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
 
                                         <tbody>
                                             
-                                            @if(\App\Shop::all()!==null)
-                                                @foreach(\App\Shop::all() as $p)
+                                            @if(\App\Referral::all()!==null)
+                                                @foreach(\App\Referral::all() as $p)
                                                 <tr class="tr{{$p->id}}">
-                                                    <td>{{$p->name}}</td>
-                                                    <td>{{$p->shopcategory->name}}</td>
-                                                    <td>{{$p->active==1?'Active':'Deactivated'}}</td>
+                                                    <td>{{$p->user->name}}</td>
+                                                    <td>{{$p->amount_earned }}</td>
                                                     <td>
-                                                        <button class="btn btn-warning btn-xs view" data-toggle="modal" data-target="#myProfile" data="{{$p}}">VIEW</button>
-                                                        <button class="btn btn-danger btn-xs deactivate" id="deactivate{{$p->id}}" shopid="{{$p->id}}">DEACTIVATE</button>
+                                                        <button class="btn btn-danger pay btn-xs" userid="{{$p->id}}">PAY</button>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -98,27 +94,15 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript">
-        $('.view').click(function(){
-        var data = JSON.parse($(this).attr('data'));
-        $('.name').html(data.creator_firstname+' '+data.creator_surname);
-       $('.email').html(data.creator_email);
-       $('.phone').html(data.phone);
-       $('.profile').html(data.name);
-    }); 
-    </script>
 
     <script type="text/javascript">
-    $(document).on('click','.deactivate',function(e){
-    var shopid=$(this).attr('shopid');
+    $(document).on('click','.pay',function(e){
+    var userid=$(this).attr('userid');
     var _token = "{{csrf_token()}}";
-    if (confirm('Are you sure you want to Deactive This Shop?')) {
-        $.post("{{url('admin/shop/deactivate')}}",{shopid:shopid,_token:_token},function(result){
+    if (confirm('Are you sure you want to Pay This User?')) {
+        $.post("{{url('admin/referral_payment')}}",{userid:userid,_token:_token},function(result){
         $now=JSON.parse(result);
-        $('.tr'+shopid).remove();
-        $('.deactivatedshop').html($now.deactiveCount);
-        $('.allshops').html($now.allshops);
-        $('.activatedshop').html($now.activeCount);
+        $('.tr'+userid).remove();
         notify($now.status,$now.error);
 
         }).fail(function(){

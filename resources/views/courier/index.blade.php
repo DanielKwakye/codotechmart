@@ -22,8 +22,8 @@
             <div class="tile-content-wrapper">
                 <i class="glyph-icon icon-dashboard"></i>
                 <div class="tile-content">
-                    @if(\App\Orders::all()!==null)
-                        {{count(\App\Orders::whereIn('status',['processing','delivered'])->where('user_id',Auth::guard('courier')->user()->id)->get())}}
+                    @if(\App\Order::all()!==null)
+                        {{count(\App\Order::whereIn('status',['processing','delivered'])->where('user_id',Auth::guard('courier')->user()->id)->get())}}
                     @endif
 
                 </div>
@@ -59,8 +59,8 @@
             <div class="tile-content-wrapper">
                 <i class="glyph-icon icon-tag"></i>
                 <div class="tile-content">
-                    @if(\App\Orders::all()!==null)
-                        {{count(\App\Orders::where('status',3)->where('user_id',Auth::guard('courier')->user()->id)->get())}}
+                    @if(\App\Order::all()!==null)
+                        {{count(\App\Order::where('status',3)->where('user_id',Auth::guard('courier')->user()->id)->get())}}
                     @endif                 
                 </div>
             </div>
@@ -73,7 +73,7 @@
 </div><br>
 @php
     use Carbon\Carbon; 
-     $activeUsers = \App\Orders::
+     $activeUsers = \App\Order::
     select('user_id','shop_id', \DB::raw('count(*) as total'))->where('status',3)->where('user_id',Auth::guard('courier')->user()->id)
     ->groupBy('shop_id','user_id')
     ->orderBy('total', 'desc')

@@ -84,6 +84,7 @@ Route::group(['prefix'=>'admin'], function () {
   Route::post('/shop/update', 'Admin\AdminController@ShopMonthupdate');
   Route::post('changeoptions','Admin\AdminController@changeoptions');
   Route::post('editCategory','Admin\AdminController@editCategory');
+  Route::post('referral_payment','Admin\AdminController@referralpayment');
 
 
   Route::post('category/delete','Admin\AdminController@deleteCategory');
@@ -149,6 +150,7 @@ Route::group(['prefix' => 'courier'], function () {
 Route::group(['prefix'=>'welcome'],function(){
 Route::get('/signup','AdministrationControllers\SignupController@index');
 Route::post('/sendemail','AdministrationControllers\SignupController@sendMail');
+Route::get('/validatetoken','AdministrationControllers\SignupController@validateEmail');
 Route::post('/addnewshop','AdministrationControllers\SignupController@addNewShop');
 });
 

@@ -13,15 +13,9 @@ class Shop extends Model
     protected $table = 'shop';
     
     protected $fillable = [
-<<<<<<< HEAD
-     'id','name','phone','shopcategory_id','latitude','longitude','creator_surname','creator_firstname','creator_email',
-    'active'];
-
-=======
-
-     'id','name','tag_line','phone','type','creator_surname','creator_firstname','creator_email',
+     'id','name','tag_line','phone','type','latitude','longitude','creator_surname','creator_firstname','creator_email',
     'active','logo','region'];
->>>>>>> 39efbaaa39037a60d02788c97d2d48e21a38efd3
+
 
     public function products(){
         return $this->hasMany('App\Product');

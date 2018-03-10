@@ -28,7 +28,7 @@
 		            <!--      Wizard container        -->
 		            <div class="wizard-container">
 		                <div class="card wizard-card" data-color="azure" id="wizard">
-		                    <form action="{{url('/welcome/addnewshop')}}" method="post">
+		                    <form id="signformid" action="{{url('/welcome/addnewshop')}}" method="post">
 		                 {{csrf_field()}}
 
 		                    	<div class="wizard-header">
@@ -113,9 +113,16 @@
 			                                <div class="col-sm-5">
 			                                    <div class="form-group">
 			                                        <label>Type</label>
-			                                        <select class="form-control" name="type">
-			                                        	<option value="automobiles">automobiles</option>
+			                                       
+			                                        	{{-- <option value="automobiles">automobiles</option> --}}
+			                                        	 <select class="form-control" name="type" required="required">
+			                                        	<option value="">Select Category</option>
+			                                        	<?php $types = DB::table('shop_categories')->get(['id','name']);?>
+			                                        	@foreach($types as $t)
+			                                        	<option value="{{$t->id}}">{{$t->name}}</option>
+			                                        	@endforeach
 			                                        </select>
+			                                       
 			                                    </div>
 			                                </div>
 			                            </div>
@@ -140,6 +147,28 @@
 			                                </div>
 			                               
 			                               
+		                            	</div>
+
+		                            	<div class="row">
+		                            		<div class="col-sm-5 col-sm-offset-1">
+			                                  		<div class="form-group">
+			                                        <label>Region</label>
+			                                        <select class="form-control" name="region" required="required">
+			                                        	<option value=''>Select Region</option>
+			                                        	<option value="Greater Accra">Greater Accra</option>
+			                                        	<option value="Brong Ahafo">Brong Ahafo</option>
+			                                        	<option value="Ashanti">Ashanti</option>
+			                                        	<option value="Eastern">Eastern</option>
+			                                        	<option value="Western">Western</option>
+			                                        	<option value="Central">Central</option>
+			                                        	<option value="Upper East">Upper East</option>
+			                                        	<option value="Upper West">Upper West</option>
+			                                        	<option value="Northern">Northern</option>
+			                                        	<option value="Volta">Volta</option>
+			                        
+			                                        </select>
+			                                    </div>                            
+			                                </div>
 		                            	</div>
 		                            </div>
 		                            <div class="tab-pane" id="description">
@@ -186,6 +215,7 @@
 		                            </div>
 
 		                            <div class="pull-left">
+		                            	<a class='btn btn-home btn-default btn-wd' href="{{url('/')}}" style="display: none">Home</a>
 		                                <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Previous' />
 		                            </div>
 		                            <div class="clearfix"></div>
@@ -198,9 +228,7 @@
 	    </div> <!--  big container -->
 
 	    <div class="footer">
-	        <div class="container text-center">
-	             Made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>. Free download <a href="http://www.creative-tim.com/product/paper-bootstrap-wizard">here.</a>
-	        </div>
+	      
 	    </div>
 	</div>
 
@@ -218,7 +246,7 @@
 			var _token = "{{csrf_token()}}";
 			$('.securitykey').click(function(e){
 				e.preventDefault();
-            $.post("{{url('/welcome/sendemail')}}",{_token:_token},function(resp){
+            $.post("{{url('/welcome/sendemail')}}",{_token:_token,email:$('#email').val()},function(resp){
             	console.log(resp);
             });
 			});
@@ -266,6 +294,11 @@ function getLocation() {
           $('#latitude').val(place.geometry.location.lat());
           $('#longitude').val(place.geometry.location.lng());
       });
+</script>
+<script type="text/javascript">
+	$('.btn-finish').click(function(){
+		$('#signformid').submit();
+	})
 </script>
 
 </html>

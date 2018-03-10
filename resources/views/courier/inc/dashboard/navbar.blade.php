@@ -76,6 +76,7 @@
           <span class="secs"></span><br><span class="smalltext">Sec(s)</span>
         </a>
         @endif
+        {{-- <p id="demo"></p> --}}
         <a class="header-btn" id="fullscreen-btn" title="Fullscreen" href="#" >
             <i class="glyph-icon icon-arrows-alt"></i>
         </a>
@@ -119,7 +120,7 @@
             </div>
         </div>
         
-        <a class="header-btn" id="logout-btn" href="lockscreen-3.html" title="Lockscreen page example">
+        <a class="header-btn" id="logout-btn" href="{{url('logout')}}" title="Log Out">
             <i class="glyph-icon icon-linecons-lock"></i>
         </a>
 
@@ -144,14 +145,14 @@
         <a href="#" title="All Orders">
             <i class="glyph-icon icon-linecons-diamond"></i>
             <span>Orders</span>
-            <span class="bs-badge badge-danger totalorders">{{count(\App\Orders::where('user_id',Auth::guard('courier')->user()->id)->get())}}</span>
+            <span class="bs-badge badge-danger totalorders">{{count(\App\Order::where('user_id',Auth::guard('courier')->user()->id)->get())}}</span>
         </a>
         <div class="sidebar-submenu">
 
             <ul>
                 <li><a href="{{url('courier/pending-orders')}}" title="Buttons"><span>Pending Orders</span>
-                    <span class="bs-badge badge-purple orders">{{count(\App\Orders::whereIn('status',[1,2])->where('user_id',Auth::guard('courier')->user()->id)->get())}}</span></a></li>
-                    <li><a href="{{url('courier/delivery-history')}}" title="Buttons"><span>Delivery History</span> <span class="bs-badge badge-yellow delivery">{{count(\App\Orders::where('status',3)->where('user_id',Auth::guard('courier')->user()->id)->get())}}</span></a></a></li>
+                    <span class="bs-badge badge-purple orders">{{count(\App\Order::whereIn('status',[1,2])->where('user_id',Auth::guard('courier')->user()->id)->get())}}</span></a></li>
+                    <li><a href="{{url('courier/delivery-history')}}" title="Buttons"><span>Delivery History</span> <span class="bs-badge badge-yellow delivery">{{count(\App\Order::where('status',3)->where('user_id',Auth::guard('courier')->user()->id)->get())}}</span></a></a></li>
             </ul>
 
         </div><!-- .sidebar-submenu -->

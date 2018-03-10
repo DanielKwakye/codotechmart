@@ -49,6 +49,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof \Illuminate\Session\TokenMismatchException){
+            return redirect()
+            ->back()->withInput($request->except('_token'))
+            ->withErrors("Sorry, your request wasn't verified, please try again");
+        }
+        
         return parent::render($request, $exception);
     }
 

@@ -101,12 +101,12 @@
                                             <div class="tab-pane" id="tab2">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <form class="form-horizontal" id="changepassword">
+                                                        <form class="form-horizontal passwordform" id="changepassword">
                                                             {{csrf_field()}}
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label">Old Password <small>(required)</small></label>
                                                                 <div class="col-sm-6">
-                                                                    <input type="password" name="old_password" class="form-control">
+                                                                    <input type="password" name="old_password" class="form-control oldpassword">
                                                                 </div>
                                                             </div>
                                                             <input type="hidden" name="id" value="{{Auth::guard('courier')->user()->id}}">
@@ -117,7 +117,7 @@
                                                                 </div>
                                                                 <div class="pass hiding">
                                                                     <div class="col-sm-6 texting">
-                                                                        <input id="txtPassword" type="text"  name="password" class="form-control">
+                                                                        <input id="txtPassword" type="text"  name="password" class="form-control generatepassword">
                                                                         <span id="password_strength"></span>
                                                                     </div>
                                                                     <a class="btn btn-default passview hiding">View</a>
@@ -128,7 +128,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label">Confirm Password</label>
                                                                 <div class="col-sm-6">
-                                                                    <input type="password" name="password_confirmation" class="form-control">
+                                                                    <input type="password" name="password_confirmation" class="form-control confirmpassword">
                                                                 </div>
                                                             </div>
                                                             <center><button type="submit" class="btn btn-success btn-md">Save</button> <button class="btn btn-danger btn-md" type="reset">Cancel</button></center>
@@ -481,11 +481,19 @@
 
             $.post("{{url('courier/changepassword')}}",$(this).serialize(),function(result){
             }).done(function(data){
+                $('.confirmpassword input[type=password]').val("");
+                $('.oldpassword input[type=password]').val("");
+                $('.generatepassword input[type=text]').val("");
                 $now=JSON.parse(data);
                 notify($now.status,$now.error);
+                
               }).fail(function(result){
+                $('.confirmpassword input[type=password]').val("");
+                $('.oldpassword input[type=password]').val("");
+                $('.generatepassword input[type=text]').val("");
                var error=JSON.parse(result.responseText);
                $.each(error.errors, function(key, value){
+                
                 notify(value[0],true);
                });
               });

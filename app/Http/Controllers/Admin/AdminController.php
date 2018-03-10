@@ -12,6 +12,8 @@ use App\ShopMonthlyPlan;
 use App\Courier;
 use App\AdminOption;
 use App\Complaints;
+use App\Referral;
+use Carbon\Carbon;
 
 
 class AdminController extends Controller
@@ -43,6 +45,13 @@ class AdminController extends Controller
 
     public function referral(){
         return view('admin.referrals');
+    }
+
+    public function referralpayment(Request $r){
+        //hubtel takes over
+
+        Referral::find($r->userid)->orderBy('id','desc')->first()->update(['paid'=>2,'date_paid'=>Carbon::now()]);
+        return json_encode(array('status' =>"User Paid Successfully" , 'error'=>false));
     }
 
     /**
