@@ -20,7 +20,7 @@
         <div class="col-full">
             <div class="row">
                 <nav class="woocommerce-breadcrumb">
-                    <a href="home-v1.html">Home</a>
+                    <a href="{{url('/')}}">Home</a>
                     <span class="delimiter">
                                 <i class="tm tm-breadcrumbs-arrow-right"></i>
                             </span>
@@ -33,53 +33,11 @@
                             <div class="entry-content">
                                 <div class="woocommerce">
 
-                                    <div class="collapse" id="login-form">
-                                        <form method="post" class="woocomerce-form woocommerce-form-login login">
-                                            <p class="before-login-text">
-                                                Vestibulum lacus magna, faucibus vitae dui eget, aliquam fringilla. In et commodo elit. Class aptent taciti sociosqu ad litora.
-                                            </p>
-                                            <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing &amp; Shipping section.</p>
-                                            <p class="form-row form-row-first">
-                                                <label for="username">Username or email
-                                                    <span class="required">*</span>
-                                                </label>
-                                                <input type="text" id="username" name="username" class="input-text">
-                                            </p>
-                                            <p class="form-row form-row-last">
-                                                <label for="password">Password
-                                                    <span class="required">*</span>
-                                                </label>
-                                                <input type="password" id="password" name="password" class="input-text">
-                                            </p>
-                                            <div class="clear"></div>
-                                            <p class="form-row">
-                                                <input type="submit" value="Login" name="login" class="button">
-                                                <label class="woocommerce-form__label woocommerce-form__label-for-checkbox inline">
-                                                    <input type="checkbox" value="forever" id="rememberme" name="rememberme" class="woocommerce-form__input woocommerce-form__input-checkbox">
-                                                    <span>Remember me</span>
-                                                </label>
-                                            </p>
-                                            <p class="lost_password">
-                                                <a href="#">Lost your password?</a>
-                                            </p>
-                                            <div class="clear"></div>
-                                        </form>
-                                    </div>
-                                    <!-- .collapse -->
-                                    <div class="collapse" id="checkoutCouponForm">
-                                        <form method="post" class="checkout_coupon">
-                                            <p class="form-row form-row-first">
-                                                <input type="text" value="" id="coupon_code" placeholder="Coupon code" class="input-text" name="coupon_code">
-                                            </p>
-                                            <p class="form-row form-row-last">
-                                                <input type="submit" value="Apply coupon" name="apply_coupon" class="button">
-                                            </p>
-                                            <div class="clear"></div>
-                                        </form>
-                                    </div>
-                                    <!-- .collapse -->
+
                                     <form action="{{url('checkout')}}" class="checkout woocommerce-checkout place_order_form" method="post">
                                         {{csrf_field()}}
+                                        <input type="hidden" id="longitude" name="longitude">
+                                        <input type="hidden" id="latitude" name="latitude">
                                         <div id="customer_details" class="col2-set">
                                             <div class="col-1">
                                                 <div class="woocommerce-billing-fields">
@@ -93,25 +51,58 @@
                                                                 <input type="text" value="{{\Illuminate\Support\Facades\Auth::user()->name}}" placeholder="" id="billing_first_name" name="billing_first_name" class="input-text ">
                                                             </p>
                                                             <p id="billing_last_name_field" class="form-row form-row-last validate-required">
-                                                                <label class="" for="billing_last_name">Phone Number
+                                                                <label class="" for="phone">Phone Number
                                                                     <abbr title="required" class="required">*</abbr>
                                                                 </label>
-                                                                <input type="text" value="" placeholder="Contact Number" id="billing_last_name" name="phone_number" class="input-text ">
+                                                                <input type="text" value="{{\Illuminate\Support\Facades\Auth::user()->phone}}" id="phone" placeholder="Contact Number" required name="phone_number" class="input-text ">
                                                             </p>
 
-
-                                                            <div class="clear"></div>
-                                                            <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
-                                                                <label class="" for="billing_address_1">Address
+                                                            <p id="billing_state_field" class="form-row form-row-wide validate-required validate-email">
+                                                                <label class="" for="billing_state">Location
                                                                     <abbr title="required" class="required">*</abbr>
                                                                 </label>
-                                                                <input type="text" value="" placeholder="Street address" id="billing_address_1" name="full_address" class="input-text ">
+                                                                <select data-placeholder="" class="state_select select2-hidden-accessible" id="select_location" required name="location" tabindex="-1" aria-hidden="true">
+                                                                    <option value="0"> Enter A location </option>
+                                                                    <option value="1">Use my current location</option>
+                                                                </select>
+                                                            </p>
+
+                                                            <div class="clear"></div>
+                                                            <p id="full_address" class="form-row form-row-wide address-field validate-required">
+                                                                <label class="" for="search_location">Address
+                                                                    <abbr title="required" class="required">*</abbr> &nbsp;&nbsp;&nbsp;
+                                                                    <span id="loader" class="none"><img src="{{asset('assets/images/load.gif')}}" width="30" height="30"> Fetching Address ...</span>
+                                                                </label>
+                                                                <input type="text" value="" placeholder="Street address" id="search_location" name="full_address" class="input-text " required>
+                                                            </p>
+
+                                                            <p id="billing_state_field" class="form-row form-row-wide validate-required validate-email">
+                                                                <label class="" for="billing_state">Delivery Option
+                                                                    <abbr title="required" class="required">*</abbr>
+                                                                </label>
+                                                                <select data-placeholder="" autocomplete="address-level1" class="state_select select2-hidden-accessible" id="billing_state" required name="delivery_option" tabindex="-1" aria-hidden="true">
+                                                                    <option value="">Select an option…</option>
+                                                                    <option value="1">Deliver To Me</option>
+                                                                    <option value="0"> I'll Pick It Up </option>
+                                                                </select>
+                                                            </p>
+
+                                                            <p id="billing_state_field" class="form-row form-row-wide validate-required validate-email">
+                                                                <label class="" for="billing_state">Payment Option
+                                                                    <abbr title="required" class="required">*</abbr>
+                                                                </label>
+                                                                <select data-placeholder="" autocomplete="address-level1" class="state_select select2-hidden-accessible" id="billing_state" required name="payment_option" tabindex="-1" aria-hidden="true">
+                                                                    <option value="">Select an option…</option>
+                                                                    <option value="1">Pay Online</option>
+                                                                    <option value="0"> Cash On Pick Up </option>
+                                                                </select>
                                                             </p>
 
                                                             <p id="order_comments_field" class="form-row notes">
                                                                 <label class="" for="order_comments">Order notes</label>
                                                                 <textarea cols="5" rows="2" placeholder="Notes about your order, e.g. special notes for delivery." id="order_comments" class="input-text " name="notes"></textarea>
                                                             </p>
+
 
                                                         </div>
                                                     </div>
@@ -217,6 +208,7 @@
 <!-- For demo purposes – can be removed on production -->
 @include('front.techmarket.inc.config')
 @include('front.techmarket.inc.foot_assets')
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAolhXr2vsz2x8-fNYJjVghMI-p9XDzNwo&libraries=places"></script>
 <script>
    $(".place_order_form").submit(function (e) {
 
@@ -226,6 +218,69 @@
        }
 
    });
+   $("#select_location").change(function () {
+      var val = $(this).val();
+       console.log(val);
+       if(val == 1){
+           // location 1 is use my current location --------------------
+           getLocation();
+       }
+       if(val == 0){
+           // enter a location ----------------------
+           console.log("search location");
+           $("#loader").addClass("none");
+           $("#search_location").val("");
+       }
+   });
+
+   function getLocation() {
+       if (navigator.geolocation) {
+           $("#loader").removeClass("none");
+           navigator.geolocation.getCurrentPosition(showPosition,positionNotFound);
+       } else {
+          alert("Geolocation is not supported by this browser.");
+       }
+   }
+   
+   function positionNotFound(error) {
+       toast(error.message);
+       $("#loader").addClass("none");
+   }
+
+   function showPosition(position) {
+       $("#latitude").val(position.coords.latitude);
+       $("#longitude").val(position.coords.longitude);
+       var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&sensor=true&key=AIzaSyAolhXr2vsz2x8-fNYJjVghMI-p9XDzNwo";
+       $.get(url, function (result) {
+           console.log(result);
+           // JSON.parse(result)
+           // console.log(result.results[0]);
+           $("#loader").addClass("none");
+           $("#search_location").val(result.results[0].formatted_address);
+       });
+   }
+
+
+   var input = document.getElementById('search_location');
+   var options = {
+       componentRestrictions: {country: 'gh'}
+   };
+
+   autocomplete = new google.maps.places.Autocomplete(input, options);
+
+   google.maps.event.addListener(autocomplete, 'place_changed', function () {
+       var place = autocomplete.getPlace();
+
+       var destinationLat = place.geometry.location.lat();
+       var destinationLng = place.geometry.location.lng();
+       var address = place.address_components[0].long_name;
+
+       $("#latitude").val(destinationLat);
+       $("#longitude").val(destinationLng);
+       $
+
+   });
+
 </script>
 </body>
 

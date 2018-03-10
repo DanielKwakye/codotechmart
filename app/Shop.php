@@ -10,7 +10,7 @@ class Shop extends Model
 {
 	use SoftDeletes;
     
-    protected $table = 'shop';
+//    protected $table = 'shops';
     
     protected $fillable = [
      'id','name','tag_line','phone','type','latitude','longitude','creator_surname','creator_firstname','creator_email',

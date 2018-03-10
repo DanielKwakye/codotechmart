@@ -142,7 +142,7 @@ class WebpageController extends Controller
         if($res){
             return json_encode(['status' => true, 'message' => $item->name . " is added to favorites", 'qty' => WishList::getInstance()->totalQty]);
         }else{
-            return json_encode(['status' => true, 'message' => $item->name . " is added already added to favorite", 'qty' => WishList::getInstance()->totalQty]);
+            return json_encode(['status' => true, 'message' => $item->name . " already added to favorite", 'qty' => WishList::getInstance()->totalQty]);
         }
 
 

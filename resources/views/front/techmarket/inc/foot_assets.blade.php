@@ -30,7 +30,7 @@
                      iziToast.info({
                          id: 'info',
                          message: message,
-                         position: 'topLeft',
+                         position: 'bottomCenter',
                          transitionIn: 'bounceInLeft',
                          // iconText: 'star',
                          onOpened: function(instance, toast){

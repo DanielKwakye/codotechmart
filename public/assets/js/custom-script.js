@@ -5,6 +5,8 @@ function toast(message) {
         message: message,
         position: 'bottomCenter',
         transitionIn: 'bounceInLeft',
+        icon : "fa fa-check",
+        drag: true,
         // iconText: 'star',
         onOpened: function(instance, toast){
             // console.info(instance)
@@ -14,6 +16,63 @@ function toast(message) {
     });
 
 }
+
+function yellowToast(message) {
+
+    iziToast.warning({
+        id: 'success',
+        message: message,
+        position: 'bottomCenter',
+        transitionIn: 'bounceInLeft',
+        icon : "fa fa-check",
+        drag: true,
+        // iconText: 'star',
+        onOpened: function(instance, toast){
+            // console.info(instance)
+        },
+        onClosed: function(instance, toast, closedBy){
+        }
+    });
+
+}
+
+function redToast(message) {
+
+    iziToast.error({
+        id: 'success',
+        message: message,
+        position: 'bottomCenter',
+        transitionIn: 'bounceInLeft',
+        drag: true,
+        // iconText: 'star',
+        onOpened: function(instance, toast){
+            // console.info(instance)
+        },
+        onClosed: function(instance, toast, closedBy){
+        }
+    });
+
+}
+
+function greenToast(message) {
+
+    iziToast.success({
+        id: 'success',
+        message: message,
+        position: 'bottomCenter',
+        transitionIn: 'bounceInLeft',
+        drag: true,
+        // iconText: 'star',
+        icon : "fa fa-check",
+        onOpened: function(instance, toast){
+            // console.info(instance)
+        },
+        onClosed: function(instance, toast, closedBy){
+        }
+    });
+
+}
+
 
 $(document).on('click', '.trigger', function (event) {
     event.preventDefault();
@@ -35,7 +94,7 @@ $(document).on('click','.remove_cart', function (e) {
             $("#hang_cart").load(base_url + "/hang/cart");
             $(".main_cart").load(base_url + "/main/cart");
             $(".cart-collaterals").load(base_url + "/cart/summary");
-            toast(result.message);
+            greenToast(result.message);
         }
     });
 });
@@ -59,7 +118,7 @@ $('.woocommerce-cart-form').submit(function (e) {
         $(".main_cart").load(base_url + "/main/cart");
         $(".cart-collaterals").load(base_url + "/cart/summary");
         $('#loader').addClass("none");
-        toast(result.message);
+        greenToast(result.message);
     });
 
 });
@@ -74,7 +133,7 @@ $('.add_to_wishlist').click(function(e){
         if(result.status){
             $('#top-cart-wishlist-count').html(result.qty);
             $('#ajax_loader_'+data).hide();
-            toast(result.message);
+            yellowToast(result.message);
         }
     });
 });
@@ -132,7 +191,7 @@ $(document).on('click','.remove_wishlist',function (e) {
 
             $('#top-cart-wishlist-count').html(result.qty);
             $('#wishlist_container').load(base_url + "/favorite/section");
-            toast(result.message);
+            yellowToast(result.message);
         }
     });
 });
@@ -144,26 +203,14 @@ $('#add-to-cart').click(function(event){
 //    validations ---------------------
     if(!$.isNumeric(qty) && !(Math.floor(qty) === qty)){
 
-        iziToast.error({
-            id: 'error',
-            title: 'Error',
-            message: 'Please enter the correct quantity',
-            position: 'topRight',
-            transitionIn: 'fadeInDown'
-        });
+       redToast("Please enter the correct quantity");
         return;
     }
 
 //    check if qty is less than zero
 
     if(qty < 1){
-        iziToast.error({
-            id: 'error',
-            title: 'Error',
-            message: 'quantity cannot be less than 1',
-            position: 'topRight',
-            transitionIn: 'fadeInDown'
-        });
+        redToast("quantity cannot be less than 1");
 
         return;
     }
@@ -211,7 +258,7 @@ $('#add-to-cart').click(function(event){
             $("#count_mini_cart").html(result.qty);
             $("#hang_cart").load(base_url + "/hang/cart");
 
-            toast(result.message);
+            greenToast(result.message);
         }
 
     });
