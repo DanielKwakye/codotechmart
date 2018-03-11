@@ -1,94 +1,67 @@
-@if(\App\Front\Plugins\Compare::getInstance()->totalQty > 0)
+<!DOCTYPE html>
+<html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
 
-    <tr>
-        <th>Product</th>
-        @foreach(\App\Front\Plugins\Compare::getInstance()->all() as $p)
-            <td>
-                <a class="product" href="single-product-fullwidth.html">
-                    <div class="product-image">
-                        <div class="image">
-                            <img width="300" height="300" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{asset('assets/images/products/1-2.jpg')}}">
+<!-- Mirrored from transvelo.github.io/techmarket-html/compare.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 09:54:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <title>Compare List</title>
+    @include('front.techmarket.inc.head_assets')
+</head>
+<body class="page home page-template-default">
+<div id="page" class="hfeed site">
+@include('front.techmarket.inc.top_bar')
+    <!-- .top-bar-v1 -->
+@include('front.techmarket.inc.header')
+    <!-- .header-v1 -->
+    <!-- ============================================================= Header End ============================================================= -->
+    <div id="content" class="site-content">
+        <div class="col-full">
+            <div class="row">
+                <nav class="woocommerce-breadcrumb">
+                    <a href="{{url('/')}}">Home</a>
+                    <span class="delimiter">
+                                <i class="tm tm-breadcrumbs-arrow-right"></i>
+                            </span>Compare
+                </nav>
+                <!-- .woocommerce-breadcrumb -->
+                <div id="primary" class="content-area">
+                    <main id="main" class="site-main">
+                        <div class="type-page hentry">
+                            <div class="entry-content">
+                                <div class="table-responsive">
+                                    <table class="table table-compare compare-list">
+                                        <tbody id="compare_container">
+                                            @include('front.techmarket.inc.compare_section')
+                                        </tbody>
+                                    </table>
+                                    <!-- /.table-compare compare-list -->
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- .entry-content -->
                         </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">{{$p['item']->name}}</h3>
-
-                        <div class="star-rating">
-                                                                        <span style="width:100%">Rated
-                                                                            <strong class="rating">5.00</strong> out of 5</span>
-                        </div>
-                    </div>
-                </a>
-                <!-- /.product -->
-            </td>
-        @endforeach
-    </tr>
-
-    <tr>
-        <th>Price</th>
-        @foreach(\App\Front\Plugins\Compare::getInstance()->all() as $p)
-            <td>
-                <div class="product-price price">
-                    <ins>
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        <span class="woocommerce-Price-currencySymbol">¢ </span>{{$p['item']->price}}</span>
-                    </ins>
-                    <del>
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        <span class="woocommerce-Price-currencySymbol">¢ </span>{{$p['item']->old_price}}</span>
-                    </del>
+                        <!-- .hentry -->
+                    </main>
+                    <!-- #main -->
                 </div>
-            </td>
-        @endforeach
-    </tr>
+                <!-- #primary -->
+            </div>
+            <!-- .row -->
+        </div>
+        <!-- .col-full -->
+    </div>
+    <!-- #content -->
+@include('front.techmarket.inc.footer')
+    <!-- .site-footer -->
+</div>
+<!-- For demo purposes – can be removed on production -->
+@include('front.techmarket.inc.config')
+<!-- For demo purposes – can be removed on production : End -->
+@include('front.techmarket.inc.foot_assets')
+<!-- For demo purposes – can be removed on production : End -->
+</body>
 
-    <tr>
-        <th>Description</th>
-        @foreach(\App\Front\Plugins\Compare::getInstance()->all() as $p)
-            <td>
-                <p>
-                    {{$p['item']->description}}
-                </p>
-            </td>
-        @endforeach
-    </tr>
 
-    <tr>
-        <th>Add to cart</th>
-        @foreach(\App\Front\Plugins\Compare::getInstance()->all() as $p)
-            <td>
-                <a class="button trigger" data="{{$p['item']}}" href="#" >Add to cart</a>
-            </td>
-        @endforeach
-    </tr>
-
-    <tr>
-        <th>Brand</th>
-        @foreach(\App\Front\Plugins\Compare::getInstance()->all() as $p)
-            <td>&nbsp;</td>
-        @endforeach
-    </tr>
-    <tr>
-        <th>Price</th>
-        @foreach(\App\Front\Plugins\Compare::getInstance()->all() as $p)
-            <td>
-                <div class="product-price price">
-                                                                <span class="woocommerce-Price-amount amount">
-                                                                    <span class="woocommerce-Price-currencySymbol">¢</span>{{$p['item']->price}}</span>
-                </div>
-            </td>
-        @endforeach
-    </tr>
-    <tr>
-        <th>&nbsp;</th>
-        @foreach(\App\Front\Plugins\Compare::getInstance()->all() as $p)
-            <td class="text-center">
-                <a title="Remove" class="remove-icon remove_compare" data="{{$p['item']->id}}" href="{{url('/remove/compare/'.$p['item']->id)}}">
-                    <i class="fa fa-times"></i>
-                </a>
-            </td>
-        @endforeach
-    </tr>
-    @else
-    Your Compare List Is Empty
-@endif
+</html>

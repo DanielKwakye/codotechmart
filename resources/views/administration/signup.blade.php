@@ -15,6 +15,7 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
 	<link href="{{asset('admin-assets/signup-assets/css/themify-icons.css')}}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 </head>
 
 <body>
@@ -28,11 +29,11 @@
 		            <!--      Wizard container        -->
 		            <div class="wizard-container">
 		                <div class="card wizard-card" data-color="azure" id="wizard">
-<<<<<<< HEAD
-		                    <form id="signformid" action="{{url('/welcome/addnewshop')}}" method="post">
-=======
+
+		                   {{--  <form id="signformid" action="{{url('/welcome/addnewshop')}}" method="post"> --}}
+
 		                    <form id="signupform">
->>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
+
 		                 {{csrf_field()}}
 
 		                    	<div class="wizard-header">
@@ -122,7 +123,7 @@
 			                                <div class="col-sm-5">
 			                                    <div class="form-group">
 			                                        <label>Type</label>
-<<<<<<< HEAD
+
 			                                       
 			                                        	{{-- <option value="automobiles">automobiles</option> --}}
 			                                        	 <select class="form-control" name="type" required="required">
@@ -130,12 +131,6 @@
 			                                        	<?php $types = DB::table('shop_categories')->get(['id','name']);?>
 			                                        	@foreach($types as $t)
 			                                        	<option value="{{$t->id}}">{{$t->name}}</option>
-=======
-			                                        <select class="form-control" name="type">
-			                                        	<option value="">Select Shop Type</option>
-			                                        	@foreach(\App\ShopCategory::get(['name','id']) as $cat)
-			                                        	<option value="{{$cat->id}}">{{$cat->name}}</option>
->>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
 			                                        	@endforeach
 			                                        </select>
 			                                       
@@ -184,27 +179,7 @@
 			                                </div>
 		                            	</div>
 
-		                            	<div class="row">
-		                            		<div class="col-sm-5 col-sm-offset-1">
-			                                  		<div class="form-group">
-			                                        <label>Region</label>
-			                                        <select class="form-control" name="region" required="required">
-			                                        	<option value=''>Select Region</option>
-			                                        	<option value="Greater Accra">Greater Accra</option>
-			                                        	<option value="Brong Ahafo">Brong Ahafo</option>
-			                                        	<option value="Ashanti">Ashanti</option>
-			                                        	<option value="Eastern">Eastern</option>
-			                                        	<option value="Western">Western</option>
-			                                        	<option value="Central">Central</option>
-			                                        	<option value="Upper East">Upper East</option>
-			                                        	<option value="Upper West">Upper West</option>
-			                                        	<option value="Northern">Northern</option>
-			                                        	<option value="Volta">Volta</option>
-			                        
-			                                        </select>
-			                                    </div>                            
-			                                </div>
-		                            	</div>
+		                            	
 		                            </div>
 		                            <div class="tab-pane" id="description">
 		                               <div class="row">
@@ -213,8 +188,8 @@
 		                                	</div>
 			                                <div class="col-sm-10 col-sm-offset-1">
 			                                    <div class="form-group">
-			                                        <label>Username</label>
-			                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
+			                                        <label></label>
+			                                        <input type="hidden" value="" class="form-control" id="username" name="username" placeholder="Enter Username">
 			                                    </div>
 			                                </div>
 			                                   <div class="col-sm-5 col-sm-offset-1">
@@ -238,7 +213,7 @@
 			                                    
 			                                </div>
 			                                <div class="col-sm-5">			                                	
-			                                	<a class="btn btn-primary securitykey" style="margin-top: 25px">Get Security Key</a>			                            
+			                                	<button class="btn btn-primary securitykey" style="margin-top: 25px">Get Security Key <img src="{{asset('admin-assets/images/loading.gif')}}" style="width: 20px;height:20px;display: none" id="loadinggif"></button>			                            
 			                                </div>
 		                            	</div>
 		                            </div>
@@ -246,7 +221,7 @@
 		                        <div class="wizard-footer">
 		                        	<div class="pull-right">
 		                                <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Next' />
-		                                <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' name='finish' value='Finish' />
+		                                <input class='btn btn-finish btn-fill btn-primary btn-wd' name='finish' value='Finish' />
 		                            </div>
 
 		                            <div class="pull-left">
@@ -263,13 +238,11 @@
 	    </div> <!--  big container -->
 
 	    <div class="footer">
-<<<<<<< HEAD
-	      
-=======
-	      {{--   <div class="container text-center">
-	             Made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>. Free download <a href="http://www.creative-tim.com/product/paper-bootstrap-wizard">here.</a>
-	        </div> --}}
->>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
+
+	        <div class="container text-center">
+	            
+	        </div>
+
 	    </div>
 	</div>
 
@@ -281,14 +254,24 @@
 	<script src="{{asset('admin-assets/signup-assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
 	<script src="{{asset('admin-assets/signup-assets/js/paper-bootstrap-wizard.js')}}" type="text/javascript"></script>
 	<script src="{{asset('admin-assets/vendors/js/forms/extended/inputmask/jquery.inputmask.bundle.min.js')}}" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 	<script src="{{asset('admin-assets/signup-assets/js/jquery.validate.min.js')}}" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(function(){
+			//swal("Success","Email Sent Successfully",'success');
 			var _token = "{{csrf_token()}}";
-			$('.securitykey').click(function(e){
-				e.preventDefault();
+			$('.securitykey').click(function(){
+				//e.preventDefault();
+				$('#loadinggif').show();
+				$(this).attr('disabled','disabled');
             $.post("{{url('/welcome/sendemail')}}",{_token:_token,email:$('#email').val()},function(resp){
-            	console.log(resp);
+            	swal("Success","Verification Token Sent to your mail Successfully",'success');
+            	$('.securitykey').removeAttr('disabled');
+            	$('#loadinggif').hide();
+            }).fail(function(){
+            		swal("Error","Verification Token Not Sent",'error');
+            		$('#loadinggif').hide();
+            		$('.securitykey').removeAttr('disabled');
             });
 			});
 		})
@@ -338,13 +321,14 @@ function getLocation() {
       });
 </script>
 <script type="text/javascript">
-<<<<<<< HEAD
+
 	$('.btn-finish').click(function(){
 		$('#signformid').submit();
 	})
-=======
+
 	$('#signupform').submit(function(e){
 		e.preventDefault();
+		if($('#signupform').valid()){
 		$.get('{{url('/welcome/validatetoken')}}',{token:$('#securitykey').val()},function(resp){
 			if(resp.status==='success'){
 				if($('#signupform').valid()){
@@ -353,20 +337,20 @@ function getLocation() {
 							window.location.href=res.responseurl;
 						}
 				}).fail(function(){
-					alert("Error Connecting");
+					swal("Error","Error Adding Shop.. Try Again",'error');
 				})
 			}else{
 				//form is invalid
 			}
 			}else{
-				alert("Invalid Token. Try Again");
+				swal("Error","Invalid Token",'error');
 			}
 		}).fail(function(){
-			alert("Error Connecting");
+				swal("Error","Error In Network Connection",'error');
 		});
+	}
 
 	});
->>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
 </script>
 
 </html>

@@ -119,7 +119,7 @@ transparent = true;
                     // If it's the last tab then hide the last button and show the finish instead
                     if($current >= $total) {
                         $($wizard).find('.btn-next').hide();
-                        $($wizard).find('.btn-finish').show();
+                        $($wizard).find('.btn-finish').attr('type','submit').show();
                     } else {
                         $($wizard).find('.btn-next').show();
                         $($wizard).find('.btn-finish').hide();

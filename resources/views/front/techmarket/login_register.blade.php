@@ -56,14 +56,35 @@
                                                     <p class="form-row">
                                                         <input class="woocommerce-Button button" type="submit" value="Login" name="login">
                                                         <label for="rememberme" class="woocommerce-form__label woocommerce-form__label-for-checkbox inline">
-                                                            <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> Remember me
+                                                            <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="remember" type="checkbox" id="rememberme" value="forever" /> Remember me
                                                         </label>
                                                     </p>
 
                                                     <p class="woocommerce-LostPassword lost_password">
-                                                        <a href="#">Lost your password?</a>
+                                                        <a href="#" id="resetPassword">Lost your password?</a>
                                                     </p>
 
+                                                    <p class="woocommerce-LostPassword hide_reset none">
+                                                        <a href="#" id="resetPassword">Hide reset password</a>
+                                                    </p>
+
+
+                                                </form>
+                                                    
+                                                <form method="post" action="{{url("password/email")}}" class="reset_pass_form" style="display: none;">
+
+                                                    {{csrf_field()}}
+                                                    <p class="form-row form-row-wide">
+                                                        <label for="username"> Enter email address to reset password
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <input type="email" class="input-text" name="email" id="username" value="" />                                                        
+                                                    </p>
+                                                     <p class="form-row">
+                                                        <input class="woocommerce-Button button" type="submit" value="Reset Now" name="login">
+                                                    </p>
+
+                                                    
                                                 </form>
 
                                                 <div class="footer-social-icons">
@@ -154,6 +175,28 @@
 <!-- For demo purposes – can be removed on production : End -->
 @include('front.techmarket.inc.foot_assets')
 <!-- For demo purposes – can be removed on production : End -->
+
+@if(Session::has("status"))
+    <script type="text/javascript">
+        greenToast("{{Session::get('status')}}");
+    </script>
+@endif
+
+<script type="text/javascript">
+    $("#resetPassword").click(function(e){
+        e.preventDefault();
+        $(".reset_pass_form").show(300);
+        $(".hide_reset").removeClass("none");
+        $(".lost_password").addClass("none");
+    });
+
+    $(".hide_reset").click(function(e){
+        e.preventDefault();
+        $(".reset_pass_form").hide(300);
+         $(".hide_reset").addClass("none");
+        $(".lost_password").removeClass("none");
+    });
+</script>
 </body>
 
 

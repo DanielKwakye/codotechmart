@@ -52,23 +52,20 @@
                                         <ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
                                             <li class="woocommerce-order-overview__order order">
                                                 Order number:
-                                                <strong>3001</strong>
+                                                <strong>{{$order->order_number}}</strong>
                                             </li>
                                             <li class="woocommerce-order-overview__date date">
                                                 Date:
-                                                <strong>November 6, 2017</strong>
+                                                <strong>{{\Carbon\Carbon::parse($order->created_at)->toDayDateTimeString()}}</strong>
                                             </li>
                                             <li class="woocommerce-order-overview__total total">
                                                 Total:
                                                 <strong>
                                                             <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>1,476.99</span>
+                                                                <span class="woocommerce-Price-currencySymbol">¢</span>{{$order->amount}}</span>
                                                 </strong>
                                             </li>
-                                            <li class="woocommerce-order-overview__payment-method method">
-                                                Payment method:
-                                                <strong>Direct bank transfer</strong>
-                                            </li>
+                                            
                                         </ul>
                                         <!-- .woocommerce-order-overview -->
                                         <section class="woocommerce-order-details">
@@ -82,16 +79,20 @@
                                                 </thead>
                                                 <tbody>
 
+                                                @foreach($order->carts as $c)
                                                 <tr class="woocommerce-table__line-item order_item">
                                                     <td class="woocommerce-table__product-name product-name">
-                                                        <a href="single-product-fullwidth.html">Snap White Instant Digital Camera in White</a>
-                                                        <strong class="product-quantity">× 1</strong>
+                                                        <a href="single-product-fullwidth.html">
+                                                            {{$c->product->name}}
+                                                        </a>
+                                                        <strong class="product-quantity">× {{$c->qty}}</strong>
                                                     </td>
                                                     <td class="woocommerce-table__product-total product-total">
                                                                     <span class="woocommerce-Price-amount amount">
-                                                                        <span class="woocommerce-Price-currencySymbol">$</span>179.99</span>
+                                                                        <span class="woocommerce-Price-currencySymbol">¢</span>{{$c->price}}</span>
                                                     </td>
                                                 </tr>
+                                                @endforeach
 
                                                 </tbody>
                                                 <tfoot>
@@ -99,26 +100,29 @@
                                                     <th scope="row">Subtotal:</th>
                                                     <td>
                                                                     <span class="woocommerce-Price-amount amount">
-                                                                        <span class="woocommerce-Price-currencySymbol">$</span>1,376.99</span>
+                                                                        <span class="woocommerce-Price-currencySymbol">¢</span>
+                                                                            {{$c->order->amount}}
+                                                                    </span>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                {{-- <tr>
                                                     <th scope="row">Shipping:</th>
                                                     <td>
                                                                     <span class="woocommerce-Price-amount amount">
                                                                         <span class="woocommerce-Price-currencySymbol">$</span>100.00</span>&nbsp;
                                                         <small class="shipped_via">via Normal Delivery</small>
                                                     </td>
-                                                </tr>
-                                                <tr>
+                                                </tr> --}}
+                                                {{-- <tr>
                                                     <th scope="row">Payment method:</th>
                                                     <td>Direct bank transfer</td>
-                                                </tr>
+                                                </tr> --}}
                                                 <tr>
                                                     <th scope="row">Total:</th>
                                                     <td>
                                                                     <span class="woocommerce-Price-amount amount">
-                                                                        <span class="woocommerce-Price-currencySymbol">$</span>1,476.99</span>
+                                                                        <span class="woocommerce-Price-currencySymbol">¢</span>
+                                                                    {{$c->order->amount}}</span>
                                                     </td>
                                                 </tr>
                                                 </tfoot>

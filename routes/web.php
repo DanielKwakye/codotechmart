@@ -11,7 +11,7 @@
 |
 */
 
-
+ 
 use App\Front\Plugins\Cart;
 
 Route::prefix('/')->group(function(){
@@ -25,7 +25,7 @@ Route::prefix('/')->group(function(){
     Route::get('add/wishlist/{id}','Front\WebpageController@addWishlist');
     Route::get('remove/compare/{id}','Front\WebpageController@removeCompare');
     Route::get('remove/wishlist/{id}','Front\WebpageController@removeWishlist');
-    Route::get('/login/register/{token?}','Front\WebpageController@loginOrRegister');
+    Route::get('/login/register/{token?}','Front\WebpageController@loginOrRegister')->middleware('guest');
     Route::get('profile','Front\WebpageController@profile');
     Route::get('shop/{id}/products','Front\WebpageController@products');
     Route::get('/wishlist','Front\WebpageController@favorite');
@@ -44,6 +44,9 @@ Route::prefix('/')->group(function(){
 
 
     Route::auth();
+
+    // password reset ==============================
+   // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 
 //    =================== methods called when user is logged In ===================================
     Route::get('save/wishlist','Front\UsersController@saveWishlist');
@@ -138,10 +141,15 @@ Route::group(['prefix' => 'courier'], function () {
 
   Route::get('subscription','Courier\CourierController@subscribe');
 
+  Route::post('/edit','Courier\CourierController@changeEmail');
+
+  Route::get('verify-email','Courier\CourierController@verification');
+
   Route::get('notify','Courier\CourierController@notify');
   Route::get('listen','Courier\CourierController@listen');
   Route::get('markasread/{id}','Courier\CourierController@markasread');
   Route::get('notification/get','Courier\CourierController@notificationtest');
+  Route::get('emailverification/{mail}','Courier\CourierController@emailverification')->middleware('courier');
 
 
 });
@@ -162,16 +170,16 @@ Route::get('/validatetoken','AdministrationControllers\SignupController@validate
 
 
 Route::group(['prefix' => 'administration'], function () {
-Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm')->name('login');
+Route::get('/login', 'ShopadminAuth\LoginController@showLoginForm');
 Route::post('/login', 'ShopadminAuth\LoginController@login');
-Route::get('/logout', 'ShopadminAuth\LoginController@logout')->name('logout');
+Route::get('/logout', 'ShopadminAuth\LoginController@logout');
 
-Route::get('/register', 'ShopadminAuth\RegisterController@showRegistrationForm')->name('register');
+Route::get('/register', 'ShopadminAuth\RegisterController@showRegistrationForm');
 Route::post('/register', 'ShopadminAuth\RegisterController@register');
 
-Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset')->name('password.email');
-Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+Route::post('/password/email', 'ShopadminAuth\ForgotPasswordController@sendResetLinkEmail');
+Route::post('/password/reset', 'ShopadminAuth\ResetPasswordController@reset');
+Route::get('/password/reset', 'ShopadminAuth\ForgotPasswordController@showLinkRequestForm');
 Route::get('/password/reset/{token}', 'ShopadminAuth\ResetPasswordController@showResetForm');
 
 
@@ -226,6 +234,8 @@ Route::post('/savegeneralsettings','AdministrationControllers\GeneralSettingsCon
 
 Route::get('/customers','AdministrationControllers\CustomersController@customerList');
 
+
+Route::get('/orders','AdministrationControllers\OrdersController@index');
 
 
 Route::get('/sendsmstocustomer','AdministrationControllers\CustomersController@sendSmsToCustomer');

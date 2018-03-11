@@ -79,8 +79,8 @@
 
                                         <tbody>
                                             
-                                            @if(\App\Orders::all()!==null)
-                                            @foreach(\App\Orders::where('courier_id',Auth::guard('courier')->user()->id)->whereIn('status',[1,2])->get() as $p)
+                                            @if(\App\Order::all()!==null)
+                                            @foreach(\App\Order::where('courier_id',Auth::guard('courier')->user()->id)->whereIn('status',[1,2])->get() as $p)
                                             <tr class="tr{{$p->id}}">
                                                 <td><input type="checkbox" /> {{$p->name}}</td>
                                                 <td>{{$p->shop->shopname}}</td>

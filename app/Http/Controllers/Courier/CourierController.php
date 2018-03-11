@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Notification;
 use App\Events\sentRequest;
  use Carbon\Carbon;
+ use Mail;
+
 
 
 
@@ -26,6 +28,46 @@ class CourierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function changeEmail(Request $r){
+        $r->validate([
+            'email' => 'required',
+        ]);
+
+        $couriers=courier::where('email',$r->email)->get();
+        $user=courier::find(Auth::guard('courier')->user()->id);
+
+        // if (!$couriers->exists()) {
+        //   if ($user->verified_at==null) {
+        //   $user->update(['email'=>$r->email]);
+        //   return back()->withErrors('Email Changed Successfully');
+        //   }
+        //   else{
+        //     return view('index')->withErrors('Verification Already Done');
+        //   }
+        // }
+        // else{
+        //  return view('index')->withErrors('User With That Email already Exist');
+        // }
+
+    }
+
+
+    public function emailverification($mail){
+     $mailling= \App\Security::getInstance()->decode($mail);
+      $courier=Courier::where('email',$mailling)->first();
+      if ($courier->verified_at==null) {
+        $courier->update(['verified_at'=>\Carbon\Carbon::now()]);
+        return redirect('courier')->withErrors('You Have Verified Email Successfully');
+      }
+      return redirect('courier');
+    }
+
+    public function verification(){
+      Mail::to(Auth::guard('courier')->user())->send(new \App\Mail\ConfirmationEmail(Auth::guard('courier')->user()->email));
+      return back()->withErrors('Email Verification Successfully Sent To Your Email..Check and Confirm');
+    }
+
     public function neworders($id)
     {
 

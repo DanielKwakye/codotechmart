@@ -12,7 +12,7 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $parent = 'parent_id';
-    protected $fillable = ['name','parent_id','description','image'];
+    protected $fillable = ['name','parent_id','description','image','shop_id'];
 
      public function parent(){
         return $this->belongsTo('App\Category', 'parent_id');

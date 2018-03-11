@@ -1,5 +1,5 @@
  @php
-   $shops = Auth::guard('courier')->user()->shops()->pluck('shop.id');
+   $shops = Auth::guard('courier')->user()->shops()->pluck('shops.id');
     $unrequested_shops = \App\Shop::whereNotIn('id',$shops)->get();
     $requested_shops=\App\Shop::whereIn('id',$shops)->get();
 @endphp
@@ -13,14 +13,14 @@
 <div id="page-header" class="{{Auth::guard('courier')->user()->option->header}}">
     <div id="mobile-navigation">
         <button id="nav-toggle" class="collapsed" data-toggle="collapse" data-target="#page-sidebar"><span></span></button>
-        <a href="index.html" class="logo-content-small" title="MonarchUI"></a>
+        <a href="{{url('courier')}}" class="logo-content-small" title="MonarchUI"></a>
     </div>
     <div id="header-logo" class="logo-bg">
-        <a href="{{url('/')}}" style="background: url('{{asset('couriers/assets/image-resources/logo-admin.png')}}') left 50% no-repeat;" class="logo-content-big" title="Courier">
+        <a href="{{url('courier')}}" style="background: url('{{asset('/images/logo.png')}}') left 50% no-repeat;" class="logo-content-big" title="Courier">
             Monarch <i>UI</i>
             <span>The perfect solution for user interfaces</span>
         </a>
-        <a href="{{url('/')}}" style="background: url({{asset(Auth::guard('courier')->user()->image)}}); border-radius: 50%; background-size: 100% 100%" class="logo-content-small" title="MonarchUI">
+        <a href="{{url('courier/')}}" style="background: url('{{asset('/images/logo.png')}}'); border-radius: 50%; background-size: 100% 100%" class="logo-content-small" title="MonarchUI">
             Monarch <i>UI</i>
             <span>The perfect solution for user interfaces</span>
         </a>
@@ -60,27 +60,33 @@
             </div>
         </div>
     </div><!-- #header-nav-left -->
+    <style type="text/css">
+        .leftside{
+            float: left;
+            height: 28px;
+            line-height: 28px;
+            display: block;
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+            margin: 8px 10px 0 0;
+            color: rgba(255,255,255,255);
+        }
+        a.leftside:hover{
+            color: rgba(255,255,255,255);
+            text-decoration: none;
+        }
+    </style>
     <div id="header-nav-right">
-        @if($almostexpired)
-        <a href="#" class="hdr-btn " title="Days To Expire">
-
-           <span class="days"></span> <br><span class="smalltext">Days</span>
+        
+        <a href="#" class="leftside" title="Days To Expire">
+           <span class="">Account Expires In</span>  : <span class="smalltext" id="demo"></span><br>
         </a>
-        <a href="#" class="hdr-btn" title="Hours To Expire">
-           <span class="hours"></span> <br><span class="smalltext">Hours</span>
-        </a>
-        <a href="#" class="hdr-btn"  title="Minutes to Expire">
-         <span class="mins"></span><br><span class="smalltext">Min(s)</span>
-        </a>
-        <a href="#" class="hdr-btn" title="Seconds To Expire">
-          <span class="secs"></span><br><span class="smalltext">Sec(s)</span>
-        </a>
-        @endif
-        {{-- <p id="demo"></p> --}}
+        
         <a class="header-btn" id="fullscreen-btn" title="Fullscreen" href="#" >
             <i class="glyph-icon icon-arrows-alt"></i>
         </a>
-        <div class="dropdown" id="notifications-btn">
+       {{--  <div class="dropdown" id="notifications-btn">
             <a data-toggle="dropdown" href="#" title="">
                 <span class="small-badge bg-yellow"></span>
 
@@ -96,20 +102,14 @@
                 </div>
                 <div class="scrollable-content scrollable-slim-box">
                     <ul class="no-border notifications-box">
-                        {{-- <li>
+                        <li>
                             <span class="bg-danger icon-notification glyph-icon icon-bullhorn"></span>
                             <span class="notification-text">This is an error notification</span>
                             <div class="notification-time">
                                 a few seconds ago
                                 <span class="glyph-icon icon-clock-o"></span>
                             </div>
-                        </li> --}}
-                       
-                        {{-- notification --}}
-                           
-                                {{-- <notification v-bind:notifications="notifications"></notification> --}}
-                                {{-- <example-component></example-component> --}}
-                           
+                        </li>
                     </ul>
                 </div>
                 <div class="pad10A button-pane button-pane-alt text-center">
@@ -118,7 +118,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         
         <a class="header-btn" id="logout-btn" href="{{url('logout')}}" title="Log Out">
             <i class="glyph-icon icon-linecons-lock"></i>
@@ -150,7 +150,7 @@
         <div class="sidebar-submenu">
 
             <ul>
-                <li><a href="{{url('courier/pending-orders')}}" title="Buttons"><span>Pending Orders</span>
+                <li><a href="{{url('courier/pending-orders')}}" title="Orders Not Delivered yet"><span>Pending Orders</span>
                     <span class="bs-badge badge-purple orders">{{count(\App\Order::whereIn('status',[1,2])->where('user_id',Auth::guard('courier')->user()->id)->get())}}</span></a></li>
                     <li><a href="{{url('courier/delivery-history')}}" title="Buttons"><span>Delivery History</span> <span class="bs-badge badge-yellow delivery">{{count(\App\Order::where('status',3)->where('user_id',Auth::guard('courier')->user()->id)->get())}}</span></a></a></li>
             </ul>
@@ -165,28 +165,28 @@
         <div class="sidebar-submenu">
 
             <ul>
-                <li><a href="{{url('courier/charts')}}" title="Responsive tabs"><span>Statistics</span></a></li>
+                <li><a href="{{url('courier/charts')}}" title="Check Your Progress"><span>Statistics</span></a></li>
             </ul>
 
         </div><!-- .sidebar-submenu -->
     </li>
     <li>
         <a href="#" title="Forms UI">
-            <i class="glyph-icon icon-linecons-eye"></i>
+            <i class="glyph-icon icon-credit-card"></i>
             <span>Payment</span>
         </a>
     </li>
     
     <li class="header"><span>Extra</span></li>
     <li>
-        <a href="#" title="Advanced tables">
+        <a href="#" title="Accounts">
             <i class="glyph-icon icon-linecons-megaphone"></i>
             <span>Accounts</span>
         </a>
         <div class="sidebar-submenu">
 
             <ul>
-                <li><a href="{{url('courier/profile')}}" title="Data tables"><span>Profile</span></a></li>
+                <li><a href="{{url('courier/profile')}}" title="My Profile"><span>Profile</span></a></li>
             </ul>
 
         </div><!-- .sidebar-submenu -->
@@ -199,19 +199,25 @@
         <div class="sidebar-submenu">
 
             <ul>
-                <li><a href="{{url('courier/myshops')}}" title="Responsive tables"><span>My Shops</span>
+                <li><a href="{{url('courier/myshops')}}" title="Registered Shops"><span>My Shops</span>
                     <span class="bs-badge badge-purple">{{count(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',2)->get())}}</span></a></li>
-                <li><a href="{{url('courier/all-shops')}}" title="Basic tables"><span>All Shops</span> <span class="bs-badge badge-yellow">{{count(\App\Shop::whereNotIn('id',$shops)->get())}}</span></a></li>
-                <li><a href="{{url('courier/requestedshops')}}" title="Data tables"><span>Requested Shops</span> <span class="bs-badge badge-danger">{{count(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',1)->get())}}</span></a></li>
+                <li><a href="{{url('courier/all-shops')}}" title="Search Available Shops"><span>All Shops</span> <span class="bs-badge badge-yellow">{{count(\App\Shop::whereNotIn('id',$shops)->get())}}</span></a></li>
+                <li><a href="{{url('courier/requestedshops')}}" title="Requested Shops"><span>Requested Shops</span> <span class="bs-badge badge-danger">{{count(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',1)->get())}}</span></a></li>
             </ul>
 
         </div>
     </li>
 
     <li>
-        <a href="{{url('courier/options')}}" title="Customise Dashboard Options">
-            <i class="glyph-icon icon-linecons-paper-plane"></i>
+        <a href="{{url('courier/options')}}" title="Customise Dashboard Appearance Option">
+            <i class="glyph-icon icon-wrench"></i>
             <span class="appearance">Appearance<span class="bs-badge badge-purple">New</span></span>
+        </a><!-- .sidebar-submenu -->
+    </li>
+    <li>
+        <a href="mailto:shopwithvim@gmail.com" title="Contact Us">
+            <i class="glyph-icon icon-envelope"></i>
+            <span class="appearance">Contact Us</span>
         </a><!-- .sidebar-submenu -->
     </li>
     {{-- <li>

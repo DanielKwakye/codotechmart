@@ -83,7 +83,7 @@ class UsersController extends Controller
 //        payment_option : 1 = pay online, 2 = pay on delivery ---------------------------------------
         $checkout->payment_option = $request->payment_option;
         $checkout->notes = $request->notes;
-        $checkout->branch_id = Cart::getInstance()->getFirstItem()->    item->shop_id;
+        $checkout->branch_id = Cart::getInstance()->getFirstItem()->item->shop_id;
         $checkout->delivery_to = $request->full_address;
 //        status 0 means processing ------------------------------
         $checkout->status = 0;
@@ -141,7 +141,7 @@ class UsersController extends Controller
         $order->created_at = Carbon::now();
         $order->updated_at = Carbon::now();
 
-        $order->save();
+       $order->save();
 
 
 //        save items in cart for user --------------------------------
@@ -154,11 +154,52 @@ class UsersController extends Controller
                 (new \App\Cart())->create([
                     'order_id' => $order->id,
                     'product_id' => $item->item->id,
-                    'qty' => $item->qty
+                    'qty' => $item->qty,
+                    'price' => $item->price
                 ]);
             }
 
             //        send notification message to the shop for via text ------------------------
+
+
+            // credit the person who referred him once ----------------
+
+        if(Auth::user()->referred_by  != null && Auth::user()->referrer_paid == 0){           
+
+
+                //find the person who referred this user ---------------------------
+                $my_referrer = (new \App\User)->find(Auth::user()->referred_by);
+          
+
+//  check if the user exists in the referrals db and has not been paid --------------
+            
+
+                if (!$my_referrer->referrals()->where('paid',0)->exists()) {
+                    // this is the first time hes being credited ------------------
+                    \App\Referral::create(['user_id' => Auth::user()->referred_by]);
+                }
+
+
+//               get the referrer's record from referral's table -----
+                $ref_record = $my_referrer->referrals()->where('paid',0)->first();
+
+// the referral amount is calculated with a quadratic formula here --------------------------
+
+                // update the amount and number of people's record ----------------
+
+                if (Auth::user()->referrer_paid == 0) {
+                    # code...
+                     $ref_record->update([
+                    'number_of_people' => $ref_record->number_of_people + 1, 
+                    'amount_earned' => $ref_record->amount_earned + 10
+                    ]);
+                }
+
+                // mark the logged in user as his referrer is paid ----------------------
+
+                Auth::user()->update(['referrer_paid' => 1]);
+            
+        }
 
 
 

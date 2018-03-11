@@ -14,12 +14,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Branch;
 
 class WebpageController extends Controller
 {
     
     public function shops(){
-        $shops = Shop::all()->sortByDesc('created_at');
+        $shops = Branch::where('type','main')->get()->sortByDesc('created_at');
         $data = [
           'shops' => $shops
         ];
@@ -28,11 +29,16 @@ class WebpageController extends Controller
 
 
     public function shopDetail($id){
-         $shop = Shop::find($id);
-         $products = $shop->products()->where('visibility',1)->get();
+         $branch = Branch::find($id);
+         $products = $branch->products()->where('visibility',1)->get();          
+
+         $shop = $branch->shop;
+
          $data = [
              'shop' => $shop,
-             'products' => $products
+             'products' => $products,
+             'branches' => $shop->branches,
+             'branch' => $branch
          ];
 
          return view('front.techmarket.shop_detail')->with($data);
@@ -49,10 +55,13 @@ class WebpageController extends Controller
     public function addCart(Request $request){
         $product = (new Product())->find($request->product_id);
 
+        // alter the product and add the branch to it ..
+        $product->shop_id = $request->branch_id;
+
 //        check if user is purchasing from a different shop -----------------
         if(Cart::getInstance()->getTotalQty() > 0){
-            $shop_id = Cart::getInstance()->getFirstItem()->item->shop->id;
-            if($product->shop->id != $shop_id){
+            $shop_id = Cart::getInstance()->getFirstItem()->item->shop_id;
+            if($product->shop_id != $shop_id){
                 Cart::getInstance()->clear();
             }
         }
@@ -200,11 +209,18 @@ class WebpageController extends Controller
         if ($token == null) {
             return view('front.techmarket.login_register');
         }
+        
+        $user = \App\User::where('referral_link', $token)->first();
+       
+        if ($user) {
+             
+           Session::put('referral', $user->id);
+                    
+           return view('front.techmarket.login_register');
 
-        $email = \App\Security::getInstance()->decode($token);
-        $user = \App\User::where('email', $email)->first();
-        Session::put('referral', $user->id);
-        return view('front.techmarket.login_register');
+        }
+         
+        return redirect("login/register")->withErrors("Can't find any customer with this referral link");
     }
 
     public function cart(){

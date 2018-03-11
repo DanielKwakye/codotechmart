@@ -80,7 +80,7 @@ $(document).on('click', '.trigger', function (event) {
     $('.modal-title').html("Add " + data.name+ " to your cart")
     $('#product_id').val(data.id);
     $('#product_price').val(data.price);
-    $('#shop_id').val(data.shop_id);
+    $('#shop_id').val($(this).attr('branch_id'));
     $('.modal').iziModal('open');
 });
 

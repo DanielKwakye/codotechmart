@@ -27,23 +27,23 @@
    {{--  <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}"> --}}
   
   </head>
-  <body data-open="click" data-menu="vertical-menu" data-col="1-column" class="vertical-layout vertical-menu 1-column bg-cyan bg-lighten-2 fixed-navbar">
+  <body data-open="click" data-menu="vertical-menu" data-col="1-column" class="vertical-layout vertical-menu 1-column bg-lighten-2 fixed-navbar" style="background: rgb(221, 221, 221);">
   
   {{-- start here --}}
-  <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-dark navbar-shadow">
+  <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-light navbar-shadow">
       <div class="navbar-wrapper">
         <div class="navbar-header">
           <ul class="nav navbar-nav">
             <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1"></i></a></li>
-            <li class="nav-item"><a href="index.html" class="navbar-brand nav-link"><img alt="branding logo" src="../../../app-assets/images/logo/robust-logo-light.png" data-expand="../../../app-assets/images/logo/robust-logo-light.png" data-collapse="../../../app-assets/images/logo/robust-logo-small.png" class="brand-logo"></a></li>
+            <li class="nav-item"><a href="{{url('/')}}" class="navbar-brand nav-link"><img alt="branding logo" src="{{asset('shopwithvim.png')}}" class="brand-logo" style="max-width: 100px"></a></li>
             <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="icon-ellipsis pe-2x fa-rotate-90"></i></a></li>
           </ul>
         </div>
         <div class="navbar-container content">
           <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
             <ul class="nav navbar-nav float-xs-right">
-              <li class="nav-item"><a href="index.html" class="nav-link mr-2 nav-link-label"><i class="ficon icon-reply4"></i></a></li>
-              <li class="dropdown nav-item"><a href="#" data-toggle="dropdown" class="nav-link mr-2 nav-link-label"><i class="ficon icon-cog3"></i></a></li>
+              <li class="nav-item"><a href="{{url('/')}}" class="nav-link mr-2 nav-link-label"><i class="ficon icon-reply4"></i></a></li>
+             
             </ul>
           </div>
         </div>
@@ -60,9 +60,9 @@
 	<div class="card border-grey border-lighten-3 px-2 py-2 row mb-0">
 		<div class="card-header no-border">
 			<div class="card-title text-xs-center">
-				<img src="../../../app-assets/images/logo/robust-logo-dark.png" alt="branding logo">
+			{{-- 	<img src="../../../app-assets/images/logo/robust-logo-dark.png" alt="branding logo"> --}}
 			</div>
-			<h6 class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2"><span>Login with Robust</span></h6>
+			<h6 class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2"><span>Login to your Shop</span></h6>
 		</div>
 		<div class="card-body collapse in">
 			<div class="card-block">
@@ -97,14 +97,14 @@
 				                <label for="remember-me"> Remember Me</label>
 				            </fieldset>
 						</div>
-						<div class="col-md-6 col-xs-12 text-xs-center text-md-right"><a href="recover-password.html" class="card-link">Forgot Password?</a></div>
+						<div class="col-md-6 col-xs-12 text-xs-center text-md-right"><a href="{{url('administration/password/reset')}}" class="card-link">Forgot Password?</a></div>
 					</fieldset>
 					<button type="submit" class="btn btn-danger btn-block btn-lg"><i class="icon-unlock2"></i> Login</button>
 				</form>
 			</div>
 		</div>
 		<div class="card-footer no-border">
-			<p class="card-subtitle line-on-side text-muted text-xs-center font-small-3 mx-2 my-1"><span>New to Robust ?</span></p>
+			<p class="card-subtitle line-on-side text-muted text-xs-center font-small-3 mx-2 my-1"><span>New to Shop With Vim ?</span></p>
 			<a href="{{url('/welcome/signup')}}" class="btn btn-primary btn-block btn-lg mt-3"><i class="icon-head"></i> Register</a>
 		</div>
 	</div>
@@ -115,9 +115,7 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <footer class="footer navbar-fixed-bottom footer-dark navbar-border">
-      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">PIXINVENT </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
-    </footer>
+  
   {{-- ends here --}}
     <script src="{{asset('admin-assets/js/core/libraries/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('admin-assets/vendors/js/ui/tether.min.js')}}" type="text/javascript"></script>

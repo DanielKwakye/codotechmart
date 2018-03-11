@@ -5,12 +5,11 @@
             <span>All Branches</span>
         </button>
         <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
+            @foreach($branches as $b)
             <li class="highlight menu-item animate-dropdown">
-                <a title="Value of the Day" href="home-v2.html">Value of the Day</a>
+                <a title="Top 100 Offers" href="home-v3.html">{{$b->name}}</a>
             </li>
-            <li class="highlight menu-item animate-dropdown">
-                <a title="Top 100 Offers" href="home-v3.html">Top 100 Offers</a>
-            </li>
+            @endforeach
         </ul>
     </div>
 @endsection
@@ -440,6 +439,7 @@
                                                         <div class="container-fluid">
                                                             <div class="woocommerce">
                                                                 <div class="products">
+                                                                    @if($products != null)
                                                                     @foreach($products as $p)
                                                                     <div class="product">
                                                                         <img src="{{asset('assets/images/ajax-loader.gif')}}" style="display: none;" id="ajax_loader_{{$p->id}}">
@@ -458,7 +458,7 @@
                                                                             <h2 class="woocommerce-loop-product__title">{{$p->name}}</h2>
                                                                         </a>
                                                                         <div class="hover-area">
-                                                                            <a class="button add_to_cart_button trigger" href="#" data="{{$p}}" rel="nofollow">Add to cart</a>
+                                                                            <a class="button add_to_cart_button trigger" href="#" data="{{$p}}" branch_id="{{$branch->id}}" rel="nofollow">Add to cart</a>
                                                                             <a class="add-to-compare-link add_to_compare" data="{{$p->id}}" href="#">Add to compare</a>
                                                                         </div>
                                                                     </div>
@@ -466,6 +466,7 @@
 
                                                                     <!-- /.product-outer -->
                                                                      @endforeach
+                                                                     @endif
 
                                                                 </div>
                                                             </div>

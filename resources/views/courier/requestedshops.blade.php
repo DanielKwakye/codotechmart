@@ -3,6 +3,11 @@
     <title>Requested Shops</title>
 @endsection
 @section('content')
+<style type="text/css">
+    .gap-right {
+          margin-right: 10px;
+        }
+</style>
     
      <!-- Data tables -->
 
@@ -59,6 +64,7 @@
                                             <tr>
                                                 <th>ShopName</th>
                                                 <th>Category</th>
+                                                <th>Email</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -67,6 +73,7 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Category</th>
+                                                <th>Email</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -74,10 +81,12 @@
                                         <tbody>
                                             
                                             @foreach(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',1)->get() as $p)
+                                            <?php $branch=\App\Branch::where('shop_id', $p->shop_id)->where('type', 'main')->first(); ?>
                                             
                                             <tr class="tr{{$p->shop_id}}">
-                                                <td>{{$p->shop->name}}</td>
+                                                <td><img class="pull-left img-responsive img-circle gap-right" style="width: 35px; height: 30px;" src="{{$p->shop->logo}}"> <a href="{{url('shop/'.$branch->id.'/detail')}}" class="text-info" target="_blank">{{$p->shop->name}}</a></td>
                                                 <td class="groupId">{{$p->shop->shopcategory->name}}</td>
+                                                 <td><a href="mailto:{{$p->shop->creator_email}}">{{$p->shop->creator_email}}</a></td>
                                                 <td class="cancel{{$p->shop_id}}">
                                                 <div class="btn-group" id='cancelrequest{{$p->shop_id}}'>
                                                         <button type="button" class="btn btn-info btn-xs  popover-button-default" disabled="">Request Sent</button>

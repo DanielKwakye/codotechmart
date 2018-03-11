@@ -18,7 +18,7 @@ class RedirectIfShopadmin
 	public function handle($request, Closure $next, $guard = 'shopadmin')
 	{
 	    if (Auth::guard($guard)->check()) {
-	        return redirect('shopadmin/home');
+	        return redirect('administration/dashboard');
 	    }
 
 	    return $next($request);

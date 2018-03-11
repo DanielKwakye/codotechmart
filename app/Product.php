@@ -14,7 +14,6 @@ class Product extends Model
 
     //protected $table = 'products';
     protected $fillable = [
-    	'shop_id',
     	'name',
     	'description',
     	'type',
@@ -28,12 +27,11 @@ class Product extends Model
     	'mainimage'
     ];
 
-    public function shop(){
-        return $this->belongsTo("App\Shop");
-    }
 
+   public function branch(){
+        return $this->belongsToMany('App\Branch');
+    } 
 
-   
     public function category(){
         return $this->belongsTo('App\Category','category_id');
     }

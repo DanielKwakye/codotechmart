@@ -8,6 +8,7 @@
         "php": ">=7.0.0",
         "atayahmet/laravel-nestable": "^0.8.6",
         "fideloper/proxy": "~3.3",
+        "gamajo/quadratic": "^1.0",
         "hesto/multi-auth": "^2.0",
         "jowusu837/laravelhubtelmerchantaccount": "^1.1",
         "laravel/framework": "5.5.*",

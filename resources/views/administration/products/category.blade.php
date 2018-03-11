@@ -110,13 +110,14 @@
 		<h4 class="modal-title" id="myModalLabel20">Add New Category</h4>
 	  </div>
 	  <form class="form" method="post" action="{{url('/administration/addcategory')}}">
+        <input type="hidden" name="shop_id" value="{{Auth::guard('shopadmin')->user()->shop_id}}">
 	  	{{csrf_field()}}
 	  <div class="modal-body">
 		
 		<div class="form-body">
 			<div class="form-group">
 				<label>Name</label>
-				<input class="form-control" id="name" name="name" type="text" placeholder="Tag Name">
+				<input class="form-control" id="name" name="name" type="text" placeholder="Category Name" required="required">
 			</div>
             <div class="form-group">
                 <label>Parent Category</label>
@@ -130,7 +131,7 @@
             <div class="form-group">
                 <label>Select File</label>
                 <label id="projectinput7" class="file center-block">
-                    <input type="file" id="file">
+                    <input type="file" id="file" name="image">
                     <span class="file-custom"></span>
                 </label>
             </div>
@@ -156,6 +157,7 @@
 		<h4 class="modal-title" id="myModalLabel20">Edit Tag</h4>
 	  </div>
 	  <form class="form" method="post" action="{{url('/administration/edittag')}}">
+        <input type="hidden" name="shop_id" value="{{Auth::guard('shopadmin')->user()->shop_id}}">
 	  	<input type="hidden" name="id" id="tagid">
 	  	{{csrf_field()}}
 	  <div class="modal-body">

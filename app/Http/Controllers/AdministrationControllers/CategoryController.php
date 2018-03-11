@@ -18,7 +18,7 @@ class CategoryController extends Controller
     }
 
     public function addCategory(Request $r){
-    	$addcategory = Category::create(['name'=>trim($r->name),'description'=>trim($r->description),'parent_id'=>$r->parent_id,'image'=>'']);
+    	$addcategory = Category::create(['name'=>trim($r->name),'description'=>trim($r->description),'parent_id'=>$r->parent_id,'image'=>'','shop_id'=>$r->shop_id]);
     	if($addcategory){
     		Session::flash('success-message','New Category Added');
     		return back();

@@ -7,13 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Shop;
 use DB;
 use Hash;
-<<<<<<< HEAD
 use Mail;
 use Session;
-=======
-use Session;
 use Auth;
->>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
 use App\Slydepay\Slydepay;
 
 class SignupController extends Controller
@@ -25,21 +21,13 @@ class SignupController extends Controller
 
     public function sendMail(Request $r){
     	$token = str_random(5);
-<<<<<<< HEAD
+
     	 Mail::send('emails.verifytoken', ['token' => $token], function ($m) use ($r) {
             $m->from('shopwithvim@gmail.com', 'Shop with Vim');
             $m->to($r->email,'')->subject('Verify Token');
           });
          Session::put('token',$token);
     	return ['status'=>'success','token'=>$token];
-=======
-    	//send mail here
-        $sendmessage = true;
-        if($sendmessage){
-            Session::put('token',$token);
-           return ['status'=>'success','token'=>$token]; 
-        }
-    	
     }
 
     public function validateToken(Request $r){
@@ -49,11 +37,6 @@ class SignupController extends Controller
        }else{
         return ['status'=>'error'];
        }
->>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
-    }
-
-    public function validateEmail(Request $r){
-
     }
 
     
@@ -72,16 +55,15 @@ class SignupController extends Controller
         ]);
         if($addnewstore){
             $addtoadmin = DB::table('shopadmins')->insert([
-                'username'=>$r->username,
+                'username'=>$r->surname,
                 'email'=>$r->email,
                 'password'=>Hash::make($r->password),
                 'shop_id'=>$addnewstore->id
             ]);
-<<<<<<< HEAD
+
             //Auth::guard('shopadmin')->attempt(['email' => $r->email, 'password' => Hash::make($r->password)]);
-=======
-            Auth::guard('shopadmin')->attempt(['email' => $r->email, 'password' => Hash::make($r->password)]);
->>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
+            //Auth::guard('shopadmin')->attempt(['email' => $r->email, 'password' => Hash::make($r->password)]);
+
             $addbranch = DB::table('branches')->insert([
                 'shop_id'=>$addnewstore->id,
                 'name'=>$r->storename,
@@ -90,13 +72,11 @@ class SignupController extends Controller
                 'active'=>1,
                 'latitude'=>$r->latitude,
                 'longitude'=>$r->longitude,
-                'landmark'=>''
+                'landmark'=>'',
+                'type'=>'main'
             ]);
-<<<<<<< HEAD
             return ['status'=>'success','responseurl'=>url('/administration/login')];
-=======
-            return ['status'=>'success','responseurl'=>url('/administration/dashboard')];
->>>>>>> d1b5218c53c2d1624f06b5566fa3db10e85e3951
+
         }else{
 
         }

@@ -9,7 +9,7 @@
 
 <div id="page-title">
     <h2>Overwiew</h2>
-    <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites.</p>
+    {{-- <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites.</p> --}}
   {{--   @include('courier.inc.dashboard.sideoptions') --}}
 </div>
 
@@ -28,7 +28,7 @@
 
                 </div>
             </div>
-            <a href="#" class="tile-footer tooltip-button" data-placement="bottom" title="This is a link example!">
+            <a href="{{url('courier/pending-orders')}}" class="tile-footer tooltip-button" data-placement="bottom" title="View All Pending Orders">
                 view details
                 <i class="glyph-icon icon-arrow-right"></i>
             </a>
@@ -42,10 +42,10 @@
             <div class="tile-content-wrapper">
                 <i class="glyph-icon icon-tag"></i>
                 <div class="tile-content">
-                6
+                {{count(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',2)->get())}}
                 </div>
             </div>
-            <a href="#" class="tile-footer tooltip-button" data-placement="bottom" title="This is a link example!">
+            <a href="{{url('courier/myshops')}}" class="tile-footer tooltip-button" data-placement="bottom" title="My Shops">
                 view details
                 <i class="glyph-icon icon-arrow-right"></i>
             </a>
@@ -60,11 +60,11 @@
                 <i class="glyph-icon icon-tag"></i>
                 <div class="tile-content">
                     @if(\App\Order::all()!==null)
-                        {{count(\App\Order::where('status',3)->where('user_id',Auth::guard('courier')->user()->id)->get())}}
+                        {{count(\App\Order::where('status',3)->where('courier_id',Auth::guard('courier')->user()->id)->get())}}
                     @endif                 
                 </div>
             </div>
-            <a href="#" class="tile-footer tooltip-button" data-placement="bottom" title="This is a link example!">
+            <a href="{{url('courier/delivery-history')}}" class="tile-footer tooltip-button" data-placement="bottom" title="All Deliveries">
                 view details
                 <i class="glyph-icon icon-arrow-right"></i>
             </a>
@@ -74,8 +74,8 @@
 @php
     use Carbon\Carbon; 
      $activeUsers = \App\Order::
-    select('user_id','shop_id', \DB::raw('count(*) as total'))->where('status',3)->where('user_id',Auth::guard('courier')->user()->id)
-    ->groupBy('shop_id','user_id')
+    select('courier_id','branch_id', \DB::raw('count(*) as total'))->where('status',3)->where('courier_id',Auth::guard('courier')->user()->id)
+    ->groupBy('branch_id','courier_id')
     ->orderBy('total', 'desc')
     ->get();
 

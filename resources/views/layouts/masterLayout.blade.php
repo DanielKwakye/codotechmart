@@ -25,9 +25,7 @@ use Carbon\Carbon;
   if (Carbon::now()->addWeeks(2) >= $expired->expired_at) {
       $almostexpired=true;
   }
-  if (Carbon::now() >= $expired->expired_at) {
-      $expiration=true;
-  }
+
 // $user=Auth::guard('courier')->user();
 @endphp
 <body>
@@ -46,11 +44,16 @@ use Carbon\Carbon;
 
     <div id="page-wrapper">
         @include('courier.inc.dashboard.navbar')
+        @include('courier.inc.changeEmail')
 
         <div id="page-content-wrapper">
             <div id="page-content">
 
                 <div class="container">
+                    @if(Auth::guard('courier')->user()->verified_at==null)
+                    You Need To <a href="{{url('courier/verify-email')}}" class="btn btn-primary ra-100">Verify</a> Email ({{Auth::guard('courier')->user()->email}}) Before You Can Work With Shops. <button class="btn border-blue-alt btn-link font-blue-alt ra-100 btn-border" data-toggle="modal" data-target="#changeEmail"><i class="glyph-icon icon-plus"> </i>Edit Email</button><br><br>
+                @endif
+                
                     @if($x==0)
                     {{session(['timeSetup' => 'yes'])}}
                     <div class="row">
@@ -113,7 +116,7 @@ use Carbon\Carbon;
                     </div>
 
                 @endif
-
+                
 
 
                     @yield('content')
@@ -140,7 +143,6 @@ use Carbon\Carbon;
     });
 </script>
 
-@if($almostexpired)
     <script>
     // Set the date we're counting down to
     // var countDownDate = new Date("sept 5, 2018 15:37:25").getTime();
@@ -163,10 +165,8 @@ use Carbon\Carbon;
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
         // Output the result in an element with id="demo"
-        $('.days').html(days);
-        $('.hours').html(hours);
-        $('.mins').html(minutes);
-        $('.secs').html(seconds);
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+              + minutes + "m " + seconds + "s ";
         
         // If the count down is over, write some text 
         if (distance < 0) {
@@ -175,17 +175,6 @@ use Carbon\Carbon;
         }
     }, 1000);
     </script>
-
-    @endif
-
-    {{-- @if($expiration)
-        <script type="text/javascript">
-            document.getElementById("demo").innerHTML = "EXPIRED";
-        </script>
-
-    @endif --}}
-
-
 
 </div>
 </body>

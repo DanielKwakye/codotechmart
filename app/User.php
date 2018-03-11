@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','referral_link','referred_by'
+        'name', 'email', 'password','referral_link','referred_by','referrer_paid','phone','address'
     ];
 
     /**
@@ -30,5 +30,9 @@ class User extends Authenticatable
        public function complaint()
     {
         return $this->hasMany('App\Complaints');
+    }
+
+    public function referrals(){
+        return $this->hasMany('App\Referral');
     }
 }

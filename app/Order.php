@@ -10,10 +10,7 @@ class Order extends Model
      protected $fillable = [
         'name', 'user_id','cart_id', 'status','shop_id'
     ];
-
-    public function shop(){
-        return $this->belongsTo('App\shops');
-    }
+    
 
     public function user(){
         return $this->belongsTo('App\User','user_id');
@@ -25,6 +22,14 @@ class Order extends Model
 
     public function sendOrderEmailToUser(){
     	
+    }
+
+    public function carts(){
+        return $this->hasMany('App\Cart');
+    }
+
+    public function branch(){
+        return $this->belongsTo('App\Branch');
     }
 
 }

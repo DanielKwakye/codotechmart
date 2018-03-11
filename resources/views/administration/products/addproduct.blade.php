@@ -31,7 +31,7 @@
 				</div>
 				<div class="card-body collapse in">
 					<div class="card-block">
-						<form class="form" method="post" action="{{url('administration/addnewproduct')}}">
+						<form class="form" method="post" action="{{url('administration/addnewproduct')}}" enctype="multipart/form-data">
 							{{csrf_field()}}
 							<div class="form-body">
 								<div class="row">
@@ -47,9 +47,9 @@
 											<select class="form-control" name="producttype">
 												<option>Select Product Type</option>
 												<option value="simple">Simple Product</option>
-												<option value="grouped">Grouped Product</option>
-												<option value="external">External/Affiliate Product</option>
-												<option value="variable">Variable Product</option>
+												{{-- <option value="grouped">Grouped Product</option> --}}
+												{{-- <option value="external">External/Affiliate Product</option> --}}
+												<option value="virtual">Virtual Product</option>
 											</select>
 										</div>
 									</div>
@@ -78,7 +78,7 @@
 											<div class="col-sm-12">
 												<div class="form-group">
 													<label>Short Description</label>
-													<textarea class="form-control" rows="3" name="description">Add Product Descrption</textarea>
+													<textarea class="form-control" rows="3" name="description" placeholder="Add Description"></textarea>
 												</div>
 											</div>
 											<div class="col-sm-12">
@@ -96,6 +96,16 @@
 												@endforeach
 											</select>
 											</div>
+
+											<div class="col-md-12" style="margin-top: 50px">
+											<div class="form-group">
+								                <label>Upload Image</label>
+								                <label id="projectinput7" class="file center-block">
+								                    <input type="file" id="file" name="image">
+								                    <span class="file-custom"></span>
+								                </label>
+								            </div>
+								        </div>
 											
 											{{-- <div class="col-sm-4" style="margin-top: 20px">
 												
@@ -203,11 +213,11 @@
 									<div class="col-sm-6">
 										<div class="form-group">
 										<label for="name">Product is available in these branches</label>
-										<?php  $branches = \App\Branch::get(['id','name']); ?>
+										<?php  $branches = \App\Branch::where('shop_id',Auth::guard('shopadmin')->user()->shop_id)->get(['id','name']); ?>
 										@foreach($branches as $b)
 									<fieldset class="checkboxsas">
 					                      <label>
-					                        <input type="checkbox" name="{{$b->id}}" value="{{$b->id}}">
+					                        <input type="checkbox" name="branch[]" value="{{$b->id}}" checked="checked">
 					                           {{$b->name}}
 					      				</label>
 					                 </fieldset>
@@ -237,8 +247,6 @@
 			</div>
 		</div>
 	</div>
-
-	<a href="{{Request::root().'/filemanager/filemanager/dialog.php?type=0'}}" class="btn iframe-btn" type="button">Open Filemanager</a>
 </section>
 @endsection
 @section('scripts-below')

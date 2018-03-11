@@ -77,9 +77,10 @@
                                             
                                             @if(\App\shopRequest::all()!==null)
                                                 @foreach(\App\shopRequest::where('courier_id',Auth::guard('courier')->user()->id)->where('status',2)->get() as $p)
+                                                <?php $branch=\App\Branch::where('shop_id', $p->shop_id)->where('type', 'main')->first(); ?>
                                             
                                             <tr>
-                                                <td>{{$p->shop->shopname}}</td>
+                                                <td><img class="pull-left img-responsive img-circle gap-right" style="width: 35px; height: 30px;" src="{{$p->shop->logo}}"> <a href="{{url('shop/'.$branch->id.'/detail')}}" class="text-info" target="_blank">{{$p->shop->name}}</a></td>
                                                 <td>System Architect</td>
                                                 <td class="groupId">{{$p->id}}</td>
                                                 <td>{{$p->shopRequest['status']}}</td>

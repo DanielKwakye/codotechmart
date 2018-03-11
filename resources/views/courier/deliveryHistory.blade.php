@@ -91,8 +91,8 @@
                                             if status=3 - delivered, if status=2 - ordertaken delivery order=1 - processing --}}
                                         <tbody>
                                             
-                                            @if(\App\Orders::all()!==null)
-                                                @foreach(\App\Orders::where('status',3)->where('user_id',Auth::guard('courier')->user()->id)->get() as $p)
+                                            @if(\App\Order::all()!==null)
+                                                @foreach(\App\Order::where('status',3)->where('user_id',Auth::guard('courier')->user()->id)->get() as $p)
                                             <tr>
                                                 <td>{{$p->name}}</td>
                                                 <td>{{$p->shop->shopname}}</td>

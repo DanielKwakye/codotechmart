@@ -72,10 +72,15 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'referral_link' => \App\Security::getInstance()->encode($data['email']),
-            'referred_by' => (Session::has('referral')) ? Session::get('referral') : null
+            'referred_by' => (Session::has('referral')) ? Session::get('referral') : null,
+            'referrer_paid' => 0
         ]);
 
-        if(Session::has('referral')){Session::forget('referral');}
+        // if the user was referred -------------------------
+
+        if(Session::has('referral')){            
+            Session::forget('referral');
+        }
 
         return $user;
     }

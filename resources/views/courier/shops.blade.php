@@ -3,6 +3,11 @@
     <title>All Shops</title>
 @endsection
 @section('content')
+<style type="text/css">
+    .gap-right {
+          margin-right: 10px;
+        }
+</style>
 
 <!-- Data tables -->
 
@@ -57,18 +62,18 @@
                                         <table id="datatable-tabletools" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>shop id</th>
                                                 <th>ShopName</th>
                                                 <th>Category</th>
+                                                <th>Email</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
                                         <tfoot>
                                             <tr>
-                                                <th>shop id</th>
                                                 <th>Name</th>
                                                 <th>Category</th>
+                                                <th>Email</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -76,17 +81,19 @@
                                         <tbody>
                             
                             @php
-                               $shops = Auth::guard('courier')->user()->shops()->pluck('shop.id');
+                               $shops = Auth::guard('courier')->user()->shops()->pluck('shops.id');
                                 $unrequested_shops = \App\Shop::whereNotIn('id',$shops)->get();
                                 $requested_shops=\App\Shop::whereIn('id',$shops)->get();
                             @endphp
                                             
                             @if(\App\Shop::all()!==null)
                                 @foreach($unrequested_shops as $p)
+
+                                <?php $branch=\App\Branch::where('shop_id', $p->id)->where('type', 'main')->first(); ?>
                             <tr class="tr{{$p->id}}">
-                                <td>{{$p->id}}</td>
-                                <td>{{$p->shopname}}</td>
+                                <td><img class="pull-left img-responsive img-circle gap-right" style="width: 35px; height: 30px;" src="{{$p->logo}}"> <a href="{{url('shop/'.$branch->id.'/detail')}}" class="text-info" target="_blank">{{$p->name}}</a></td>
                                 <td>{{$p->shopcategory->name}}</td>
+                                <td><a href="mailto:{{$p->creator_email}}">{{$p->creator_email}}</a></td>
                                 <td class="groupId">
                                 <button class="btn btn-xs btn-danger requestbutton" id="requestbutton{{$p->id}}" shopid="{{$p->id}}" userid="{{Auth::guard('courier')->user()->id}}">Request</button>
                                 </td>
@@ -115,18 +122,28 @@ $(document).on('click mouseenter','.popover-button-default',function(){
   });
 });
 </script>
+@if(Auth::guard('courier')->user()->verified_at == null)
+    <script type="text/javascript">
+        $(document).on('click','.requestbutton',function(e){
+            e.preventDefault();
+        notify('Verify Email Before You Can Add A Shop', true);
+        });
+    </script>
 
-<script type="text/javascript">
+@endif
+
+@if(Auth::guard('courier')->user()->verified_at !==null)
+    <script type="text/javascript">
      $(document).on('click','.requestbutton',function(e){
          e.preventDefault();
-    var userid=$(this).attr('userid');
-    var shopid=$(this).attr('shopid');
-    var _token = "{{csrf_token()}}";
-    $.post("{{url('courier/request')}}",{shopid:shopid,userid:userid,_token:_token},function(result){
-               $now=JSON.parse(result);
+        var userid=$(this).attr('userid');
+        var shopid=$(this).attr('shopid');
+        var _token = "{{csrf_token()}}";
+        $.post("{{url('courier/request')}}",{shopid:shopid,userid:userid,_token:_token},function(result){
+        $now=JSON.parse(result);
         notify($now.status,$now.error);
         }).done(function(){
-             $('.tr'+shopid).remove();
+            $('.tr'+shopid).remove();
 
         }).fail(function(){
             alert('error sending request');
@@ -135,6 +152,8 @@ $(document).on('click mouseenter','.popover-button-default',function(){
 
 
 </script>
+
+@endif
 
 
 @endsection

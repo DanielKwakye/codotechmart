@@ -100,6 +100,15 @@
     }
 </script>
 
+@if($errors->any())
+  @foreach($errors->all() as $e)
+  <script type="text/javascript">
+     notify('{{$e}}',false);
+  </script>
+
+  @endforeach
+@endif
+
 <!-- Theme switcher -->
 
 <script type="text/javascript" src="{{asset('couriers/assets/widgets/theme-switcher/themeswitcher.js')}}"></script>

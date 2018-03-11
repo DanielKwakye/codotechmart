@@ -4,7 +4,7 @@
         <a href="index.html" class="logo-content-small" title="MonarchUI"></a>
     </div>
     <div id="header-logo" class="logo-bg">
-        <a href="{{url('/')}}" style="background: url('{{asset('couriers/assets/image-resources/logo-admin.png')}}') left 50% no-repeat;" class="logo-content-big" title="admin">
+        <a href="{{url('/')}}" style="background: url('{{asset('couriers/assets/image-resources/logo.png')}}') left 50% no-repeat;" class="logo-content-big" title="admin">
             Monarch <i>UI</i>
             <span>The perfect solution for user interfaces</span>
         </a>
@@ -96,7 +96,7 @@
             </div>
         </div>
         
-        <a class="header-btn" id="logout-btn" href="lockscreen-3.html" title="Lockscreen page example">
+        <a class="header-btn" id="logout-btn" href="{{url('logout')}}" title="Lockscreen page example">
             <i class="glyph-icon icon-linecons-lock"></i>
         </a>
 

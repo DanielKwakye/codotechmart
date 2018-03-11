@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use Auth;
 use Session;
+use DB;
 
 class ProductsController extends Controller
 {
@@ -16,6 +17,12 @@ class ProductsController extends Controller
     }
 
     public function addNewProduct(Request $r){
+        $productimage = '';
+       // if($file = $r->file('image')) {
+       //      $name = $file->getClientOriginalName();
+       //      $productimage = str_random(25).$name;
+       //      $file->move('shops/images', $productimage); 
+       //  }
     	 $add = Product::create([
     	'shop_id'=>Auth::guard('shopadmin')->user()->shop_id,
     	 'name'=>$r->name,
@@ -27,9 +34,15 @@ class ProductsController extends Controller
     	 'availability'=>$r->availability,
     	 'barcode'=>$r->barcode,
     	 'condition'=>$r->condition,
-    	 'mainimage'=>'',
+    	 'mainimage'=>$productimage,
     	 'price'=>$r->price
     	]);
+      foreach($r->branch as $b){
+         DB::table('product_branch')->insert([
+            'branch_id'=>$b,
+            'product_id'=>$add->id
+         ]);
+     }
     	if($add){
     		Session::flash('success-message','New Product Added Successfully');
     		return back();

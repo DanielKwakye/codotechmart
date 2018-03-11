@@ -14,12 +14,12 @@
 </div>
 @php
 use Carbon\Carbon; 
-     $activeUsers = \App\Orders::
-    select('courier_id','shop_id', \DB::raw('count(*) as total'))->where('status',3)->where('courier_id',Auth::guard('courier')->user()->id)
-    ->groupBy('shop_id','courier_id')
+     $activeUsers = \App\Order::
+    select('courier_id','branch_id', \DB::raw('count(*) as total'))->where('status',3)->where('courier_id',Auth::guard('courier')->user()->id)
+    ->groupBy('branch_id','courier_id')
     ->orderBy('total', 'desc')
     ->get();
-$perday = \App\Orders::
+$perday = \App\Order::
     select('created_at', \DB::raw('count(*) as total'))->where('status',3)->where('courier_id',Auth::guard('courier')->user()->id)->whereYear('created_at', '=', date("Y"))
     ->groupBy('created_at')
     ->orderBy('total', 'desc')

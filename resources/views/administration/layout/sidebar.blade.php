@@ -20,7 +20,7 @@
               </li>
               <li><a href="{{url('/administration/addproduct')}}" data-i18n="nav.product.addnew" class="menu-item">Add New</a>
               </li>
-              <li><a href="#" data-i18n="nav.product.categories" class="menu-item">Categories</a>
+              <li><a href="{{url('/administration/category')}}" data-i18n="nav.product.categories" class="menu-item">Categories</a>
               </li>
               <li><a href="{{url('/administration/tags')}}" data-i18n="nav.product.tags" class="menu-item">Tags</a>
               </li>
